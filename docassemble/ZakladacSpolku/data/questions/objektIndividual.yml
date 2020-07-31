@@ -1,0 +1,61 @@
+generic object: Individual
+question: |
+  % if defined('x.cislo'):
+  Indentifikační člena orgánu údaje:
+  
+  **${ x.cislo }. ${ x.label }**
+  % else:
+  Indetifikační údaje:
+  
+  **${ x.label }**
+  % endif
+fields:
+  - Jméno a příjmení: x.name.first
+  - Bydliště: x.address
+  - Datum narození: x.birthday
+    datatype: date
+---
+question: |
+  % if Spolek.sidlo.vlastnik.vice ==  False:
+  Identifikační údaje vlastníka nemovitosti.
+  % else:
+  Indentifikační údaje:
+  
+  **${ Spolek.sidlo.vlastnik[i].cislo }. ${ Spolek.sidlo.vlastnik[i].label }**
+  % endif
+fields:
+  - Někdo z členů: Spolek.sidlo.vlastnik[i]
+    datatype: object_radio
+    disable others: True
+    choices:
+      - Spolek.zalozeni.navrhovatel
+      - Spolek.statutar.clen
+    exclude: |
+      Spolek.sidlo.vlastnik
+  - Jméno a příjmení: Spolek.sidlo.vlastnik[i].name.first
+  - Bydliště: Spolek.sidlo.vlastnik[i].address
+  - Datum narození: Spolek.sidlo.vlastnik[i].birthday
+    datatype: date
+---
+need:
+  - Spolek.zalozeni.pocetZakladatelu
+question: |
+  % if Spolek.zalozeni.typ == 'schuze':
+  Identifikační údaje osoby pověřené zápisem spolku.
+  % else:
+  Indentifikační údaje:
+  
+  **${ Spolek.zalozeni.navrhovatel[i].cislo }. ${ Spolek.zalozeni.navrhovatel[i].label }**
+  % endif
+fields:
+  - Někdo z členů: Spolek.zalozeni.navrhovatel[i]
+    datatype: object
+    disable others: True
+    choices:
+      - Spolek.statutar.clen
+    exclude: |
+      Spolek.zalozeni.navrhovatel
+  - Jméno a příjmení: Spolek.zalozeni.navrhovatel[i].name.first
+  - Bydliště: Spolek.zalozeni.navrhovatel[i].address
+  - Datum narození: Spolek.zalozeni.navrhovatel[i].birthday
+    datatype: date

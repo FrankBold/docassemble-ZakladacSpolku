@@ -1,0 +1,28 @@
+mandatory: True
+question: |
+  Zde jsou Vaše dokumenty
+subquestion: |
+  Stanovy: [Stáhnout]
+  
+  [Stáhnout]: ${ stanovy.url_for() }
+  
+  % if emailOdeslan:
+  We sent an e-mail to your e-mail address.
+  % else:
+  Oops, for some reason we could not send an e-mail to you.
+  % endif
+---
+code: |
+  email = 'michal.kuk@gmail.com'
+  emailOdeslan = send_email(to=[email], template=hello_email, attachments=[stanovy])
+---
+template: hello_email
+subject: |
+  A picture for you
+content: |
+  Hello, you!
+  Attached please find an incredibly *cool* picture.
+  From,
+  Your friend
+    
+

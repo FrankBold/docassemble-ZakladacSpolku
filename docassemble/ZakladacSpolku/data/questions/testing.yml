@@ -1,0 +1,34 @@
+objects:
+  - Program: DAList.using(object_type=DAList.using(gathared=True, there_is_another=False))
+---
+mandatory: True
+code: |
+  Program.appendObject()
+  Program.appendObject()
+  Program[0].nazev = "První bod"
+  Program[0].appendObject(Individual, organ=Program[0].nazev)
+  Program[0].appendObject(Individual, organ=Program[0].nazev)
+  Program[1].nazev = "Druhý bod"
+  Program[1].appendObject(Individual, organ=Program[1].nazev)
+  Program.gathered = True
+---
+generic object: Individual
+question: |
+  Údaje osoby v orgánu: **${ x.organ }**
+fields:
+ - Jméno: x.name.first
+---
+mandatory: True
+question: |
+  Výstup
+subquestion: |
+  % for bod in Program:
+    ${ bod.nazev }
+  % for item in bod:
+    % if isinstance(item, Individual):
+      ${ item.name.first }
+    % endif
+  % endfor
+  
+  
+  % endfor

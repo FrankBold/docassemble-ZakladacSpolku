@@ -1,0 +1,112 @@
+metadata:
+  title: |
+    Kontrolní checklist
+  short title: |
+    Checklist
+  tags:
+    - Zakladač
+---
+features:
+  labels above fields: True
+---
+mandatory: True
+code: |
+  if not user_logged_in():
+    multi_user = True
+  if url_args:
+    spolekJmeno = url_args['name']
+    statutar = url_args['stat']
+    zalozeni = url_args['zal']
+---
+question: |
+  Informace o spolku
+subquestion: |
+  Základní informace o spolku pro účely sestavení checklistu
+fields:
+  - Způsob založení: zalozeni
+    input type: radio
+    choices:
+      - Přijetím stanov: stanovy
+      - Ustavujícíc schůzi: schuze
+  - Statutární orgán: statutar
+    input type: radio
+    choices:
+      - Předseda: predseda
+      - Výbor: vybor
+  - Jméno spolku: spolekJmeno
+--- 
+code: |
+  stanovy_t = [
+  {1: "Podpisy zakládajících členů jsou úředně ověřeny"},
+  {2: "Všechna pole v hranatých závorkách jsou vyplněn"}
+  ]
+  
+  schuze_t = [
+  "Ustavující schůze byla svolána alespoň 30 před jejím konáním.",
+  "Všichni přítomní jsou podepsání na Listině přítomných.",
+  "Na zápisu jsou podpisy počizovatele a ověřovatela zápisu. (neověřené).",
+  "Všechna pole v hranatých závorkách jsou vyplněna."
+  ]
+  
+  prohlaseni_t = [
+  "Podpisy zakládajících členů jsou úředně ověřeny",
+  "Všechna pole v hranatých závorkách jsou vyplněn"
+  ]
+  
+  souhlas_t = [
+  "Kontrola správnosti informací o nemovitosti z katastru nemovitostí.",
+  "Souhlas není v době podání návrhu starší než **tři měsíce**.",
+  "Všechna pole v hranatých závorkách jsou vyplněna.",
+  "Podpis majitele nemovitosti na souhlasu je úředně ověřen."
+  ]
+---
+question: |
+  Kontrolní přehled
+subquestion: |
+  % if True:
+  Přehled můžete kdykoli znovu otevřít pod ${ action_button_html(interview_url(), label="tímto odkazem", color="primary", size="md") }
+  % else:
+  Abyste mohli přehled uložit na později a kdykoli se k němu mohli vrátit je potřeba se **[zaregistrovat](${ url_of('register') })**.
+  % endif
+fields:
+  - "##Stanovy": stanovy
+    required: False
+    datatype: checkboxes
+    none of the above: False
+    code: |
+      stanovy_t
+  - "##Zápis z ústavující schůze": schuze
+    show if:
+      code: |
+        zalozeni == "schuze"
+    required: False
+    datatype: checkboxes
+    none of the above: False
+    code: |
+      schuze_t
+  - "##Čestné prohlášení a souhlas členů výboru se zápisem do rejstříku": prohlaseni
+    required: False
+    datatype: checkboxes
+    none of the above: False
+    code: |
+      prohlaseni_t
+  - "##Souhlas majitele nemovitosti s umístěním sídla spolku": souhlas
+    required: False
+    datatype: checkboxes
+    none of the above: False
+    code: |
+      souhlas_t
+---
+mandatory: True
+code: |
+  if stanovy.all_true() and prohlaseni.all_true() and souhlas.all_true():
+    konec
+  else:
+    force_ask('souhlas')
+---
+question: |
+  Děkujeme a přejeme mnoho zdaru!
+buttons:
+  - Exit: Ukončit
+event: konec
+---

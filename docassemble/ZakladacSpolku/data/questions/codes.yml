@@ -1,0 +1,121 @@
+code: |
+  if Spolek.sidlo.vlastnik.vice == False:
+    Spolek.sidlo.vlastnik.pocet = 1
+    vlastnik = "Vlastník"
+  else:
+    vlastnik = "Spoluvlastníci"
+---
+code: |
+  if Spolek.statutar.druh == 'predseda':
+    Spolek.statutar.clen.target_number = 1
+---
+code: |
+  if minimalVerze:
+    if Spolek.statutar.druh == 'predseda':
+      hromadne = False
+---
+code: |
+  ucelySeznam = string_pole(Spolek.ucel)
+  cinnostiSeznam = string_pole(Spolek.cinnosti)
+---
+sets: pravomociSeznam
+code: |
+  if minimalVerze:
+    pravomociSeznam = ["přijímá členy", "rozhoduje o výši a splatnosti členského příspěvku", "volí a odvolává statutární orgán", "rozhoduje o změně stanov"]
+  else:
+    pravomociSeznam = string_pole(Spolek.nejvyssiOrgan.pravomoc)
+---
+code: |
+  count = 1
+  Spolek.statutar.clen.there_are_any = True
+  while count <= Spolek.statutar.clen.target_number:
+    if osobniUdaje == False:
+      Spolek.statutar.clen.append(Anonym)
+    else:
+      Spolek.statutar.clen.appendObject(Individual)
+      if Spolek.statutar.druh == 'predseda':
+        Spolek.statutar.clen[-1].label = 'předsedy'
+      else:
+        Spolek.statutar.clen[-1].label = 'člena výboru'
+    Spolek.statutar.clen[-1].cislo = count
+    count = count + 1
+  Spolek.statutar.clen.there_is_another = False
+---
+code: |
+  count = 1
+  Spolek.kontrolniKomise.there_are_any = True
+  while count <= Spolek.kontrolniKomise.target_number:
+    if osobniUdaje == False:
+      Spolek.kontrolniKomise.append(Anonym)
+    else:
+      Spolek.kontrolniKomise.appendObject(Individual)
+      Spolek.kontrolniKomise[-1].label = 'člena kontrolní komise'
+    Spolek.kontrolniKomise[-1].cislo = count
+    count = count + 1
+  Spolek.kontrolniKomise.there_is_another = False
+---
+code: |
+  count = 1
+  Spolek.rozhodciKomise.there_are_any = True
+  while count <= Spolek.rozhodciKomise.target_number:
+    if osobniUdaje == False:
+      Spolek.rozhodciKomise.append(Anonym)
+    else:
+      Spolek.rozhodciKomise.appendObject(Individual)
+      Spolek.rozhodciKomise[-1].label = 'člena rozhodčí komise'
+    Spolek.rozhodciKomise[-1].cislo = count
+    count = count + 1
+  Spolek.rozhodciKomise.there_is_another = False
+---
+code: |
+  count = 1
+  Spolek.rada.there_are_any = True
+  while count <= Spolek.rada.target_number:
+    if osobniUdaje == False:
+      Spolek.rada.append(Anonym)
+    else:
+      Spolek.rada.appendObject(Individual)
+      Spolek.rada[-1].label = 'člena rady spolku'
+    Spolek.rada[-1].cislo = count
+    count = count + 1
+  Spolek.rada.there_is_another = False
+---
+code: |
+  count = 1
+  Spolek.sidlo.vlastnik.there_are_any = True
+  while count <= Spolek.sidlo.vlastnik.pocet:
+    if osobniUdaje == False:
+      Spolek.sidlo.vlastnik.append(Anonym)
+    else:
+      Spolek.sidlo.vlastnik.appendObject(Individual)
+    Spolek.sidlo.vlastnik[-1].cislo = count
+    count = count + 1
+  Spolek.sidlo.vlastnik.there_is_another = False
+---
+code: |
+  count = 1
+  if Spolek.statutar.clen.there_is_another == False:
+    Spolek.zalozeni.navrhovatel.there_are_any = True
+    if Spolek.zalozeni.typ == 'schuze':
+      Spolek.zalozeni.navrhovatel.pocet = 1
+    else:
+      Spolek.zalozeni.navrhovatel.pocet = 3
+    while count <= Spolek.zalozeni.navrhovatel.pocet:
+      if osobniUdaje == False:
+        Spolek.zalozeni.navrhovatel.append(Anonym)
+      else:
+        Spolek.zalozeni.navrhovatel.appendObject(Individual)
+        Spolek.zalozeni.navrhovatel[-1].label = 'zakládajícího člena'
+      Spolek.zalozeni.navrhovatel[-1].cislo = count  
+      count = count + 1
+    Spolek.zalozeni.navrhovatel.there_is_another = False
+---
+code: |
+  if Spolek.sidlo.vlastnik.vice == False:
+    Spolek.sidlo.vlastnik[i].label = 'vlastníka nemovitosti'
+  else:
+    Spolek.sidlo.vlastnik[i].label = 'spoluvlastníka nemovitosti'
+---
+code: |
+  if Spolek.zalozeni.typ == 'schuze':
+    Spolek.zalozeni.pocetZakladatelu = 1    

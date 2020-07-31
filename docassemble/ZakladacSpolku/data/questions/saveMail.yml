@@ -1,0 +1,61 @@
+include:
+  - t_maily.yml
+---
+default screen parts:
+  under: |
+    % if show_save_resume_message:
+    <i class="fas fa-save"></i> [Uložit a pokračovat později](${ url_action('ulozit') })
+    % endif
+---
+mandatory: True
+code: |
+  if not user_logged_in():
+    multi_user = True
+  show_save_resume_message = True
+---
+event: ulozitMail
+code: |
+  if action_argument('wants'):
+    emailOdeslan = send_email(to=action_argument('email'), template=t_save)
+    show_save_resume_message = False
+    json_response(dict(status=emailOdeslan))  
+---
+event: ulozit
+code: |
+  wants_email
+---
+event: final_screen
+question: |
+  I would like you to cook a
+  ${ favorite_fruit },
+  ${ favorite_vegetable }, and
+  ${ favorite_legume } stew.
+---
+question: |
+  Uložení průvodce na později.
+subquestion: |
+  Pokud chcete aktuálně vyplněné údaje uložit na později, můžeme Vám na e-mail poslat odkaz, pod kterým se můžete kdykoli vrátit.
+fields:
+  - no label: wants_email
+    input type: radio
+    choices:
+      - "Chci odkaz na e-mail": True
+      - "Ne, děkuji": False
+    default: True
+  - E-mail: user_email_address
+    datatype: email
+    show if: wants_email
+  - note: |
+      <button id="run" class="btn btn-primary">Odeslat na e-mail</button>
+      
+      <span id="resultsArea"></span>
+    show if: wants_email
+script: |
+  <script>
+    $("#run").click(function(){
+      action_call('ulozitMail', {email: val('user_email_address'), wants: val('wants_email')}, function(data){
+        $("#resultsArea").html("E-mail bych úspěšně odeslán: " + data.status + ".")
+      });
+    });
+  </script>
+under: ""

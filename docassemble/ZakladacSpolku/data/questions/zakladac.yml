@@ -1,0 +1,274 @@
+include:
+  - nastaveni.yml
+  - saveMail.yml
+  - vystupSoubory.yml
+  - objektIndividual.yml
+---
+code: |
+  zakladniPole = [{'True': 'Stručná verze'}, {'False': 'Pokročilá verze'}]
+---
+reconsider:
+  - zakladniPole
+question: |
+  Jakou verzi nástroje využijete
+subquestion: |
+  % if user_logged_in():
+  Vítejte. Jelikož jste přihlášeni můžete si vybrat zda využijete pouze stručné, či pokročilejší verze zakladače. 
+  % else:
+    Vítejte. Tento průvodce Vám vygeneruje veškeré potřebné dokumenty k založení spolku. 
+  
+  Pokud byste chtěli využít pokročilejší funkce nástroje včetně možnosti uložit rozpracované dokumenty a kdykoli se k nim později vrátit, **[zaregistrujte se](${ url_of('register') })**
+  % endif
+fields:
+  - no label: minimalVerze
+    input type: radio
+    code: |
+      zakladniPole
+  - note: |
+      Osobní údaje, které v aplikaci vyplníte nikam trvale neukládáme a po vytvoření dokumentů jsou odstraněny.
+      
+      Přesto si můžete zvolit, zda osobní údaje raději vyplníte v dokumentech sami po stažení. Musíte pak však vyplňovat tytéž údaje v několika dokumentech.
+      
+      Kompletní informace o tom, jak pracujeme o osobními údaji naleznete zde: [Zásady ochrany osobních údajů](https://frankbold.org/zasady-ochrany-osobnich-udaju-frank-bold).
+  - no label: osobniUdaje
+    datatype: radio
+    choices:
+      - Údaje vyplním po stažení: False
+      - Vyplním zde v rozhraní: True
+---
+event: verze
+code: |
+  temp = action_arguments()
+  minimalVerze = temp['verze']
+  osobniUdaje
+---
+question: |
+  Způsob založení spolku
+subquestion: |
+  Nápověda k tomu, jakou variantu vybrat.
+fields:
+  - Způsob založení spolku: Spolek.zalozeni.typ
+    input type: radio
+    choices: 
+      - Ústavující schůzí: schuze
+      - Přijetím stanov: stanovy
+  - Chcete rovnou předvyplnit zápis z ústavujícíc schůze?: schuzeVyplnit
+    datatype: yesnoradio
+    show if:
+      variable: Spolek.zalozeni.typ
+      is: schuze
+    help: |
+      Pokud už víte, kdy se bude schůze konat, jaký bude program, atd. můžete si jej zde rovnou předvyplnit. Pokud ještě dá dáme Vám ke stažení prázdnou šablonu. Vyplnit zápis online můžete pak kdykoli pod tímto <a href="${ url_of('root', _external=True)}interview?i=docassemble.ZakladacSpolku:ustavujiciSchuze.yml">odkazem</a>
+---
+if: |
+  minimalVerze
+question: |
+  Statutární orgán
+subquestion: |
+  Určení statutárního orgánu.
+fields:
+  - Statutární orgán: Spolek.statutar.druh
+    input type: radio
+    choices:
+     - Předseda: predseda
+     - Výbor: vybor
+  - Počet členu výboru: Spolek.statutar.clen.target_number
+    datatype: integer
+    min: 2
+    show if:
+      variable: Spolek.statutar.druh
+      is: vybor
+---
+if: |
+  not minimalVerze
+question: |
+  Statutární orgán
+subquestion: |
+  Určení statutárního orgánu.
+fields:
+  - Statutární orgán: Spolek.statutar.druh
+    input type: radio
+    choices:
+     - Předseda: predseda
+     - Výbor: vybor
+  - Počet členu výboru: Spolek.statutar.clen.target_number
+    datatype: integer
+    min: 2
+    show if:
+      variable: Spolek.statutar.druh
+      is: vybor
+  - Volební období: Spolek.statutar.obdobi
+    input type: radio
+    choices:
+      - Do odvolání: neurcito
+      - Jeden rok: urcito
+    show if: 
+      code: |
+        minimalVerze == False
+  - Způsob jednání za spolek: Spolek.statutar.zpusobJednani
+    input type: radio
+    choices:
+      - Každý člen jedná za spolek samostatně: samostatne
+      - Všichni členové jednají společně: spolecne
+      - Alespoň dva členové jednají společně: dva
+    show if:
+      variable: Spolek.statutar.druh
+      is: vybor
+---
+question: |
+  Identifikační údaje spolku
+subquestion: |
+  Základní údaje o spolku.
+fields:
+  - Název spolku: Spolek.name.text
+    hint: Musí obsahova z.s., spolek nebo zapsaný spolek.
+    validate: contains_spolek
+  - Sídlo spolku: Spolek.address
+    hint: stačí obec
+---
+if: |
+  minimalVerze == False
+question: |
+  Nejvyšší orgán spolku
+fields:
+  - Četnost členské schůze: Spolek.nejvyssiOrgan.cetnost
+    input type: radio
+    choices:
+      - Jednou ročně: rocne
+      - Dle potřeby: neurcite
+  - Pravomoci členské schůze: Spolek.nejvyssiOrgan.pravomoc
+    datatype: area
+    default: |
+      přijímá členy
+      rozhoduje o výši a splatnosti členského příspěvku
+      volí a odvolává statutární orgán
+      rozhoduje o změnách stanov
+  - Hlasování per-rollam: Spolek.nejvyssiOrgan.perrollam
+    show if: 
+      code: |
+        minimalVerze == False
+    input type: radio
+    choices:
+      - Bude umožněno: True
+      - Nebude možné: False
+---
+question: |
+  Činnost spolku
+subquestion: |
+  Popište jaké aktivity bude Váš spolek vyvíjet.
+fields:
+  - Účel spolku: Spolek.ucel
+    datatype: area
+    hint: jednotlivé položky oddělte novým řádkem
+  - Formy činnosti spolku: Spolek.cinnosti
+    datatype: area
+    hint: jednotlivé položky oddělte novým řádkem
+  - Popis spolku: Spolek.popis
+    datatype: area
+    show if: 
+      code: |
+        minimalVerze == False
+  - Vedlejší hospodářská činnost: Spolek.zivnost
+    datatype: area
+    show if: 
+      code: |
+        minimalVerze == False
+---
+if: |
+  minimalVerze == False
+question: |
+  Dodatečné orgány spolku
+subquestion: |
+  Můžete vybrat některé běžné orgány, spolku. V dokumentu si můžete kdykoli doplnit vlastní na míru.
+fields:
+  - Kontrolní komise: Spolek.kontrolniKomise.exist
+    datatype: yesnoradio
+  - Počet členů: Spolek.kontrolniKomise.target_number
+    datatype: integer
+    min: 2
+    show if: Spolek.kontrolniKomise.exist
+  - Volební období: Spolek.kontrolniKomise.obdobi
+    input type: radio
+    choices:
+      - Jeden rok: rocne
+      - Neurčito: neurcito
+    show if: Spolek.kontrolniKomise.exist
+  - Rozhodčí komise: Spolek.rozhodciKomise.exist
+    datatype: yesnoradio
+  - Počet členů: Spolek.rozhodciKomise.target_number
+    datatype: integer
+    min: 2
+    show if: Spolek.rozhodciKomise.exist
+  - Volební období: Spolek.rozhodciKomise.obdobi
+    input type: radio
+    choices:
+      - Jeden rok: rocne
+      - Neurčito: neurcito
+    show if: Spolek.rozhodciKomise.exist
+  - Rada spolku: Spolek.rada.exist
+    datatype: yesnoradio
+  - Počet členů: Spolek.rada.target_number
+    datatype: integer
+    min: 2
+    show if: Spolek.rada.exist
+  - Volební období: Spolek.rada.obdobi
+    input type: radio
+    choices:
+      - Jeden rok: rocne
+      - Neurčito: neurcito
+    show if: Spolek.rada.exist
+---
+if: |
+  minimalVerze == False
+question: |
+  Členství ve spolku
+subquestion: |
+  Můžete přidat čestné členství, kdy čestný člen má pouze poradní hlas.
+fields:
+  - Budou řádní členové platit členské příspěky?: Spolek.clenstvi.poplatky
+    datatype: yesnoradio
+  - Čestné členství: Spolek.clenstvi.cestne
+    datatype: yesnoradio
+  - Název členství: Spolek.clenstvi.cestneNazev
+    default: Čestné
+    show if:
+      variable: Spolek.clenstvi.cestne
+      is: True
+---
+question: | 
+  Chcete pro každého člena orgánu samostatný dokument s prohlášením?
+subquestion: |
+  Na prohlášením musí být ověřené podpisy. Pokud by tedy bylo komplikované se k ověření podpisů sejít hromadně, či si předat jeden dokument, je lepší aby měl každý člen vlastní.
+noyes: hromadne
+---
+question: |
+  Sídlo spolku
+fields:
+  - Dům či byt: Spolek.sidlo.typ
+    input type: radio
+    choices:
+      - Dům: domu
+      - Byt: bytu
+  - Vlastník či spoluvlatníci: Spolek.sidlo.vlastnik.vice
+    input type: radio
+    choices:
+      - Vlastník: False
+      - Spoluvlastníci: True
+  - Kolik spoluvlastníků: Spolek.sidlo.vlastnik.pocet
+    show if: Spolek.sidlo.vlastnik.vice
+    datatype: integer
+---
+if: |
+  Spolek.zalozeni.typ == 'stanovy'
+question: |
+  Kolik bude zakladatelů spolku?
+subquestion: |
+  Spolek musí zakládat **minimálně 3 osoby**. Když zakládáte spolek přijetím stanov, musí být každý zakládající člen podepsán pod stanovami ověřeným podpisem. Pokud k tomu však máte důvod, můžete zvolit i vyšší počet zakládajících členů.
+fields:
+  - Počet zakládajících členů: Spolek.zalozeni.pocetZakladatelu
+    datatype: integer
+    default: 3
+    min: 3
+---
+include:
+  - codes.yml

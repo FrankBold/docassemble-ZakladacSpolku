@@ -1,0 +1,32 @@
+sets: listinaDone
+code: |
+  if Spolek.schuze.pritomni.there_are_any == False:
+    listinaDone = True
+  elif listinaPotvrzena:
+    listinaDone = True
+---
+event: listina
+question: |
+  Listina přítomných
+subquestion: |
+  Upravit seznam přítomných: 
+  ${ Spolek.schuze.pritomni.table }
+  
+  ${ Spolek.schuze.pritomni.add_action() }
+section: listina
+continue button label: Pokračovat
+continue button field: listinaPotvrzena
+---
+table: Spolek.schuze.pritomni.table
+rows: Spolek.schuze.pritomni
+columns:
+  - Jméno: |
+      row_item.name.first
+  - Bydliště: |
+      row_item.address
+  - Podpis: |
+      row_item.podpis.ok
+edit:
+  - name.first
+  - podpis
+---

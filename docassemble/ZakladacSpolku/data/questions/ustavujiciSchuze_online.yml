@@ -1,0 +1,283 @@
+metadata:
+  title: Ustavující schůze
+  tags:
+    - Schůze
+  short title: |
+    Ústavující schůze
+  description: |
+    Rozhraní pro vytvoření zápisu z ústavujícíc schůze
+  authors:
+    - name: Michal Kuk
+      organization: Frank Bold
+  revision_date: 2019-11-11
+  help label: |
+    Nápověda
+---
+sections:
+  - intro: Úvodní
+  - Průběh schůze:
+    - listina: Listina přítomných
+    - funkce: Funkcionáři schůze
+    - program: Schválení programu schůze
+    - stanovy: Schválení stanov
+    - organy: Volba orgánů spolku
+    - zapis: Pověření osoby zápisem spolku
+  - shrnuti: Ukončení schůze
+---
+features:
+  question help button: True
+  navigation: horizontal
+---
+mandatory: True
+code: |
+  menu_items = [ action_menu_item('Listina přítomných', 'listina') ]
+---
+interview help:
+  label: Nápověda
+  heading: Základní nápověda
+  content: |
+    Základní informace naleznete zde.
+---
+modules:
+  - docassemble.base.legal
+  - .validace
+---
+objects:
+  - Spolek: Organization
+  - Spolek.schuze: Event
+  - Spolek.schuze.stanovy: Thing
+  - Spolek.schuze.pritomni: PartyList
+  - Spolek.schuze.program: DAList.using(object_type=Thing)
+  - Spolek.schuze.predseda: Person
+  - Spolek.schuze.zapisovatel: Person
+  - Spolek.schuze.overovatel: Person
+---
+mandatory: True
+code: |
+  Spolek.schuze.svolavatel = '###'
+  Spolek.schuze.datumSvolani = today()
+  Spolek.schuze.datumKonani = today()
+  Spolek.schuze.stanovy.pro = '###'
+  Spolek.schuze.stanovy.proti = '###'
+  Spolek.schuze.stanovy.zdrzel = '###'
+  Spolek.schuze.protiOsoby = '###'
+  Spolek.name.text = 'spolek'
+  Spolek.schuze.obec = 'obec'
+  Spolek.schuze.predseda.name.first = '###'
+  Spolek.schuze.zapisovatel.name.first = '###'
+---
+mandatory: True
+question: |
+  Základní informace
+subquestion: |
+  Informace k vyplnění před samotným konáním schůze.
+fields:
+  - Název spolku: Spolek.name.text
+    hint: Včetně dovětku, zpravidla z.s.
+    validate: contains_spolek
+  - Jméno svolavatele: Spolek.schuze.svolavatel
+  - Den konání schůze: Spolek.schuze.datumKonani
+    datatype: date
+  - Den svolání schůze: Spolek.schuze.datumSvolani
+    datatype: date
+  - Obec konání schůze: Spolek.schuze.obec
+  - Chcete vyplnti Listinu přítomných zde v rozhraní?: Spolek.schuze.pritomni.there_are_any
+    datatype: yesnoradio
+    help: |
+      V rozhraní můžete rovnou elektronicky podepsat listinu přítomných, odpadne vám tak potřeba zápis skenovat.
+help: |
+  # Listina přítomných
+  Listinu přítomných můžete buď vyplnit zde online, nebo ji vystisknou a vyplnit na místě.
+  Pokud budete podávat návrh k soudu elektronicky, doporučujeme vyplnit jej online, protože jinak budete muset vyřizovat konverzi dokumentů.
+section: intro
+---
+event: listina
+question: |
+  Listina přítomných
+subquestion: |
+  Upravit seznam přítomných: 
+  ${ Spolek.schuze.pritomni.table }
+  
+  ${ Spolek.schuze.pritomni.add_action() }
+section: listina
+continue button field: listinaDone
+---
+table: Spolek.schuze.pritomni.table
+rows: Spolek.schuze.pritomni
+columns:
+  - Jméno: |
+      row_item.name.first
+  - Bydliště: |
+      row_item.address
+  - Podpis: |
+      row_item.podpis.ok
+edit:
+  - name.first
+  - podpis
+---
+mandatory: True
+code: |
+  povinnyProgram = [["Úvodní slovo", True], ["Soupis listiny přítomných", False], ["Schválení stanov", True], ["Volba orgánů spolku", True], ["Pověření osoby k podání návrhu na zápis spolku", True]]
+  for polozka in povinnyProgram:
+    Spolek.schuze.program.appendObject()
+    Spolek.schuze.program[-1].important = dict(delete=False, edit=False)
+    Spolek.schuze.program[-1].name.text = polozka[0]
+    if polozka[1] == False:
+      Spolek.schuze.program[-1].jednomyslne = True
+  Spolek.schuze.program.there_is_another = False
+---
+need: listinaDone
+question: |
+  Předseda schůze
+subquestion: |
+  Prvním bodem schůze je určení předsedajícího, zapisovatele a ověřověvatele zápisu. Stejně jako schválení programu schůze.
+fields:
+  - Z listiny přítomných: Spolek.schuze.predseda
+    datatype: object
+    choices: Spolek.schuze.pritomni
+    disable others: True
+  - Předseda schůze: Spolek.schuze.predseda.name.first
+    hint: Jméno a příjmení
+  - Bydliště: Spolek.schuze.predseda.address
+section: uvod
+continue button label: Zapisovatel
+---
+need: Spolek.schuze.predseda.name.first
+question: |
+  Zapisovatel
+subquestion: |
+  Prvním bodem schůze je určení předsedajícího, zapisovatele a ověřověvatele zápisu. Stejně jako schválení programu schůze.
+fields:
+  - Z listiny přítomných: Spolek.schuze.zapisovatel
+    datatype: object
+    choices: Spolek.schuze.pritomni
+    disable others: True
+  - Zapisovatel: Spolek.schuze.zapisovatel.name.first
+    hint: Jméno a příjmení
+  - Bydliště: Spolek.schuze.zapisovatel.address
+section: uvod
+continue button label: Ověřovatel zápisu
+---
+need: Spolek.schuze.zapisovatel.name.first
+question: |
+  Ověřovatel zápisu
+subquestion: |
+  Prvním bodem schůze je určení předsedajícího, zapisovatele a ověřověvatele zápisu. Stejně jako schválení programu schůze.
+fields:
+  - Z listiny přítomných: Spolek.schuze.overovatel
+    datatype: object
+    choices: Spolek.schuze.pritomni
+    disable others: True
+  - Ověřovatel zápisu: Spolek.schuze.overovatel.name.first
+    hint: Jméno a příjmení
+  - Bydliště: Spolek.schuze.overovatel.address
+section: uvod
+continue button label: Program schůze
+continue button field: funkceDone
+---
+need: funkceDone
+event: program
+question: |
+  Program schůze
+subquestion: |
+  Zde si sestavte program schůze. Můžete též přidat libovolné další body. Program schůze by měl být schválen na začátku.
+
+  ${ Spolek.schuze.program.table }
+  
+  ${ Spolek.schuze.program.add_action() }
+continue button field: programDone
+section: program
+---
+table: Spolek.schuze.program.table
+rows: Spolek.schuze.program
+columns:
+  - Bod: row_item
+edit:
+  - row_item
+allow reordering: True
+read only: important
+---
+question: |
+  Bod programu
+fields:
+  - Název bodu: Spolek.schuze.program[i].name.text
+---
+question: |
+  Údaje ${ ordinal(i) } přítomného?
+fields:
+  - Jméno a příjmení: Spolek.schuze.pritomni[i].name.first
+  - Bydliště: Spolek.schuze.pritomni[i].address
+  - Přidat další osobu?: Spolek.schuze.pritomni.there_is_another
+    datatype: yesnoradio
+---
+generic object: Person
+question: |
+  Podepiště se
+signature: x.podpis
+under: |
+  ${ x.name.first }
+---
+need: programDone
+question: |
+  Hlasování o bodu schůze: ${ Spolek.schuze.program[i].name.text }
+fields:
+  - Všichni pro: Spolek.schuze.program[i].jednomyslne
+    datatype: yesnoradio
+  - Kolik hlasovalo pro: Spolek.schuze.program[i].pro
+    datatype: range
+    min: 0
+    max: ${ Spolek.schuze.pritomni.number() }
+    show if:
+      variable: Spolek.schuze.program[i].jednomyslne
+      is: False
+  - Kolik hlasovalo proti: Spolek.schuze.program[i].proti
+    datatype: range
+    min: 0
+    max: ${ Spolek.schuze.pritomni.number() }
+    show if:
+      variable: Spolek.schuze.program[i].jednomyslne
+      is: False
+  - Kolik se zdrželo: Spolek.schuze.program[i].zdrzelo
+    datatype: range
+    min: 0
+    max: ${ Spolek.schuze.pritomni.number() }
+    show if:
+      variable: Spolek.schuze.program[i].jednomyslne
+      is: False
+validation code: |
+  if Spolek.schuze.program[i].jednomyslne == False and Spolek.schuze.program[i].pro + Spolek.schuze.program[i].proti + Spolek.schuze.program[i].zdrzelo != Spolek.schuze.pritomni.number():
+    validation_error("Součet musí odpovídát počtu přítomných")
+---
+code: |
+  Spolek.schuze.program[i].important = False
+---  
+section: shrnuto
+mandatory: True
+question: |
+  Shrnutí.
+subquestion: |
+  ##Název spolku
+  ${ Spolek.name.text }
+  
+  ##Počet přítomných:
+  ${ Spolek.schuze.pritomni.number_as_word() }
+  ${ Spolek.schuze.pritomni[0].podpis }
+  
+  ##Funkcionáři schůze:
+  Předseda: ${ Spolek.schuze.predseda.name.first }
+  
+  Zapisovatel: ${ Spolek.schuze.zapisovatel.name.first }
+  
+  Ověřovatel: ${ Spolek.schuze.overovatel.name.first }
+  
+  ##Program schůze:
+  ${ Spolek.schuze.program }
+  
+  ##Hlasování:
+  % for hlasovani in Spolek.schuze.program:
+  ${ hlasovani.jednomyslne }
+
+  % endfor
+ 
+  
+  

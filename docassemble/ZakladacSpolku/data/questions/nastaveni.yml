@@ -1,0 +1,92 @@
+metadata:
+  title: |
+    Průvodce založením spolku
+  short title: |
+    Založení spolku
+  description: |
+    Průvodce, který Vám připraví potřebné podklady pro založení spolku.
+  tags:
+    - Zakladač
+  authors:
+    - name: Michal Kuk
+      organization: Frank Bold Society, z.s.
+  revision_date: 2020-01-22
+  documentation: "https://docassemble.org/docs/initial.html#metadata"
+  post: |
+     &nbsp;
+     ---
+     &nbsp;
+     
+     Vznik nástroje podpořili:
+     
+#     ![NFRO](https://da.frankbold.org/playgroundstatic/ZakladacSpolku/1/logo_nfro.png) | ![Nadace VIA](https://da.frankbold.org/playgroundstatic/ZakladacSpolku/1/logo_via.png)
+  logo: |
+    **Frank Bold**
+---
+mandatory: True
+code: |
+  set_live_help_status(availability='available', mode='help', partner_roles="Administrator")
+---
+images:
+  via: logo_via.png
+  nfro: logo_nfro.png
+---
+modules:
+  - docassemble.base.legal
+  - .validace
+  - .objekty
+---
+features:
+  progress bar: True
+---
+objects: 
+  - Spolek: Organization
+  - Spolek.nejvyssiOrgan: Thing
+  - Spolek.statutar: Thing
+  - Spolek.zalozeni: Thing
+  - Spolek.sidlo: Address
+  - Spolek.sidlo.vlastnik: PartyList.using(object_type=Individual, label="vlastníka")
+  - Spolek.zalozeni.navrhovatel: PartyList.using(object_type=Individual, label="navrhovatel zápisu spolku")
+  - Spolek.statutar.clen: PartyList.using(object_type=Individual.using(funkce="True"), label="statutárního orgánu")
+  - Spolek.rada: PartyList.using(object_type=Individual.using(funkce="True"), label="člena rady spolku")
+  - Spolek.kontrolniKomise: PartyList.using(object_type=Individual.using(funkce="True"), label="člena kontrolní komise")
+  - Spolek.rozhodciKomise: PartyList.using(object_type=Individual.using(funkce="True"), label="člena rozhodčí komise")
+  - Spolek.schuze: Event
+  - Spolek.schuze.stanovy: Thing
+  - Spolek.clenstvi: Thing
+  - Clen1: Prohlaseni
+  - Clen2: Prohlaseni
+  - Anonym: Individual
+  - Soubory: DAFileList.using(auto_gather=False,gathered=True)
+---
+code: |
+  if minimalVerze == True:
+    Spolek.popis = False
+    Spolek.nejvyssiOrgan.cetnost = 'dlePotreby'
+    Spolek.nejvyssiOrgan.pravomoc = False
+    Spolek.nejvyssiOrgan.perrollam = True
+    Spolek.statutar.obdobi = 'neurcito'
+    Spolek.kontrolniKomise.exist = False
+    Spolek.clenstvi.poplatky = True
+    Spolek.rada.exist = False
+    Spolek.rozhodciKomise.exist = False
+---
+code: |
+  pocetOsob = 1
+  Anonym.name = 'Anonym'
+  Anonym.name.first = 'Anonym'
+  Anonym.address = 'Bydliště'
+  Anonym.birthday = '99.99.9999'
+  Anonym.label = '[funkce]'
+---
+code: |
+  if Spolek.zalozeni.typ == 'schuze':
+    Spolek.schuze.svolavatel = '###'
+    Spolek.schuze.predseda = '###'
+    Spolek.schuze.datumSvolani = '###'
+    Spolek.schuze.stanovy.pro = '###'
+    Spolek.schuze.stanovy.proti = '###'
+    Spolek.schuze.stanovy.zdrzel = '###'
+    Spolek.schuze.protiOsoby = '###'
+    Spolek.schuze.stanovy.zapisovatel = '###'
+    Spolek.schuze.overovatel = '###'

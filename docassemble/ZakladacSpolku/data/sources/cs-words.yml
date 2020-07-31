@@ -1,0 +1,721 @@
+cs:
+  "(Deleted)": "(Smazáno)"
+  "(New branch)": "(Nová větev)"
+  "(New file)": "(Nový soubor)"
+  "(Not a DAFile or DAFileList object)": "(Není objekty typu DAFile ani DAFileList)"
+  "(Not a readable image file)": "(Soubor s obrázkem není čitelný)"
+  "(Unable to display map)": "(Nelze zobrazit mapu)"
+  "(Unable to extract images from PDF file)": "(Nelze vyexportovat obrázky z PDF souboru)"
+  "(embedded question, source code not available)": "(zdrojový kód vložené otázky není k dispozici)"
+  ", are attached": ", jsou přiloženy"
+  ", is already in use by someone else": ", již někdo používá"
+  ", is attached": ", je přiložen"
+  "-- Do not link --": "-- Neodkazovat --"
+  ".": "."
+  "?": "?"
+  "A QR code": "QR kód"
+  "A chat message has arrived.": "Chat zpráva doručena"
+  "A new docassemble system version is available.  If you are using Docker, install a new Docker image.": "Je k dispozici nová verze systému docassemble. Pokud používáte Docker, nainstalujte nový Docker image."
+  "A user with that e-mail has already registered": "Uživatel s tímto e-mailem je již registrován"
+  "API Keys": "API Klíče"
+  "Access organizational repositories": "Zpřístupnit organizační repozitáře"
+  "Access shared repositories": "Zpřístupnit sdílené repozitáře"
+  "Account did not exist.": "Účet neexistoval"
+  "Action": "Akce"
+  "Actions": "Akce"
+  "Activate chat": "Aktivovat chat"
+  "Active": "Aktivní"
+  "Active File": "Aktivní soubor"
+  "Add": "Přidat"
+  "Add Privilege": "Přidat oprávnění"
+  "Add User": "Přidat uživatele"
+  "Add an item": "Přidat položku"
+  "Add another": "Přidat další"
+  "Administrator": "Administrátor"
+  "An e-mail address is required.": "Je vyžadován e-mail"
+  "Anonymous": "Anonym"
+  "Answer here": "Zde odpovězte"
+  "App": "Appka"
+  "Apply": "Podat"
+  "Are you sure that you want to delete this file?": "Určitě chcete smazat tento soubor?"
+  "Are you sure that you want to delete this package?": "Určitě chcete smazat tento balíček?"
+  "Are you sure that you want to delete this playground file?": "Určitě chcete smazat tento Playground soubor?"
+  "Are you sure that you want to publish this package to PyPI?": "Určitě chcete publikovat tento balíček na PyPI?"
+  "Are you sure you want to delete all saved interviews?": "Určitě chcete smazat všechny uložené průvodce?"
+  "Are you sure you want to delete this item?": "Určitě chcete smazat tuto položku?"
+  "Are you sure you want to permanently delete this user's account?": "Určitě chcete trvale smazat tento uživatelský profil?"
+  "At least one e-mail address must be listed": "Musí být vložen alespoň jeden e-mail"
+  "Attachment": "Příloha"
+  "Attachments": "Přílohy"
+  "Authentication": "Autentifikace"
+  "Authentication failed.": "Autentifikace selhala"
+  "Author E-mail": "E-mail autora"
+  "Author Name": "Jméno autora"
+  "Available": "Dostupné"
+  "Available Interviews": "Dostupní průvodci"
+  "Available interviews": "Dostupní průvodci"
+  "Back": "Zpět"
+  "Back to profile": "Zpět na profil"
+  "Back to question": "Zpět na otázku"
+  "Bad date": "Chybné datum"
+  "Block": "Blok"
+  "Branch": "Větev"
+  "Cancel": "Zrušit"
+  "Case No.": "Číslo případu"
+  "Change": "Změnit"
+  "Change Password": "Změnit heslo"
+  "Changed name of interview": "Změnit název průvodce"
+  "Chat message you want to send": "Zpráva, kterou chcete odeslat"
+  "Check at least one option, or check “%s”": "Vyberte alespoň jendnu možnost, nebo “%s”"
+  "Check box": "Zaškrtávací pole"
+  "Check if applicable": "Zaškrtněte pokud platí"
+  "Checkboxes:": "Zaškrtávací pole"
+  "Choices:": "Možnosti"
+  "Classes": "Třídy"
+  "Clear": "Vyčistit"
+  "Click here to confirm your e-mail": "Klikněte zde pro potvrzení e-mailu"
+  "Click here to get help over the phone.": "Klikněte zde pro pomoc po telefonu"
+  "Click if you want the user to be able to call you.": "Klikněte zde pokud chcete, aby vám uživatel mohl zavolat"
+  "Click to try this interview": "Klikněte zde pro vyzkoušení průvodce"
+  "Commit": "Commit"
+  "Commit message": "Commit zpráva"
+  "Configuration": "Nastavení"
+  "Configuration YAML": "Nastavení YAML"
+  "Configuration not updated.": "Nastavení nebylo aktualizováno"
+  "Configuration not updated.  There was a syntax error in the configuration YAML.": "Nestavení nebylo aktualizováno. V konfiguraci YAML se vyskytl syntax error."
+  "Configuration not updated.  There was an error.": "Nastavení nebylo aktulizováno. Vyskytla se chyba."
+  "Configure": "Nastavit"
+  "Confirmation Date": "Datum potvrzení"
+  "Connected to Google Drive": "Připojit k Google Drive"
+  "Connected to OneDrive": "Připojit k OneDrive"
+  "Continue": "Pokračovat"
+  "Control": "Ovládání"
+  "Could not create new key": "Nepodařilo se vytvořit nový klíč"
+  "Country Code": "Kód země"
+  "Country code": "Kód země"
+  "Create": "Vytvořit"
+  "Create Package": "Vytvořit balíček"
+  "Created new Markdown file called ": "Vytvořit nový soubor Markdown jménem "
+  "Current": "Stávající"
+  "Decorations": "Dekorace"
+  "Defined in": "Definováno v"
+  "Delete": "Smazat"
+  "Delete Account": "Smazat účet"
+  "Delete project": "Smazat projekt"
+  "Deleted file: ": "Smazat soubor"
+  "Deleted interview": "Smazat průvodce"
+  "Deleted interviews": "Smazat průvodce"
+  "Deleted package": "Smazat balíček"
+  "Dependencies": "Závislosti"
+  "Description": "Popis"
+  "Developer Access": "Developerský přístup"
+  "Disable": "Vypnout"
+  "Display the menu": "Zobrazit menu"
+  "Docassemble Office Add-in": "Docassemble Office doplněk"
+  "Docassemble Playground": "Dockassemble hřiště"
+  "Document": "Dokument"
+  "Documentation": "Dokumentace"
+  "Done": "Hotovo"
+  "Download": "Stáhnout"
+  "Download All": "Stáhnout vše"
+  "Download all documents as a ZIP file": "Stáhnout všechny dokumenty jako ZIP"
+  "Download this document as a ZIP file": "Stáhnout tento dokument jako ZIP"
+  "E-mail": "E-mail"
+  "E-mail address": "E-mailová adresa"
+  "E-mail address is required": "Je vyžadován e-mail"
+  "E-mail is required": "Je vyžadován e-mail"
+  "E-mail these documents": "Poslat dokumenty e-mailem"
+  "E-mail this document": "Poslat dokument e-mailem"
+  "E-mail was sent to": "E-mail byl odeslán na"
+  "E.g., docassemble.demo:data/questions/questions.yml": "Např. docassemble.demo:data/questions/questions.yml"
+  "E.g., es, fr, it": "Např. es, fr, it"
+  "ERROR: you cannot insert a table into a .docx document": "CHYBA: nelze vložit tabulku do .docx souboru"
+  "Edit": "Upravit"
+  "Edit API Key": "Upravit API klíč"
+  "Edit User Profile": "Upravit uživatelský profil"
+  "Edit module files": "Upravit soubory modulu"
+  "Edit source files": "Upravit zdrojové soubory"
+  "Edit text files": "Upravit textový soubor"
+  "Email": "E-mail"
+  "Email is required": "Je vyžadován e-mail"
+  "Enter a URL of a GitHub repository containing an extension package.  When you press Pull, the contents of that repository will be copied into the Playground, overwriting any files with the same names.  Or, put in the name of a PyPI package and it will do the same with the package on PyPI.": null
+  "Enter code": "Vložte kód"
+  "Enter the name of the new project you want to create.": "Uveďte jméno nového projektu, který chcete vytvořit."
+  "Error": "Chyba"
+  "Error reading JSON file from package.  File did not exist.": "Chyba při čtení souboru JSON v balíčku. Soubor neexistuje."
+  "Error reading JSON file.  Not a valid JSON file.": "Chyba při čtení souboru JSON. Neplatný JSON soubor."
+  "Error reading JSON file.  The JSON file needs to contain a dictionary at the root level.": "Chyba při čtení souboru JSON. Soubor musí obsahovat slovník na úrovní root."
+  "Error: interview not found": "Chyba: průvodce nenalezen"
+  "Error: interview not found and answers could not be decrypted": "Chyba: průvodce nenalezen a odpovědi nebylo možno dešifrovat"
+  "Error: menu item is not a Python dict with keys of url and label": "Chyba: položka menu není Python slovník s klíčy url a popiskem"
+  "Error: menu_items is not a Python list": "Chyba: menu_items není Python seznam"
+  "Error: no fields could be found in the file": "Chyba: v souboru nebylo nalezeno žádné pole"
+  "Every Two Weeks": "Každé dva týdny"
+  "Existing module files": "Existující soubory modulů"
+  "Existing source files": "Existující zdrojové soubory"
+  "Existing static files": "Existující statické soubory"
+  "Existing template files": "Existující soubory šablony"
+  "Exit": "Odejít"
+  "File Name": "Název souboru"
+  "File Text": "Text souboru"
+  "File could not be converted: ": "Soubor nemohl být převeden: "
+  "File deleted.": "Soubor odstraněn."
+  "File format not understood: ": "Nerozumím formátu souboru: "
+  "File not deleted.  There was an error.": "Soubor nebyl odstraněn. Vyskytla se chyba."
+  "File not found: ": "Soubor nenalezen: "
+  "File to upload": "Soubor k nahrání"
+  "Filter For": "Filtrovat"
+  "First Subdivision": "První podkategorie"
+  "First name": "Křestní jméno"
+  "First subdivision": "První podkategorie"
+  "Floor": "Poschodí"
+  "Folder": "Složka"
+  "Functions": "Funkce"
+  "Get help through live chat by clicking here.": "Získejte pomoc skrze chat kliknutím zde."
+  "Get package": "Získat balíček"
+  "Get template": "Získat šablonu"
+  "GitHub": "GitHub"
+  "GitHub Branch": "Větev GitHub"
+  "GitHub Integration": "GitHub integrace"
+  "GitHub URL": "GitHub URL"
+  "GitHub integration was successfully configured.": "GitHub integrace byla úspěšně nastavena"
+  "GitHub integration was successfully disconnected.": "GitHub integrace byla úspěšně odpojena"
+  "Go": "Proveď"
+  "Go back to the main Playground page": "Zpět na hlavní stránku Hřiště"
+  "Go back to the previous question": "Zpět na předchozí otázku"
+  "Google Drive": "Google Drive"
+  "Google Drive is not configured": "Google Drive is not configured"
+  "Google Drive is not linked.": "Google Drive is not linked"
+  "Help": "Nápověda"
+  "Help is available": "Nápověda je k dispozici"
+  "Help is available for this question": "Nápověda je pro tuto otázku k dispozici"
+  "Help with this question": "Chci s touto otázkou pomoci"
+  "Here is your document.": "Zde je Váš dokument."
+  "Hide context of example": "Skrýt kontext příkladu"
+  "How question came to be asked": "Proč byla otázka položena"
+  "How this question came to be asked": "Proč byla otázka položena"
+  "I am sorry.  The code you entered is invalid or expired.  Goodbye.": "Je nám líto. Kód, který byl zadán, je neplatný nebo propadlý. Nashledanou."
+  "I do not understand what you mean by": "Nerozumím co myslíte"
+  "I don't know": "Nevím"
+  "Import": "Import"
+  "Import method": "Metoda importu"
+  "Input box": "Pole"
+  "Input not processed because the question changed.  Please continue.": "Vstup nebyl zpracován, protože se otázka změnila. Prosím pokračujte."
+  "Insert": "Vložte"
+  "Install": "Instalovat"
+  "Interview": "Průvodce"
+  "Interview answers cannot be decrypted": "Odpovědi průvodce nemohly být dešifrovány"
+  "Interview files": "Soubory průvodce"
+  "Interviews": "Průvodce"
+  "Invalid E-mail": "Neplatný e-mail"
+  "Invalid Email": null
+  "Invalid e-mail address": null
+  "Invalid interview": null
+  "Invalid invitation token": null
+  "Invalid phone number.": null
+  "Invitation has been sent.": null
+  "Invitations have been sent.": null
+  "Invite": null
+  "Invite User": null
+  "JSON file": null
+  "Jinja2 help template": null
+  "Join": null
+  "Language": null
+  "Last name": null
+  "Leave": null
+  "License": null
+  "Links": null
+  "Listen": null
+  "Live chat": null
+  "Live chat is available": null
+  "Loading.  Please wait . . . ": null
+  "Logs": null
+  "Manage account": null
+  "Markdown": null
+  "Menu": null
+  "Menu:": null
+  "Methods": null
+  "Modules": null
+  "Modules available in Playground": null
+  "Modules defined": null
+  "Monitor": null
+  "Move down": null
+  "Must be a two-letter code": null
+  "Must be a valid e-mail address": null
+  "My Interviews": null
+  "My Playground": null
+  "Name": null
+  "Name of new branch": null
+  "Name of new privilege": null
+  "Name of new privilege is required": null
+  "New API Key": null
+  "New Name": null
+  "New chat connection from": null
+  "New chat message": null
+  "New conversation above": null
+  "New conversation below": null
+  "New message above": null
+  "New message below": null
+  "New project": null
+  "Next will be": null
+  "Nickname": null
+  "No": "Ne"
+  "No access code was entered.": null
+  "No administrators could be found.": null
+  "No data existed in training set.  JSON file not created.": null
+  "None of the above": null
+  "Not authorized": null
+  "Note": null
+  "Note that if you connect to a Google Drive folder, you will disable your connection to OneDrive.": null
+  "Note that if you connect to a OneDrive folder, you will disable your connection to Google Drive.": null
+  "Note: it is a best practice to tag every mandatory block with an id.": null
+  "Note: more than one block uses id": null
+  "Note: only users with e-mail/password accounts can be given admin privileges.": null
+  "OCR succeeded": null
+  "Observation": null
+  "Observe": null
+  "Office Add-in": null
+  "One or more e-mail addresses (separated by newlines)": null
+  "OneDrive": null
+  "OneDrive is not configured": null
+  "OneDrive is not linked.": null
+  "Organization": null
+  "Original Name": null
+  "PDF/DOCX File": null
+  "Package": null
+  "Package Management": null
+  "Package Name": null
+  "Package Name is required": null
+  "Package created": null
+  "Package did not exist": null
+  "Package name": null
+  "Package name is required": null
+  "Package on PyPI": null
+  "Packages": null
+  "Password": null
+  "Per Month": null
+  "Per Week": null
+  "Per Year": null
+  "Phone help": null
+  "Phone help is available": null
+  "Phone number": null
+  "Plain text of sections": null
+  "Playground": null
+  "Playground Packages": null
+  "Playground YAML": null
+  "Playground not saved.  There was an error.": null
+  "Please choose a different e-mail address.": null
+  "Please enter a valid phone number": null
+  "Please enter a valid value.": null
+  "Please enter the four digit code, followed by the pound sign.": null
+  "Please enter the verification code from the text message we just sent you.": null
+  "Please enter the verification code from your authentication app.": null
+  "Please log in.": null
+  "Please select at least %s.": null
+  "Please select exactly %s.": null
+  "Please select no more than %s.": null
+  "Please select one.": null
+  "Please send a video, or type skip.": null
+  "Please send a video.": null
+  "Please send an audio clip, or type skip.": null
+  "Please send an audio clip.": null
+  "Please send an image or file, or type skip.": null
+  "Please send an image or file.": null
+  "Please send one or more images, or type skip.": null
+  "Please send one or more images.": null
+  "Please upload a file with a valid file format.": null
+  "Possibly not defined": null
+  "Possibly not used": null
+  "Press one of the following buttons:": null
+  "Preview": null
+  "Privilege": null
+  "Privileges": null
+  "Problem detected.": null
+  "Profile": null
+  "Project name cannot begin with a number": null
+  "Project name is required": null
+  "Projects": null
+  "Pull": null
+  "Pull GitHub or PyPI Package": null
+  "Pushed commit to GitHub.": null
+  "PyPI": null
+  "PyPI Password": null
+  "PyPI Username": null
+  "PyPI package": null
+  "Question": null
+  "README file": null
+  "Read this screen out loud": null
+  "Reason for needing developer account (optional)": null
+  "Reconfigure": null
+  "Registration is invite only": null
+  "Remove": null
+  "Rename": null
+  "Rename project": null
+  "Reorder by moving down": null
+  "Reorder by moving up": null
+  "Restart": null
+  "Restarting": null
+  "Resume": null
+  "Role": null
+  "Room": null
+  "Running in other tab.": null
+  "SMS": null
+  "Save": null
+  "Save and Run": null
+  "Save changes": null
+  "Saved at": null
+  "Scan": null
+  "Scan the barcode with your phone's authenticator app and enter the verification code.": null
+  "Search": null
+  "Second Subdivision": null
+  "Second subdivision": null
+  "Section": null
+  "Security Method": null
+  "Select a value between": null
+  "Select box": null
+  "Select file": null
+  "Select one": null
+  "Select the folder from your OneDrive that you want to be synchronized with the Playground.": null
+  "Select...": null
+  "Send": null
+  "Send confirmation email": null
+  "Server did not respond to request for update.": null
+  "Show attributes": null
+  "Show context of example": null
+  "Show variables and values": null
+  "Sign In": null
+  "Sign Out": null
+  "Sign Your Name": null
+  "Sign in": null
+  "Sign in or sign up to save answers": null
+  "Sign in to save answers": null
+  "Sign in with your mobile phone": null
+  "Since you changed a Python module, the server needs to restart in order to load your module.": null
+  "Since you did not type \"delete my account\" I did not delete your account.": null
+  "Since you renamed a project, the server needs to restart in order to reload any modules.": null
+  "Since you uploaded a Python module, the server needs to restart in order to load your module.": null
+  "Social ID": null
+  "Sorry, no help is available for this question.": null
+  "Sorry, only .py files can be uploaded here.  To upload other types of files, use other Folders.": null
+  "Sorry, only YAML files can be uploaded here.  To upload other types of files, use the Folders.": null
+  "Sorry, that package name does not exist in the playground": null
+  "Sorry, that package name is already in use by someone else": null
+  "Sorry, that package name,": null
+  "Source": null
+  "Source Files": null
+  "Source code for question": null
+  "Source files": null
+  "Special variable": null
+  "Static Files": null
+  "Static files": null
+  "Stop Controlling": null
+  "Stop Observing": null
+  "Submit": null
+  "Synchronizing": null
+  "System": null
+  "Telephone assistance": null
+  "Template files": null
+  "Templates": null
+  "Terms used in this question:": null
+  "Terms used:": null
+  "That package name is already in use by someone else.  Please change the name.": null
+  "That screen is already being controlled by another operator": null
+  "The author is": null
+  "The configuration file was saved.": null
+  "The default project cannot be deleted.": null
+  "The document is available in the following formats:": null
+  "The file you requested does not exist.": null
+  "The following document has been created for you.": null
+  "The following documents have been created for you.": null
+  "The information was saved.": null
+  "The key no longer exists": null
+  "The key was deleted": null
+  "The link has expired.": null
+  "The mapping was reset because the folder does not appear to exist anymore.": null
+  "The name must be filled in.": null
+  "The new user has been created": null
+  "The operator is no longer controlling your screen.": null
+  "The package information was saved.": null
+  "The package update did not report an error.  The logs are below.": null
+  "The package update reported an error.  The logs are below.": null
+  "The package was unpacked into the Playground.": null
+  "The package you specified could not be downloaded from PyPI as a tar.gz file.": null
+  "The package you specified could not be downloaded from PyPI.": null
+  "The previously selected OneDrive folder does not exist.": null
+  "The previously selected OneDrive folder was deleted.": null
+  "The privilege could not be added because it already exists.": null
+  "The privilege was added.": null
+  "The project name %s is not available.": null
+  "The regular expression you provided could not be parsed.": null
+  "The role could not be deleted.": null
+  "The synchronization was not successful.": null
+  "The synchronization was successful.": null
+  "The user account was deleted.": null
+  "The user can call you.  Click to cancel.": null
+  "The user profile was not changed.": null
+  "The version on PyPI is": null
+  "There are unsaved changes.  Are you sure you wish to leave this page?": null
+  "There is already a username and password on this system with the e-mail address": null
+  "There was a problem reading the YAML file you uploaded.  Are you sure it is a YAML file?  File was not saved.": null
+  "There was a problem sending the text message.": null
+  "There was a problem sending you a text message.  Please log in another way.": null
+  "There was an error updating the packages.": null
+  "There was an error with the synchronization.": null
+  "There was an error.": null
+  "Third Subdivision": null
+  "Third subdivision": null
+  "This Email is already in use. Please try another one.": null
+  "This account uses two-factor authentication.": null
+  "This field is required.": null
+  "This image file does not exist": null
+  "This package is": null
+  "This package is not yet published on PyPI.": null
+  "This package is not yet published on your GitHub account.": null
+  "This package was originally pulled from": null
+  "Thumbnail image of document": null
+  "Time Zone": null
+  "To reach an advocate who can assist you, call": null
+  "To read the question again, type question.": null
+  "Train": null
+  "Train machine learning models": null
+  "Training data were successfully imported.": null
+  "Translate": null
+  "Turn off chat": null
+  "Twice Per Month": null
+  "Two-factor authentication": null
+  "Type": null
+  "Type \"delete my account\" here to confirm that you want to delete your account.": null
+  "Type ? for additional assistance.": null
+  "Type ? to see": null
+  "Type Ctrl-space to autocomplete.": null
+  "Type [y]es or [n]o.": null
+  "Type [y]es, [n]o, or [d]on't know": null
+  "Type a currency value, or type skip.": null
+  "Type a currency value.": null
+  "Type a date and time, or type skip.": null
+  "Type a date and time.": null
+  "Type a date, or type skip.": null
+  "Type a date.": null
+  "Type a number, or type skip.": null
+  "Type a number.": null
+  "Type a time, or type skip.": null
+  "Type a time.": null
+  "Type a value between": null
+  "Type an e-mail address, or type skip.": null
+  "Type an e-mail address.": null
+  "Type ok to continue.": null
+  "Type the": null
+  "Type x to sign your name electronically": null
+  "Type your message here.": null
+  "Type your selection(s), separated by commas, or type none.": null
+  "Type your selection(s), separated by commas.": null
+  "Type your selection, or type skip to move on without selecting.": null
+  "Type your selection.": null
+  "URL": null
+  "Unable to determine if the package is published on PyPI.": null
+  "Unable to determine if the package is published on your GitHub account.": null
+  "Unable to e-mail your documents to": null
+  "Unable to find documents to e-mail.": null
+  "Unable to locate interview session.  Starting a new session instead.": null
+  "Unable to retrieve interview session.  Starting a new session instead.": null
+  "Unable to send e-mail to": null
+  "Unable to send e-mail.  Error was: ": null
+  "Unable to send verification code.": null
+  "Unblock": null
+  "Undefined names": null
+  "Undelete": null
+  "Unit": null
+  "Unknown": null
+  "Unnamed User": null
+  "Untitled": null
+  "Update": null
+  "Updating": null
+  "Upload": null
+  "Upload a Python module": null
+  "Upload a source file": null
+  "Upload a static file": null
+  "Upload a template file": null
+  "Upload successful": null
+  "Use Package": null
+  "Used in": null
+  "User": null
+  "User List": null
+  "User Profile": null
+  "Uses two-factor authentication": null
+  "Using Jinja2": null
+  "Utilities": null
+  "Valid characters are: A-Z, a-z, 0-9": null
+  "Valid characters are: A-Z, a-z, 0-9, hyphen": null
+  "Variables": null
+  "Verification code": null
+  "Verify": null
+  "Verify your phone": null
+  "Version": null
+  "Version ": null
+  "View documentation": null
+  "WARNING!  If you press Delete, the contents of the %s project will be permanently deleted.": null
+  "Waiting": null
+  "Warning: a file by that name already exists.  If you save, you will overwrite it.": null
+  "Warning: a package definition by that name already exists.  If you save, you will overwrite it.": null
+  "We just sent you a text message with a verification code.  Enter the verification code to proceed.": null
+  "We were unable to submit your request.": null
+  "Would you like to reconfigure two-factor authentication?": null
+  "Yes": "Ano"
+  "You are not allowed to access this interview.": null
+  "You are not authorized to access": null
+  "You are now set up with two factor authentication.": null
+  "You are renaming the project called %s.": null
+  "You can also follow this link: ": null
+  "You can type link1 to visit the link": null
+  "You can type link1, etc. to visit a link": null
+  "You can type menu1 to select the menu item": null
+  "You can type menu1, etc. to select a menu item": null
+  "You can type question to read the question again.": null
+  "You can upload a file here": null
+  "You cannot log in this way.": null
+  "You cannot log in until your e-mail address has been confirmed.": null
+  "You cannot pull from GitHub and PyPI at the same time.  Please fill in one and leave the other blank.": null
+  "You cannot rename the default Playground project": null
+  "You cannot take away your own admin privilege.": null
+  "You cannot type more than %s characters.": null
+  "You do not have permission to install this package.": null
+  "You have made too many login attempts.": null
+  "You have signed in successfully.": null
+  "You have signed out successfully.": null
+  "You must attach a file.": null
+  "You must provide a file.": null
+  "You must provide a language": null
+  "You must provide an interview filename": null
+  "You must select an option.": null
+  "You must sign your name to continue.": null
+  "You must type at least %s characters.": null
+  "You need to be logged in to access this interview.": null
+  "You need to enter a complete e-mail address.": null
+  "You need to enter a date between %s and %s.": null
+  "You need to enter a date on or after %s.": null
+  "You need to enter a date on or before %s.": null
+  "You need to enter a number that is at least %s.": null
+  "You need to enter a number that is at most %s.": null
+  "You need to enter a number.": null
+  "You need to enter a valid date and time.": null
+  "You need to enter a valid date.": null
+  "You need to enter a valid time.": null
+  "You need to log in before you can access": null
+  "You need to log in with Auth0.": null
+  "You need to log in with Azure.": null
+  "You need to log in with Facebook.": null
+  "You need to log in with Google.": null
+  "You need to log in with Twitter.": null
+  "You need to select one or type in a new value.": null
+  "You need to select one.": null
+  "You need to supply a Git URL, upload a file, or supply the name of a package on PyPI.": null
+  "You need to type in a name for the file": null
+  "You need to type in a name for the interview": null
+  "Your GitHub integration has already been configured.": null
+  "Your GitHub settings were saved.": null
+  "Your IP address is": null
+  "Your Playground is connected to your Google Drive.": null
+  "Your Playground is connected to your OneDrive.": null
+  "Your account already has two-factor authentication enabled.  Would you like to reconfigure or disable two-factor authentication?": null
+  "Your account has been disabled.": null
+  "Your account has not been enabled.": null
+  "Your account no longer uses two-factor authentication.": null
+  "Your browser session has expired and you have been signed out.  You will not be able to save your work.  Please log in again.": null
+  "Your document is attached.": null
+  "Your document, ": null
+  "Your documents are attached.": null
+  "Your documents will be e-mailed to": null
+  "Your documents, ": null
+  "Your e-mail address": null
+  "Your information was saved.": null
+  "Your new API key, known internally as": null
+  "Your password is insecure and needs to be changed": null
+  "Your request was submitted.": null
+  "Your screen is being controlled by an operator.": null
+  "Your verification code is": null
+  "Your verification code is invalid or expired.  Please try again.": null
+  "Your verification code was invalid or expired.": null
+  "Your verification code was invalid.": null
+  "Your verification code was missing or expired": null
+  "Your version is": null
+  "Zip File": null
+  "a GitHub repository": null
+  "and": null
+  "and enter the code": null
+  "anonymous visitor": null
+  "are you": null
+  "back": null
+  "blank message": null
+  "could not connect to Google Drive": null
+  "could not connect to OneDrive": null
+  "day": null
+  "definitions of words": null
+  "delete my account": null
+  "e.g., *example.com": null
+  "e.g., 56.33.114.49": null
+  "exit": null
+  "f": null
+  "false": null
+  "for debugging PDF output": null
+  "for downloading": null
+  "for editing; requires Microsoft Word or compatible application": null
+  "for editing; requires Microsoft Word, Wordpad, or similar application": null
+  "for printing; requires Adobe Reader or similar application": null
+  "from": null
+  "he": null
+  "her": null
+  "him": null
+  "in the": null
+  "interview answers cannot be decrypted": null
+  "is": null
+  "is not a valid date and time.": null
+  "is not a valid date.": null
+  "is not a valid number.": null
+  "is not a valid time.": null
+  "is not a whole number.": null
+  "is not within the range.": null
+  "it": null
+  "link": null
+  "means the name is located in this file": null
+  "means the name may be located in a file included by reference, such as:": null
+  "menu": null
+  "menu items": null
+  "merge from Playground": null
+  "month": null
+  "n": null
+  "no": null
+  "none": null
+  "offline": null
+  "ok": null
+  "operator": null
+  "operators": null
+  "or type skip to leave blank.": null
+  "other user": null
+  "other users": null
+  "pages": null
+  "password": null
+  "pip log": null
+  "published on GitHub": null
+  "published on PyPI": null
+  "published on your GitHub account": null
+  "question": null
+  "quit": null
+  "she": null
+  "skip": null
+  "something": null
+  "system": null
+  "t": null
+  "them": null
+  "they": null
+  "to proceed.": null
+  "true": null
+  "unavailable": null
+  "user": null
+  "v.": null
+  "was saved at": null
+  "x": null
+  "y": null
+  "year": null
+  "yes": null
+  "you": null
+  "yourself": null

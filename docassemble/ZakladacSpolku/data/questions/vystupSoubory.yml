@@ -1,0 +1,165 @@
+include:
+  - t_maily.yml
+---
+modules:
+  - .ecomail
+---
+sets: s_stanovy
+code: |
+  Soubory.append(stanovy)
+  s_stanovy = True
+---
+need: s_stanovy
+sets: s_statutar
+code: |
+  if hromadne:
+    Soubory.append(Spolek.statutar.clen.prohlaseni)
+  else:
+    for clen in Spolek.statutar.clen:
+      Soubory.append(clen.prohlaseni)
+  s_statutar = True
+---
+need: s_statutar
+sets: s_kontrolni
+code: |
+  if not minimalVerze:
+    if Spolek.kontrolniKomise.exist:
+      if hromadne:
+        Soubory.append(Spolek.kontrolniKomise.prohlaseni)
+      else:
+        for clen in Spolek.kontrolniKomise:
+          Soubory.append(clen.prohlaseni)
+  s_kontrolni = True
+---
+need: s_kontrolni
+sets: s_rozhodci
+code: |
+  if not minimalVerze:  
+    if Spolek.rozhodciKomise.exist:
+      if hromadne:
+        Soubory.append(Spolek.rozhodciKomise.prohlaseni)
+      else:
+        for clen in Spolek.rozhodciKomise:
+          Soubory.append(clen.prohlaseni)
+  s_rozhodci = True
+---
+need: s_rozhodci
+sets: s_souhlas
+code: |
+  Soubory.append(souhlas)
+  s_souhlas = True
+---
+need: s_souhlas
+sets: souboryDone
+code: |
+  souboryDone = True
+---
+sets: vseHotovo
+mandatory: True
+progress: 100
+need:
+ - minimalVerze
+ - osobniUdaje
+ - souboryDone
+question: |
+  Zde jsou Vaše dokumenty
+subquestion: |
+  Vše potřebné Vám zašleme na e-mail spolu s informacemi k dalšímu postupu.
+  
+  V e-mailu bude též odkaz na kontrolní seznam, na co nezapomenout před odesláním žádosti. Zkontrolujete si, že máte všude správné podpisy, aj.
+
+  ${ zip_file(Soubory, filename="Podklady_Spolek.zip") }
+  
+  % if Spolek.zalozeni.typ == 'schuze':
+  % if schuzeVyplnit:
+  Pokračovat na vytvoření Zápisu z ustavující schůze můžete pod [tímto odkazem](${ odkazChecklist })
+  % endif
+  % endif
+fields:
+  - Váš e-mail: email
+    datatype: email
+  - note: |
+      <button id="run" class="btn btn-primary">Odeslat na e-mail</button>
+      
+      <span id="resultsArea"></span>
+script: |
+  <script>
+    $("#run").click(function(){
+      $("#resultsArea").html("<div class='spinner-border' role='status'></div> Odesílám...")
+      action_call('odeslatEmail', {email: val('email')}, function(data){
+        if (data.status) {
+          $("#resultsArea").html("E-mail bych úspěšně odeslán.")
+        } else {
+          $("#resultsArea").html("Něco se pokazilo.")
+        }
+      });
+     return false;
+    });
+  </script>
+continue buttton field: vseHotovo
+---
+need: vseHotovo
+event: final_screen
+question: |
+  Úspěšně odesláno!
+---
+event: odeslatEmail
+code: |
+  emailOdeslan = send_email(to=action_argument('email'), template=potvrzeniDok, attachments=Soubory)
+  ecomail = addEcomail(action_argument('email'))
+  json_response(dict(status=emailOdeslan))
+---
+template: hello_email
+subject: |
+  Vše hotov
+content: |
+  Ahojky mňauky, tady jsou podklady k založení spolku.
+  
+  Frank Bold
+---
+code: |
+  idSesn = user_info().session
+  idFile = user_info().filename
+  odkazChecklist = "https://da.frankbold.org/interview?i=docassemble.playground1ZakladacSpolku:checklist.yml&idSesn=" + idSesn +"&idFile=" + idFile 
+---
+attachment:
+  name: Stanovy
+  filename: Stanovy_spolku
+  variable name: stanovy
+  docx template file: Stanovy.docx
+  valid formats:
+    - docx
+---
+generic object: PartyList
+attachment:
+  name: Prohlášení všech
+  filename: Prohlášení_${ x.label }
+  variable name: x.prohlaseni
+  docx template file: Prohlaseni.docx
+  valid formats:
+    - docx
+---
+generic object: Individual
+attachment:
+  name: Prohlášení
+  filename: Prohlášení_${ x.label }
+  variable name: x.prohlaseni
+  docx template file: Prohlaseni.docx
+  valid formats:
+    - docx
+---
+attachment:
+  name: Souhlas vlastníka
+  filename: Souhlas vlastníka
+  variable name: souhlas
+  docx template file: Souhlas.docx
+  valid formats:
+    - docx
+---
+attachment:
+  name: Zápis ze schůze
+  filename: Schůze zápis
+  variable name: schuze
+  docx template file: Schuze.docx
+  valid formats:
+    - docx

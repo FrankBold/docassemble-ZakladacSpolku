@@ -1,0 +1,44 @@
+---
+modules:
+  - docassemble.base.legal
+---
+objects:
+  - Program: |
+      DAList.using(object_type=Thing, minimum_number=1)
+  - Program[i].kandidat: |
+      PartyList.using(object_type=Individual, typOsoby='kandidat', ask_number=True)
+---
+question: |
+  Název bodu programu
+fields:
+  - Název bodu: Program[i].name.text
+---
+question: |
+  Chcete přidat další bod?
+yesno: Program.there_is_another
+---
+question: |
+  Počet členů orgánu
+fields: 
+  - Počet členů orgánu: Program[i].kandidat.target_number
+---
+question: |
+  Údaje o kandidátovi
+fields:
+  - Jméno a příjmení: Program[i].kandidat[j].name.first
+  - Bydliště: Program[i].kandidat[j].address
+---
+question: |
+  Je i další kandidát?
+yesno: Program[i].kandidat.there_is_another
+---
+mandatory: True
+question: |
+  Výstup
+subquestion: |
+  % for bod in Program:
+  # Body programu: ${ bod }
+    % for osoba in bod.kandidat:
+    * ${ osoba.name.first }, ${ osoba.address }
+    % endfor
+  % endfor
