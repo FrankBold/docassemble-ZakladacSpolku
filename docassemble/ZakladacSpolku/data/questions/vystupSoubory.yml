@@ -67,13 +67,10 @@ subquestion: |
   Vše potřebné Vám zašleme na e-mail spolu s informacemi k dalšímu postupu.
   
   V e-mailu bude též odkaz na kontrolní seznam, na co nezapomenout před odesláním žádosti. Zkontrolujete si, že máte všude správné podpisy, aj.
-
+  % if user_has_privilege('admin'):
   ${ zip_file(Soubory, filename="Podklady_Spolek.zip") }
-  
-  % if Spolek.zalozeni.typ == 'schuze':
-  % if schuzeVyplnit:
-  Pokračovat na vytvoření Zápisu z ustavující schůze můžete pod [tímto odkazem](${ odkazChecklist })
   % endif
+  % if Spolek.zalozeni.typ == 'schuze':
   % endif
 fields:
   - Váš e-mail: email

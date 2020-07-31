@@ -13,12 +13,12 @@ metadata:
   revision_date: 2020-01-22
   documentation: "https://docassemble.org/docs/initial.html#metadata"
   post: |
-     &nbsp;
-     ---
-     &nbsp;
-     
-     Vznik nástroje podpořili:
-     
+#     &nbsp;
+#     ---
+#     &nbsp;
+#     
+#     Vznik nástroje podpořili:
+#     
 #     ![NFRO](https://da.frankbold.org/playgroundstatic/ZakladacSpolku/1/logo_nfro.png) | ![Nadace VIA](https://da.frankbold.org/playgroundstatic/ZakladacSpolku/1/logo_via.png)
   logo: |
     **Frank Bold**
@@ -38,6 +38,7 @@ modules:
 ---
 features:
   progress bar: True
+  question help button: True
 ---
 objects: 
   - Spolek: Organization

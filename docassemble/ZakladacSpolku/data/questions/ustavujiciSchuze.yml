@@ -1,45 +1,14 @@
 metadata:
-  title: Ustavující schůze
-  tags:
-    - Schůze
+  title: |
+    Průvodce ústavující schůzí
   short title: |
-    Ústavující schůze
-  description: |
-    Rozhraní pro vytvoření zápisu z ústavujícíc schůze
-  authors:
-    - name: Michal Kuk
-      organization: Frank Bold
-  revision_date: 2019-11-11
-  help label: |
-    Nápověda
+    Ústavující schůze spolku
+  tags:
+    - Zakladač
 ---
 include:
   - t_program.yml
----
-sections:
-  - intro: Úvodní
-  - Průběh schůze:
-    - listina: Listina přítomných
-    - funkce: Funkcionáři schůze
-    - program: Schválení programu schůze
-    - stanovy: Schválení stanov
-    - organy: Volba orgánů spolku
-    - zapis: Pověření osoby zápisem spolku
-  - shrnuti: Ukončení schůze
----
-features:
-  question help button: True
-  navigation: horizontal
----
-mandatory: True
-code: |
-  menu_items = [ action_menu_item('Listina přítomných', 'listina') ]
----
-interview help:
-  label: Nápověda
-  heading: Základní nápověda
-  content: |
-    Základní informace naleznete zde.
+  - saveMail.yml
 ---
 modules:
   - docassemble.base.legal
@@ -48,26 +17,16 @@ modules:
 objects:
   - Spolek: Organization
   - Spolek.schuze: Event
-  - Spolek.schuze.pritomni: PartyList.using(there_are_any=False)
+  - Spolek.schuze.zapisovatel: Individual.using(organ='Zapisovatel', typOsoby='funkce')
+  - Spolek.schuze.overovatel: Individual.using(organ='Ověřovatel', typOsoby='funkce')
   - Spolek.schuze.program: DAList.using(object_type=Thing)
-  - Spolek.schuze.program.organClen: PartyList.using(there_are_any=False)
-  - Spolek.schuze.predseda: Person
-  - Spolek.schuze.zapisovatel: Person
-  - Spolek.schuze.overovatel: Person
+  - Spolek.schuze.program[i].kandidat: |
+      PartyList.using(object_type=Individual.using(typOsoby='kandidat'), ask_number=True)
+  - Spolek.schuze.predseda: Individual.using(organ='Předseda schůze', typOsoby='funkce')
+  - Spolek.statutar: Individual.using(organ='statutar')
+  - Spolek.navrhovatel: Individual.using(organ='Osoba pověřená zápisem spolku', typOsoby='funkce')
+  - Spolek.schuze.pritomni: PartyList.using(object_type=Individual.using(typOsoby='listina'),there_are_any=True,minimum_number=3)
 ---
-mandatory: True
-code: |
-  Spolek.schuze.svolavatel = '###'
-  Spolek.schuze.datumSvolani = today()
-  Spolek.schuze.datumKonani = today()
-  Spolek.name.text = 'spolek z.s.'
-  Spolek.schuze.obec = 'obec'
----
-code: |
-  if verze == 'pred':
-    Spolek.schuze.predseda = 'Jméno a příjmení, bydliště'
----
-mandatory: True
 question: |
   Základní volby
 fields:
@@ -76,86 +35,146 @@ fields:
     choices:
       - "Připravit podklad na schůzi": pred
       - "Vytvořit zápis z konané schůze": po
+  - Listinu přítomných...: listina
+    input type: radio
+    choices:
+      - "... máme podepsanou ze schůze.": false
+      - "... potřebujeme vytvořit online": true
+    show if:
+      variable: verze
+      is: po
+  - Předvyplnit listinu přítomných?: listina
+    datatype: yesnoradio
+    show if:
+      variable: verze
+      is: pred
 ---
-mandatory: True
+question: |
+  Informace o spolku
+fields:
+  - Název spolku: Spolek.name.text
+    hint: Včetně dovětku, zpravidla z.s.
+    validate: contains_spolek
+  - Statutární orgán: Spolek.statutar.druh
+    input type: radio
+    choices:
+     - Předseda: predseda
+     - Výbor: vybor
+---
+question: |
+  Počet členů orgánu
+fields:
+  - Počet členů výboru: Spolek.schuze.program[i].pocet
+    datatype: integer
+---
+need: verze
 question: |
   Základní informace
 subquestion: |
   Informace k vyplnění před samotným konáním schůze.
 fields:
-  - Název spolku: Spolek.name.text
-    hint: Včetně dovětku, zpravidla z.s.
-    validate: contains_spolek
+
   - Jméno svolavatele: Spolek.schuze.svolavatel
+    required: False
   - Den konání schůze: Spolek.schuze.datumKonani
     datatype: date
+    required: False
   - Den svolání schůze: Spolek.schuze.datumSvolani
     datatype: date
+    required: False
   - Obec konání schůze: Spolek.schuze.obec
-section: intro
+    required: False
 ---
-question: |
-  Předseda schůze
-subquestion: |
-  Prvním bodem schůze je určení předsedajícího, zapisovatele a ověřověvatele zápisu. Stejně jako schválení programu schůze.
-fields:
-  - Z listiny přítomných: Spolek.schuze.predseda
-    datatype: object
-    choices: Spolek.schuze.pritomni
-    disable others: True
-  - Předseda schůze: Spolek.schuze.predseda.name.first
-    hint: Jméno a příjmení
-  - Bydliště: Spolek.schuze.predseda.address
-section: uvod
-continue button label: Zapisovatel
----
-need: Spolek.schuze.predseda.name.first
-question: |
-  Zapisovatel
-subquestion: |
-  Prvním bodem schůze je určení předsedajícího, zapisovatele a ověřověvatele zápisu. Stejně jako schválení programu schůze.
-fields:
-  - Z listiny přítomných: Spolek.schuze.zapisovatel
-    datatype: object
-    choices: Spolek.schuze.pritomni
-    disable others: True
-  - Zapisovatel: Spolek.schuze.zapisovatel.name.first
-    hint: Jméno a příjmení
-  - Bydliště: Spolek.schuze.zapisovatel.address
-section: uvod
-continue button label: Ověřovatel zápisu
----
-need: Spolek.schuze.zapisovatel.name.first
-question: |
-  Ověřovatel zápisu
-subquestion: |
-  Prvním bodem schůze je určení předsedajícího, zapisovatele a ověřověvatele zápisu. Stejně jako schválení programu schůze.
-fields:
-  - Z listiny přítomných: Spolek.schuze.overovatel
-    datatype: object
-    choices: Spolek.schuze.pritomni
-    disable others: True
-  - Ověřovatel zápisu: Spolek.schuze.overovatel.name.first
-    hint: Jméno a příjmení
-  - Bydliště: Spolek.schuze.overovatel.address
-section: uvod
-continue button label: Program schůze
-continue button field: funkceDone
----
+need: verze
 sets: Spolek.schuze.program.there_are_any
 code: |
-  povinnyProgram = [[t_uvod.subject, t_uvod.content, True], [t_listina.subject, t_listina.content, False], [t_stanovy.subject, t_stanovy.content, True], [t_statutar.subject, t_statutar.content, True], [t_povereni.subject, t_povereni.content, True]]
+  Spolek.schuze.program.there_are_any = True
+  povinnyProgram = [[t_uvod.subject, False, False], [t_listina.subject, False, False], [t_stanovy.subject, True, False], [t_statutar.subject, False, True], [t_povereni.subject, False, False]]
+  Spolek.schuze.program.clear()
   for polozka in povinnyProgram:
     Spolek.schuze.program.appendObject()
     Spolek.schuze.program[-1].important = dict(delete=False, edit=False)
     Spolek.schuze.program[-1].name.text = polozka[0]
-    Spolek.schuze.program[-1].zapis = polozka[1]
-    if polozka[2] == False:
-      Spolek.schuze.program[-1].jednomyslne = True
+    Spolek.schuze.program[-1].hlasovani = polozka[1]
+    Spolek.schuze.program[-1].volba = polozka[2]
   Spolek.schuze.program.there_is_another = False
-  programDefault = True
 ---
-need: programDefault
+sets: Spolek.schuze.program[i].zapis
+code: |
+  cal = 0
+  povinnyProgramZapis = [[t_uvod.content, t_uvod.subject, False], [t_listina.content, t_listina.subject, False], [t_stanovy.content, t_stanovy.subject, False], [t_statutar.content, t_statutar.subject, True], [t_povereni.content, t_povereni.subject, False]]
+  Spolek.schuze.program[i].zapis = povinnyProgramZapis[i][0]
+  Spolek.schuze.program[i].volba = povinnyProgramZapis[i][2]
+---
+sets: Spolek.schuze.program[i].target_number
+code: |
+  if Spolek.schuze.program[i].volba == False:
+    Spolek.schuze.program[i].kandidat.target_number = 0
+  else:
+    if Spolek.schuze.program[i].name.text == "Volba statutárního orgánu" and Spolek.statutar.druh == "predseda":
+      Spolek.schuze.program[i].kandidat.target_number = 1
+    else:
+      Spolek.schuze.program[i].kandidat.target_number = Spolek.schuze.program[i].kandidat.pocet
+---
+question: |
+  Počet členů orgánu:
+  
+  **${ Spolek.schuze.program[i].name.text }**
+fields: 
+  - no label: Spolek.schuze.program[i].kandidat.pocet
+    datatype: integer
+---
+if: |
+  x.typOsoby != 'listina'
+generic object: Individual
+code: |
+  if verze == 'pred':
+    x.name.first = 'Jméno a příjmení'
+    x.address = 'bydliště'
+    x.birthday = '99.99.9999'
+    x.pro = '##'
+---
+sets: Spolek.schuze.program[i].all
+code: |
+  if verze == 'pred':
+    Spolek.schuze.program[i].all = False
+    Spolek.schuze.program[i].pro = '##'
+    Spolek.schuze.program[i].proti = '##'
+    Spolek.schuze.program[i].zdrzelo = '##'
+---
+question: |
+  Údaje osoby v orgánu: 
+  
+  **${ Spolek.schuze.program[i].name.text }**
+fields:
+  - Jméno a příjmení: Spolek.schuze.program[i].kandidat[j].name.first
+  - Ulice a číslo popisné: Spolek.schuze.program[i].kandidat[j].address
+  - Datum narození: Spolek.schuze.program[i].kandidat[j].birthday
+    datatype: date
+  - Hlasů pro: Spolek.schuze.program[i].kandidat[j].pro
+    datatype: range
+    min: 0
+    max: ${ Spolek.schuze.pritomni.number() }
+---
+sets: Spolek.schuze.program[i].kandidat[j].zvolen
+code: |
+  if Spolek.schuze.program[i].kandidat[j].pro >= (Spolek.schuze.pritomni.number()/2):
+    Spolek.schuze.program[i].kandidat[j].zvolen = True
+  else:
+    Spolek.schuze.program[i].kandidat[j].zvolen = False 
+---
+if: |
+  x.typOsoby != 'kandidat'
+generic object: Individual
+question: |
+  Údaje osoby v orgánu:  
+  **${ x.organ }**
+fields:
+  - Jméno a příjmení: x.name.first
+  - Ulice a číslo popisné: x.address
+  - Datum narození: x.birthday
+    datatype: date
+---
 event: program
 question: |
   Program schůze
@@ -174,14 +193,65 @@ columns:
   - Bod: row_item.name.text
 edit:
   - row_item.name.text
-allow reordering: True
 read only: important
 ---
 question: |
   Bod programu
 fields:
   - Název bodu: Spolek.schuze.program[i].name.text
+  - Hlasuje se o bodu?: Spolek.schuze.program[i].hlasovani
+    datatype: yesnoradio
+  - Volí se osoby?: Spolek.schuze.program[i].volba
+    datatype: yesnoradio
 ---
+code: |
+  Spolek.schuze.program[i].important = False
+---
+if: |
+  verze == 'po'
+need: programDone
+question: |
+  Hlasování o bodu schůze: 
+  
+  ${ Spolek.schuze.program[i].name.text }
+fields:
+  - Všichni pro: Spolek.schuze.program[i].all
+    datatype: yesnoradio
+  - Kolik hlasovalo pro: Spolek.schuze.program[i].pro
+    datatype: range
+    min: 0
+    max: ${ Spolek.schuze.pritomni.number() }
+    show if:
+      variable: Spolek.schuze.program[i].all
+      is: False
+  - Kolik hlasovalo proti: Spolek.schuze.program[i].proti
+    datatype: range
+    min: 0
+    max: ${ Spolek.schuze.pritomni.number() }
+    show if:
+      variable: Spolek.schuze.program[i].all
+      is: False
+  - Kolik se zdrželo: Spolek.schuze.program[i].zdrzelo
+    datatype: range
+    min: 0
+    max: ${ Spolek.schuze.pritomni.number() }
+    show if:
+      variable: Spolek.schuze.program[i].all
+      is: False
+validation code: |
+  if Spolek.schuze.program[i].all == False and Spolek.schuze.program[i].pro + Spolek.schuze.program[i].proti + Spolek.schuze.program[i].zdrzelo != Spolek.schuze.pritomni.number():
+    validation_error("Součet musí odpovídát počtu přítomných")
+---
+question: |
+  Počet hlasů pro kandidáty: 
+fields:
+  - Kolik hlasů získal: Spolek.schuze.program[i][j].pro
+    datatype: range
+    min: 0
+    max: ${ Spolek.schuze.pritomni.number() }
+---
+sets: Spolek.schuze.pritomni[i].name.first
+generic object: Individual
 question: |
   Údaje ${ ordinal(i) } přítomného?
 fields:
@@ -189,49 +259,63 @@ fields:
   - Bydliště: Spolek.schuze.pritomni[i].address
   - Přidat další osobu?: Spolek.schuze.pritomni.there_is_another
     datatype: yesnoradio
+    show if:
+      code: |
+        Spolek.schuze.pritomni.minimum_number <= len(Spolek.schuze.pritomni)
 ---
-generic object: Person
+generic object: Individual
 question: |
   Podepiště se
 signature: x.podpis
+required: False
 under: |
-  ${ x.name.first }
+  ${ x.name}
 ---
-need: programDone
-question: |
-  Hlasování o bodu schůze: ${ Spolek.schuze.program[i].name.text }
-fields:
-  - Všichni pro: Spolek.schuze.program[i].jednomyslne
-    datatype: yesnoradio
-  - Kolik hlasovalo pro: Spolek.schuze.program[i].pro
-    datatype: range
-    min: 0
-    max: ${ Spolek.schuze.pritomni.number() }
-    show if:
-      variable: Spolek.schuze.program[i].jednomyslne
-      is: False
-  - Kolik hlasovalo proti: Spolek.schuze.program[i].proti
-    datatype: range
-    min: 0
-    max: ${ Spolek.schuze.pritomni.number() }
-    show if:
-      variable: Spolek.schuze.program[i].jednomyslne
-      is: False
-  - Kolik se zdrželo: Spolek.schuze.program[i].zdrzelo
-    datatype: range
-    min: 0
-    max: ${ Spolek.schuze.pritomni.number() }
-    show if:
-      variable: Spolek.schuze.program[i].jednomyslne
-      is: False
-validation code: |
-  if Spolek.schuze.program[i].jednomyslne == False and Spolek.schuze.program[i].pro + Spolek.schuze.program[i].proti + Spolek.schuze.program[i].zdrzelo != Spolek.schuze.pritomni.number():
-    validation_error("Součet musí odpovídát počtu přítomných")
----
+sets: listinaDone
 code: |
-  Spolek.schuze.program[i].important = False
----  
-section: shrnuto
+  if Spolek.schuze.pritomni.there_are_any == False:
+    listinaDone = True
+  elif listinaPotvrzena:
+    listinaDone = True
+---
+event: listina
+question: |
+  Listina přítomných
+subquestion: |
+  Upravit seznam přítomných: 
+  ${ Spolek.schuze.pritomni.table }
+  
+  ${ Spolek.schuze.pritomni.add_action() }
+section: listina
+continue button label: Pokračovat
+continue button field: listinaHotovo
+---
+table: Spolek.schuze.pritomni.table
+rows: Spolek.schuze.pritomni
+columns:
+  - Jméno: |
+      row_item.name
+  - Bydliště: |
+      row_item.address
+edit:
+  - name.first
+---
+sets: hotovo
+code: |
+  if programDone and pritomniDone:
+    hotovo = True
+---
+sets: pritomniDone
+code: |
+  if listina == False or listinaHotovo == True:
+    if listina == False:
+      Spolek.schuze.pritomni.appendObject(Individual, name='##',address='##', podpis='')
+      Spolek.schuze.pritomni.appendObject(Individual, name='##',address='##', podpis='')
+      Spolek.schuze.pritomni.appendObject(Individual, name='##',address='##', podpis='')
+      Spolek.schuze.pritomni.there_is_another = False
+    pritomniDone = True
+---
+need: hotovo
 mandatory: True
 question: |
   Zápis ke stažení
@@ -239,7 +323,8 @@ attachment:
   name: Zápis z ustavující schůze
   filename: zapis
   docx template file: Schuze.docx
+  decimal places: 0
   valid formats:
     - docx
-  
-  
+    - pdf
+    - odt

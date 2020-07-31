@@ -3,6 +3,7 @@ include:
   - saveMail.yml
   - vystupSoubory.yml
   - objektIndividual.yml
+  - t_napovedy.yml
 ---
 code: |
   zakladniPole = [{'True': 'Stručná verze'}, {'False': 'Pokročilá verze'}]
@@ -52,13 +53,15 @@ fields:
     choices: 
       - Ústavující schůzí: schuze
       - Přijetím stanov: stanovy
-  - Chcete rovnou předvyplnit zápis z ústavujícíc schůze?: schuzeVyplnit
-    datatype: yesnoradio
-    show if:
-      variable: Spolek.zalozeni.typ
-      is: schuze
-    help: |
-      Pokud už víte, kdy se bude schůze konat, jaký bude program, atd. můžete si jej zde rovnou předvyplnit. Pokud ještě dá dáme Vám ke stažení prázdnou šablonu. Vyplnit zápis online můžete pak kdykoli pod tímto <a href="${ url_of('root', _external=True)}interview?i=docassemble.ZakladacSpolku:ustavujiciSchuze.yml">odkazem</a>
+help: |
+  ${ h_zalozeni }
+#  - Chcete rovnou předvyplnit zápis z ústavujícíc schůze?: schuzeVyplnit
+#    datatype: yesnoradio
+#    show if:
+#      variable: Spolek.zalozeni.typ
+#      is: schuze
+#    help: |
+#      Pokud už víte, kdy se bude schůze konat, jaký bude program, atd. můžete si jej zde rovnou předvyplnit. Pokud ještě dá dáme Vám ke stažení prázdnou šablonu. Vyplnit zápis online můžete pak kdykoli pod tímto <a href="${ url_of('root', _external=True)}interview?i=docassemble.ZakladacSpolku:ustavujiciSchuze.yml">odkazem</a>
 ---
 if: |
   minimalVerze
@@ -78,6 +81,8 @@ fields:
     show if:
       variable: Spolek.statutar.druh
       is: vybor
+help: |
+  ${ h_statutar }
 ---
 if: |
   not minimalVerze
@@ -114,6 +119,8 @@ fields:
     show if:
       variable: Spolek.statutar.druh
       is: vybor
+help: |
+  ${ h_statutar }
 ---
 question: |
   Identifikační údaje spolku
@@ -125,6 +132,9 @@ fields:
     validate: contains_spolek
   - Sídlo spolku: Spolek.address
     hint: stačí obec
+help: |
+  ${ h_nazev }
+  ${ h_sidlo }
 ---
 if: |
   minimalVerze == False
@@ -173,6 +183,9 @@ fields:
     show if: 
       code: |
         minimalVerze == False
+help: |
+  ${ h_ucel }
+  ${ h_formy }
 ---
 if: |
   minimalVerze == False
