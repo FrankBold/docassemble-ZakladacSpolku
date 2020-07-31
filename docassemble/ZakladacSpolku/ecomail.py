@@ -8,12 +8,12 @@ def addEcomail (email):
   "subscriber_data": {
     "email": "'''+ email +'''",
     "tags": [
-      "Zakladac_testing"
+      "Zakladac"
     ]
   },
   "trigger_autoresponders": true,
   "update_existing": true,
-  "resubscribe": false
+  "resubscribe": true
   }
   '''
   r = requests.post('http://api2.ecomailapp.cz/lists/75/subscribe', headers=header, data=values)

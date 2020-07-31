@@ -120,7 +120,7 @@ code: |
   odkazChecklist = "https://da.frankbold.org/interview?i=docassemble.playground1ZakladacSpolku:checklist.yml&idSesn=" + idSesn +"&idFile=" + idFile 
 ---
 attachment:
-  name: Stanovy
+  name: Stanovy spolku
   filename: Stanovy_spolku
   variable name: stanovy
   docx template file: Stanovy.docx
@@ -129,7 +129,7 @@ attachment:
 ---
 generic object: PartyList
 attachment:
-  name: Prohlášení všech
+  name: Prohlášení osob zapisovaných do rejstříku
   filename: Prohlášení_${ x.label }
   variable name: x.prohlaseni
   docx template file: Prohlaseni.docx
@@ -138,7 +138,7 @@ attachment:
 ---
 generic object: Individual
 attachment:
-  name: Prohlášení
+  name: Prohlášení osob zapisovaných do rejstříku
   filename: Prohlášení_${ x.label }
   variable name: x.prohlaseni
   docx template file: Prohlaseni.docx
@@ -146,7 +146,7 @@ attachment:
     - docx
 ---
 attachment:
-  name: Souhlas vlastníka
+  name: Souhlas s umístěním sídla spolku
   filename: Souhlas vlastníka
   variable name: souhlas
   docx template file: Souhlas.docx
@@ -154,7 +154,7 @@ attachment:
     - docx
 ---
 attachment:
-  name: Zápis ze schůze
+  name: Zápis ze ustavující schůze
   filename: Schůze zápis
   variable name: schuze
   docx template file: Schuze.docx

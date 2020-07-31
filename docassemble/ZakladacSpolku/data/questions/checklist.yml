@@ -19,6 +19,17 @@ code: |
     zalozeni = url_args['zal']
 ---
 question: |
+  Verze průvodce
+subquestion: |
+  Využili jste stručnou či pokročilejší verzi nástroje?
+field: minimalVerze
+buttons:
+  - "Stručnou verzi": True
+  - "Pokročilou verzi": False
+---
+if: |
+  minimalVerze
+question: |
   Informace o spolku
 subquestion: |
   Základní informace o spolku pro účely sestavení checklistu
@@ -33,13 +44,54 @@ fields:
     choices:
       - Předseda: predseda
       - Výbor: vybor
-  - Jméno spolku: spolekJmeno
+  - Způsob doručení na soud: doruceni
+    input type: radio
+    choices:
+      - Osobně: osobne
+      - Elektronicky: elektro
+---
+if: |
+  not minimalVerze
+question: |
+  Informace o spolku
+subquestion: |
+  Základní informace o spolku pro účely sestavení checklistu
+fields:
+  - Způsob založení: zalozeni
+    input type: radio
+    choices:
+      - Přijetím stanov: stanovy
+      - Ustavujícíc schůzi: schuze
+  - Statutární orgán: statutar
+    input type: radio
+    choices:
+      - Předseda: predseda
+      - Výbor: vybor
+  - Další orgány spolku: organy
+    datatype: checkboxes
+    choices: 
+      - Rada: rada
+      - Kontrolní komise: kontrol_komise
+      - Rozhodčí komise: rozhod_komise
+  - Výkon vedlejší hospodářské činnosti: podnikani
+    datatype: yesnoradio
+  - Způsob doručení na soud: doruceni
+    input type: radio
+    choices:
+      - Osobně: osobne
+      - Elektronicky: elektro
 --- 
 code: |
-  stanovy_t = [
-  {1: "Podpisy zakládajících členů jsou úředně ověřeny"},
-  {2: "Všechna pole v hranatých závorkách jsou vyplněn"}
-  ]
+  if zalozeni == "stanovy":
+    stanovy_t = [
+    {1: "Podpisy zakládajících členů jsou úředně ověřeny"},
+    {2: "Všechna pole v hranatých závorkách jsou vyplněn"}
+    ]
+  else:
+    stanovy_t = [
+    {1: "Stanovy jsou podepsány osobou podávající návrh na zápis, tzn. osobou, která je podepsána na inteligentním formuláři. Podpis nemusí být ověřen."},
+    {2: "Všechna pole v hranatých závorkách jsou vyplněn"}
+    ]
   
   schuze_t = [
   "Ustavující schůze byla svolána alespoň 30 před jejím konáním.",
@@ -59,6 +111,24 @@ code: |
   "Všechna pole v hranatých závorkách jsou vyplněna.",
   "Podpis majitele nemovitosti na souhlasu je úředně ověřen."
   ]
+
+  zivnost_t = [
+  "Před podáním žádosti máte vyřízené živnostenské oprávnění."
+  ]
+  
+  intForm_t = [
+  "Všechna pole inteligentního formuláře jsou řádně vyplněna dle [našeho manuálu](https://frankbold.org/poradna/kategorie/zakladani-spolku/rada/jak-vyplnit-inteligentni-formular-pri-zakladani-spolku).",
+  "Podpis na vygenerovaném formuláři je úředně ověřen."
+  ]
+  
+  if doruceni == "osobne":
+    odeslani_t = [
+    "Veškeré výše uvedené dokumenty jsou originály nebo úředně ověřené kopie.",
+    ]
+  else:
+    odeslani_t = [
+    "Veškeré výše uvedené dokumenty jsou opatřeny zaručeným elektronickým podpisem.",
+    ]
 ---
 question: |
   Kontrolní přehled
@@ -84,7 +154,7 @@ fields:
     none of the above: False
     code: |
       schuze_t
-  - "##Čestné prohlášení a souhlas členů výboru se zápisem do rejstříku": prohlaseni
+  - "##Čestné prohlášení a souhlas členů všech orgánů se zápisem do rejstříku": prohlaseni
     required: False
     datatype: checkboxes
     none of the above: False
@@ -96,6 +166,27 @@ fields:
     none of the above: False
     code: |
       souhlas_t
+  - "##Živnostenské oprávnění": zivnost
+    show if:
+      code: |
+        not minimalVerze and podnikani
+    required: False
+    datatype: checkboxes
+    none of the above: False
+    code: |
+      schuze_t
+  - "##Inteligentní formulář": intForm
+    required: False
+    datatype: checkboxes
+    none of the above: False
+    code: |
+      intForm_t
+  - "##Odeslání na soud": intForm
+    required: False
+    datatype: checkboxes
+    none of the above: False
+    code: |
+      odeslani_t
 ---
 mandatory: True
 code: |

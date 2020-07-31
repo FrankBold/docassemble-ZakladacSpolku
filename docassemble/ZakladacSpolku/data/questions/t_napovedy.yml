@@ -1,0 +1,58 @@
+template: h_zalozeni
+content: |
+  <h2>Způsob založení spolku</h2>
+  Zákon předpokládá dva možné způsoby založení spolku – přijetím stanov či usnesením ustavující schůze. Rozdíly jsou pouze formální, vzniklý spolek je každopádně jeden a ten samý. 
+  <br> 
+  <br> Pokud zakládáte spolek ve více než třech lidech, bude pro vás zpravidla lepší svolat ustavující členskou schůzi. Na té se schválí znění stanov, jmenují členové orgánů a určí osoba pověřená zápisem do rejstříku. Tato osoba pak může již vše potřebné sama vyřídit a jde o jediného člověka, jehož podpis bude nutné úředně ověřit. Sepisuje se listina přítomných, na které postačí podpisy bez ověření.       
+  <br>V případě prostého přijetí stanov se nekoná ustavující schůze a první členové orgánů se uvedou přímo do textu stanov. Je však nutné, aby všichni zakádající členové podepsali stanovy s úředně ověřeným podpisem. Tedy je nutné ověřit podpisy alespoň tří různých lidí. 
+  <br> 
+  <br> Doporučení 
+  <br> Při založení příjetím stanov ušetříte formalitu v podobě ustavujicí schůze, ale musíte zajistit ověřené podpisy alespoň tří zakladajících členů. Ustavující schůze bývá pohodlnější variantou.
+---
+template: h_nazev
+content: |
+  <h2>Název spolku</h2>
+  Název musí obsahovat slovo „spolek“, „zapsaný spolek“, případně zkratku „z. s.“ (tj. zapsaný spolek).  Mezi variantami není rozdíl a je tak čístě na Vás, kterou zvolíte.
+  Tedy například:
+     - Frank Bold Society, z. s.
+     - Spolek kovářů na Bruntálsku
+
+  Zkontrolujte si též v rejstříku spolků (https://or.justice.cz/ias/ui/rejstrik), že neexistuje spolek se stejným či příliš podobným názvem. V takovém případě by rejstříkový soud odmítl spolek zapsat.
+---
+template: h_statutar
+content: |
+  <h2>Statutární orgán</h2>
+  Statutární orgán je tím, kdo za spolek jedná navenek. Za spolek, jako právnickou osobu, musí vždy reálně jednat nějaký člověk. To jsou právě členové statutárního orgánu. Statutární orgán tak doplňuje orgán nejvyšší, kterým je členská schůze. 
+  Zjednodušeně lze tedy říci, že nejvyšší orgán rozhoduje a statutární orgán jedná.
+  
+  Předseda je jednočlenným orgánem. Ten pak může spolek zastupovat samostatně ve všech věcech.
+
+  Výbor bývá nejčastěji tříčlenný, avšak může mít libovolný počet členů. Zpravidla může každý člen výboru jednat za spolek samostatně. Je však možné určit, že jich za spolek musí jednat více současně. To znamená, že na smlouvě uzavírané jménem spolku by musel být například podpis alespoň dvou členů, jinak je neplatná.
+
+  <strong>Doporučení</strong>
+  U menších spolků zpravidla postačí předseda s tím, že je tak ve spolku jeden člověk, „který to vede“ a má o veškerých záležitostech spolku přehled. Výhodou výboru je pak efektivita v tom, že není vždy nutné sehnat jednoho člověka, ale jednání za spolek může vyřídit více lidí. Také se členové výboru mohou navzájem kontrolovat.
+---
+template: h_sidlo
+content: |
+  <h2>Sídlo spolku</h2>
+  Stačí jméno obce. 
+  Můžete uvést i přesnou adresu, avšak pak je nutné při změně sídla v rámci obce změnit též stanovy.
+---
+template: h_formy
+content: |
+  <h2>Formy činnosti</h2>
+  Uveďte, jaké formy činnosti bude spolek používat, tj. jakým způsobem bude spolek naplňovat svůj účel.
+
+  Formami činnosti mohou být například pořádání vzdělávacích akcí, účast ve správních řízeních, organizování kampaní a petičních akcí na ochranu přírody pořádáním koncetrům, organizace šachových turnajů, apod. Jsou zcela na vašem uvážení.
+
+  Budoucí doplnění forem činnosti vyžaduje změnu stanov spolku.
+---
+template: h_ucel
+content: |
+  <h2>Účel činnosti</h2>
+  Uveďte, jaký je základní účel vašeho spolku. Jde vlastně o cíl, s jakým spolek zakládáte. 
+  Může se tak jednat například o: „Zasazení se o ochranu přírody a krajiny na   Bruntálsku“, „Rozvoj povědomí a všeobecné vzdělanosti o novodobé historii České republiky“ či „Organizace masopustního průvodu v obci Středupluky“.
+  
+  Spolek nesmí být založen čistě za účelem podnikání nebo jiné výdělečné činnosti. Spolek však může vyvíjet vedlejší hospodářskou činnost, spočívající v podnikání, podporuje-li tato činnost hlavní činnost spolku, která musí být ve stanovách uvedena.
+
+  Pokud se se spolkem chcete účastnit řízení, ve kterých jsou dotčeny zájmy ochrany přírody, musí být účelem spolku „ochrana přírody a krajiny“.
