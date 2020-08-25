@@ -43,7 +43,7 @@ def find_package_data(where='.', package='', exclude=standard_exclude, exclude_d
     return out
 
 setup(name='docassemble.ZakladacSpolku',
-      version='0.0.9',
+      version='0.0.10',
       description=('Zakladač spolků'),
       long_description='# zakladac-spolku\r\nHello world\r\n\r\n\r\n\r\n',
       long_description_content_type='text/markdown',

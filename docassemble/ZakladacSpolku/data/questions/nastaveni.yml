@@ -60,6 +60,10 @@ objects:
   - Anonym: Individual
   - Soubory: DAFileList.using(auto_gather=False,gathered=True)
 ---
+mandatory: True
+code: |
+  multi_user = True
+---
 code: |
   if minimalVerze == True:
     Spolek.popis = False

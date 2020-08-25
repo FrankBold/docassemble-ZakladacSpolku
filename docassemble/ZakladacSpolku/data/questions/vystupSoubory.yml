@@ -106,14 +106,6 @@ code: |
   ecomail = addEcomail(action_argument('email'))
   json_response(dict(status=emailOdeslan))
 ---
-template: hello_email
-subject: |
-  Vše hotov
-content: |
-  Ahojky mňauky, tady jsou podklady k založení spolku.
-  
-  Frank Bold
----
 code: |
   idSesn = user_info().session
   idFile = user_info().filename

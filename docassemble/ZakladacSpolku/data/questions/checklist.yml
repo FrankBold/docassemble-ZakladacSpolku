@@ -5,6 +5,8 @@ metadata:
     Checklist
   tags:
     - Zakladač
+  footer: |
+    Hello worlds
 ---
 features:
   labels above fields: True
