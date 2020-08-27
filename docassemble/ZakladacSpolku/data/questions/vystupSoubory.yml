@@ -2,7 +2,7 @@ include:
   - t_maily.yml
 ---
 modules:
-  - .ecomail
+  - .integrace
 ---
 # Následující části kodu určují jaké šablony se mají přidat k odesílaným přílohám. Jejich pořadí také určuje pořadí, v jakém průvodce doplňuje proměnné.
 # Podle obsahu proměnných se pak do DAFileCollection "Soubory" vkládají jednotlivé přílohy k odeslání.

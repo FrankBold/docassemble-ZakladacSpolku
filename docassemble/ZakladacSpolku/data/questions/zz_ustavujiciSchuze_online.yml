@@ -41,7 +41,7 @@ interview help:
 ---
 modules:
   - docassemble.base.legal
-  - .validace
+  - .utility
 ---
 objects:
   - Spolek: Organization

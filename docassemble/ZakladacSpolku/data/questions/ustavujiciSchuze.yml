@@ -12,7 +12,7 @@ include:
 ---
 modules:
   - docassemble.base.legal
-  - .validace
+  - .utility
 ---
 objects:
   - Spolek: Organization
