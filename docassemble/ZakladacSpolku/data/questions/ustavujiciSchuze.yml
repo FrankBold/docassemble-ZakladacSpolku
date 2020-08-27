@@ -118,9 +118,9 @@ code: |
 ---
 question: |
   Počet členů orgánu:
-  
+
   **${ Spolek.schuze.program[i].name.text }**
-fields: 
+fields:
   - no label: Spolek.schuze.program[i].kandidat.pocet
     datatype: integer
 ---
@@ -143,8 +143,8 @@ code: |
     Spolek.schuze.program[i].zdrzelo = '##'
 ---
 question: |
-  Údaje osoby v orgánu: 
-  
+  Údaje osoby v orgánu:
+
   **${ Spolek.schuze.program[i].name.text }**
 fields:
   - Jméno a příjmení: Spolek.schuze.program[i].kandidat[j].name.first
@@ -161,13 +161,13 @@ code: |
   if Spolek.schuze.program[i].kandidat[j].pro >= (Spolek.schuze.pritomni.number()/2):
     Spolek.schuze.program[i].kandidat[j].zvolen = True
   else:
-    Spolek.schuze.program[i].kandidat[j].zvolen = False 
+    Spolek.schuze.program[i].kandidat[j].zvolen = False
 ---
 if: |
   x.typOsoby != 'kandidat'
 generic object: Individual
 question: |
-  Údaje osoby v orgánu:  
+  Údaje osoby v orgánu:
   **${ x.organ }**
 fields:
   - Jméno a příjmení: x.name.first
@@ -182,7 +182,7 @@ subquestion: |
   Zde si sestavte program schůze. Můžete též přidat libovolné další body. Program schůze by měl být schválen na začátku.
 
   ${ Spolek.schuze.program.table }
-  
+
   ${ Spolek.schuze.program.add_action() }
 continue button field: programDone
 section: program
@@ -211,8 +211,8 @@ if: |
   verze == 'po'
 need: programDone
 question: |
-  Hlasování o bodu schůze: 
-  
+  Hlasování o bodu schůze:
+
   ${ Spolek.schuze.program[i].name.text }
 fields:
   - Všichni pro: Spolek.schuze.program[i].all
@@ -243,7 +243,7 @@ validation code: |
     validation_error("Součet musí odpovídát počtu přítomných")
 ---
 question: |
-  Počet hlasů pro kandidáty: 
+  Počet hlasů pro kandidáty:
 fields:
   - Kolik hlasů získal: Spolek.schuze.program[i][j].pro
     datatype: range
@@ -282,9 +282,9 @@ event: listina
 question: |
   Listina přítomných
 subquestion: |
-  Upravit seznam přítomných: 
+  Upravit seznam přítomných:
   ${ Spolek.schuze.pritomni.table }
-  
+
   ${ Spolek.schuze.pritomni.add_action() }
 section: listina
 continue button label: Pokračovat

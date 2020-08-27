@@ -1,36 +1,34 @@
 include:
   - t_maily.yml
 ---
+# Přidání odkazu pro uložení naspod každé stránky.
 default screen parts:
   under: |
     % if show_save_resume_message:
     <i class="fas fa-save"></i> [Uložit a pokračovat později](${ url_action('ulozit') })
     % endif
 ---
+# Aby se nepřihlášený uživatel mohl dostat zpět, je nutné nastavit interview pro multi_user.
 mandatory: True
 code: |
   if not user_logged_in():
     multi_user = True
   show_save_resume_message = True
 ---
+# Odeslání e-mailu s návratovým odkazem.
 event: ulozitMail
 code: |
   if action_argument('wants'):
     emailOdeslan = send_email(to=action_argument('email'), template=t_save)
     show_save_resume_message = False
-    json_response(dict(status=emailOdeslan))  
+    json_response(dict(status=emailOdeslan))
 ---
+# Vstupní událost. Po kliknutí na odkaz zobrazí otázku s uložením.
 event: ulozit
 code: |
   wants_email
 ---
-event: final_screen
-question: |
-  I would like you to cook a
-  ${ favorite_fruit },
-  ${ favorite_vegetable }, and
-  ${ favorite_legume } stew.
----
+id: navratovyOdkaz
 question: |
   Uložení průvodce na později.
 subquestion: |
@@ -44,10 +42,14 @@ fields:
     default: True
   - E-mail: user_email_address
     datatype: email
+    default: |
+      % if user_logged_in():
+      ${ user_info().email }
+      % endif
     show if: wants_email
   - note: |
       <button id="run" class="btn btn-primary">Odeslat na e-mail</button>
-      
+
       <span id="resultsArea"></span>
     show if: wants_email
 script: |

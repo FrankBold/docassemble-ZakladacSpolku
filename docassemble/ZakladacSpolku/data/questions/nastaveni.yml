@@ -16,9 +16,9 @@ metadata:
 #     &nbsp;
 #     ---
 #     &nbsp;
-#     
+#
 #     Vznik nástroje podpořili:
-#     
+#
 #     ![NFRO](https://da.frankbold.org/playgroundstatic/ZakladacSpolku/1/logo_nfro.png) | ![Nadace VIA](https://da.frankbold.org/playgroundstatic/ZakladacSpolku/1/logo_via.png)
   logo: |
     **Frank Bold**
@@ -40,7 +40,7 @@ features:
   progress bar: True
   question help button: True
 ---
-objects: 
+objects:
   - Spolek: Organization
   - Spolek.nejvyssiOrgan: Thing
   - Spolek.statutar: Thing
@@ -63,6 +63,9 @@ objects:
 mandatory: True
 code: |
   multi_user = True
+---
+code: |
+  zakladniPole = [{'True': 'Stručná verze'}, {'False': 'Pokročilá verze'}]
 ---
 code: |
   if minimalVerze == True:

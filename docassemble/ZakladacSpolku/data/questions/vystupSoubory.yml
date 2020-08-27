@@ -4,6 +4,9 @@ include:
 modules:
   - .ecomail
 ---
+# Následující části kodu určují jaké šablony se mají přidat k odesílaným přílohám. Jejich pořadí také určuje pořadí, v jakém průvodce doplňuje proměnné.
+# Podle obsahu proměnných se pak do DAFileCollection "Soubory" vkládají jednotlivé přílohy k odeslání.
+# Kombinace need a sets určuje pořadí.
 sets: s_stanovy
 code: |
   Soubory.append(stanovy)
@@ -34,7 +37,7 @@ code: |
 need: s_kontrolni
 sets: s_rozhodci
 code: |
-  if not minimalVerze:  
+  if not minimalVerze:
     if Spolek.rozhodciKomise.exist:
       if hromadne:
         Soubory.append(Spolek.rozhodciKomise.prohlaseni)
@@ -54,6 +57,8 @@ sets: souboryDone
 code: |
   souboryDone = True
 ---
+# Cílová stránka celého průvodce.
+id: souboryKeStazeni
 sets: vseHotovo
 mandatory: True
 progress: 100
@@ -65,7 +70,7 @@ question: |
   Zde jsou Vaše dokumenty
 subquestion: |
   Vše potřebné Vám zašleme na e-mail spolu s informacemi k dalšímu postupu.
-  
+
   V e-mailu bude též odkaz na kontrolní seznam, na co nezapomenout před odesláním žádosti. Zkontrolujete si, že máte všude správné podpisy, aj.
   % if user_has_privilege('admin'):
   ${ zip_file(Soubory, filename="Podklady_Spolek.zip") }
@@ -77,8 +82,9 @@ fields:
     datatype: email
   - note: |
       <button id="run" class="btn btn-primary">Odeslat na e-mail</button>
-      
+
       <span id="resultsArea"></span>
+# Skript starající se o odeslání e-mailu.
 script: |
   <script>
     $("#run").click(function(){
@@ -95,21 +101,25 @@ script: |
   </script>
 continue buttton field: vseHotovo
 ---
+# Doplnit poslední stránku s informacemi co dál, FR výzvou, atd.
+# mandatory: True
+id: final_screen
 need: vseHotovo
-event: final_screen
 question: |
   Úspěšně odesláno!
 ---
+# Odeslání e-mailu s dokumenty. Zároveň přidání kontaktu k mailing listu v rámci Ecomailu.
 event: odeslatEmail
 code: |
   emailOdeslan = send_email(to=action_argument('email'), template=potvrzeniDok, attachments=Soubory)
   ecomail = addEcomail(action_argument('email'))
   json_response(dict(status=emailOdeslan))
 ---
+# Vytvoření odkazu na checklist s předáním potřebných údajů tak, aby si průvodce v rámci checklistu mohl stáhnout potřebné proměnné z tohoto průvodce.
 code: |
   idSesn = user_info().session
   idFile = user_info().filename
-  odkazChecklist = "https://da.frankbold.org/interview?i=docassemble.playground1ZakladacSpolku:checklist.yml&idSesn=" + idSesn +"&idFile=" + idFile 
+  odkazChecklist = "https://da.frankbold.org/interview?i=docassemble.playground1ZakladacSpolku:checklist.yml&idSesn=" + idSesn +"&idFile=" + idFile
 ---
 attachment:
   name: Stanovy spolku
@@ -119,6 +129,7 @@ attachment:
   valid formats:
     - docx
 ---
+# Pokud má být společný dokument pro všechny členy orgánu. Je předán celý PartyList
 generic object: PartyList
 attachment:
   name: Prohlášení osob zapisovaných do rejstříku
@@ -128,6 +139,7 @@ attachment:
   valid formats:
     - docx
 ---
+# Pokud má každá člen orgánu mít svůj dokument. Je předáván každý jednotlivý Individual.
 generic object: Individual
 attachment:
   name: Prohlášení osob zapisovaných do rejstříku

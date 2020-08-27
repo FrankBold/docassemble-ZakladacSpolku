@@ -1,4 +1,4 @@
-from docassemble.base.util import *
+from docassemble.base.util import validation_error
 
 def contains_spolek(x):
   x = x.lower()

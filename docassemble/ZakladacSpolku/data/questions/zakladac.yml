@@ -5,23 +5,18 @@ include:
   - objektIndividual.yml
   - t_napovedy.yml
 ---
-mandatory: True
-code: |
-  multi_user = True
----
-code: |
-  zakladniPole = [{'True': 'Stručná verze'}, {'False': 'Pokročilá verze'}]
----
+# Upravit texting
+id: uvodniObrazovka
 reconsider:
   - zakladniPole
 question: |
   Jakou verzi nástroje využijete
 subquestion: |
   % if user_logged_in():
-  Vítejte. Jelikož jste přihlášeni můžete si vybrat zda využijete pouze stručné, či pokročilejší verze zakladače. 
+  Vítejte. Jelikož jste přihlášeni můžete si vybrat zda využijete pouze stručné, či pokročilejší verze zakladače.
   % else:
-    Vítejte. Tento průvodce Vám vygeneruje veškeré potřebné dokumenty k založení spolku. 
-  
+    Vítejte. Tento průvodce Vám vygeneruje veškeré potřebné dokumenty k založení spolku.
+
   Pokud byste chtěli využít pokročilejší funkce nástroje včetně možnosti uložit rozpracované dokumenty a kdykoli se k nim později vrátit, **[zaregistrujte se](${ url_of('register') })**
   % endif
 fields:
@@ -31,9 +26,9 @@ fields:
       zakladniPole
   - note: |
       Osobní údaje, které v aplikaci vyplníte nikam trvale neukládáme a po vytvoření dokumentů jsou odstraněny.
-      
+
       Přesto si můžete zvolit, zda osobní údaje raději vyplníte v dokumentech sami po stažení. Musíte pak však vyplňovat tytéž údaje v několika dokumentech.
-      
+
       Kompletní informace o tom, jak pracujeme o osobními údaji naleznete zde: [Zásady ochrany osobních údajů](https://frankbold.org/zasady-ochrany-osobnich-udaju-frank-bold).
   - no label: osobniUdaje
     datatype: radio
@@ -41,12 +36,7 @@ fields:
       - Údaje vyplním po stažení: False
       - Vyplním zde v rozhraní: True
 ---
-event: verze
-code: |
-  temp = action_arguments()
-  minimalVerze = temp['verze']
-  osobniUdaje
----
+id: zpusobZalozeni
 question: |
   Způsob založení spolku
 subquestion: |
@@ -54,7 +44,7 @@ subquestion: |
 fields:
   - Způsob založení spolku: Spolek.zalozeni.typ
     input type: radio
-    choices: 
+    choices:
       - Ústavující schůzí: schuze
       - Přijetím stanov: stanovy
 help: |
@@ -67,6 +57,7 @@ help: |
 #    help: |
 #      Pokud už víte, kdy se bude schůze konat, jaký bude program, atd. můžete si jej zde rovnou předvyplnit. Pokud ještě dá dáme Vám ke stažení prázdnou šablonu. Vyplnit zápis online můžete pak kdykoli pod tímto <a href="${ url_of('root', _external=True)}interview?i=docassemble.ZakladacSpolku:ustavujiciSchuze.yml">odkazem</a>
 ---
+id: statutar_minimal
 if: |
   minimalVerze
 question: |
@@ -88,6 +79,7 @@ fields:
 help: |
   ${ h_statutar }
 ---
+id: statutar
 if: |
   not minimalVerze
 question: |
@@ -111,7 +103,7 @@ fields:
     choices:
       - Do odvolání: neurcito
       - Jeden rok: urcito
-    show if: 
+    show if:
       code: |
         minimalVerze == False
   - Způsob jednání za spolek: Spolek.statutar.zpusobJednani
@@ -126,11 +118,13 @@ fields:
 help: |
   ${ h_statutar }
 ---
+id: identifikaceSpolku
 question: |
   Identifikační údaje spolku
 subquestion: |
   Základní údaje o spolku.
 fields:
+# Doplnit check se spolkovým rejstříkem.
   - Název spolku: Spolek.name.text
     hint: Musí obsahova z.s., spolek nebo zapsaný spolek.
     validate: contains_spolek
@@ -140,6 +134,7 @@ help: |
   ${ h_nazev }
   ${ h_sidlo }
 ---
+id: nejvyssiOrgan
 if: |
   minimalVerze == False
 question: |
@@ -158,7 +153,7 @@ fields:
       volí a odvolává statutární orgán
       rozhoduje o změnách stanov
   - Hlasování per-rollam: Spolek.nejvyssiOrgan.perrollam
-    show if: 
+    show if:
       code: |
         minimalVerze == False
     input type: radio
@@ -166,6 +161,7 @@ fields:
       - Bude umožněno: True
       - Nebude možné: False
 ---
+id: cinnostSpolku
 question: |
   Činnost spolku
 subquestion: |
@@ -179,18 +175,19 @@ fields:
     hint: jednotlivé položky oddělte novým řádkem
   - Popis spolku: Spolek.popis
     datatype: area
-    show if: 
+    show if:
       code: |
         minimalVerze == False
   - Vedlejší hospodářská činnost: Spolek.zivnost
     datatype: area
-    show if: 
+    show if:
       code: |
         minimalVerze == False
 help: |
   ${ h_ucel }
   ${ h_formy }
 ---
+id: dalsiOrgany
 if: |
   minimalVerze == False
 question: |
@@ -235,6 +232,7 @@ fields:
       - Neurčito: neurcito
     show if: Spolek.rada.exist
 ---
+id: clenstvi
 if: |
   minimalVerze == False
 question: |
@@ -252,12 +250,14 @@ fields:
       variable: Spolek.clenstvi.cestne
       is: True
 ---
-question: | 
+# Zde se určuje, zda budou dokumenty k podpisům rozděleny, aby měl každý svůj, či se podpisy nahromadí na jednom.
+question: |
   Chcete pro každého člena orgánu samostatný dokument s prohlášením?
 subquestion: |
   Na prohlášením musí být ověřené podpisy. Pokud by tedy bylo komplikované se k ověření podpisů sejít hromadně, či si předat jeden dokument, je lepší aby měl každý člen vlastní.
 noyes: hromadne
 ---
+id: sidlo
 question: |
   Sídlo spolku
 fields:
@@ -275,6 +275,7 @@ fields:
     show if: Spolek.sidlo.vlastnik.vice
     datatype: integer
 ---
+id: pocetZakladatelu
 if: |
   Spolek.zalozeni.typ == 'stanovy'
 question: |

@@ -1,3 +1,4 @@
+# Body pro zápis z ústavující schůze. Jsou skladovány zde zvlášť, aby šly snáze přidávat jako celé bloky do výstupní word šablony. "subject" představuje název bodu. "content" představuje zápis z projednání bodu.
 template: t_uvod
 subject: |
   Úvodní slovo

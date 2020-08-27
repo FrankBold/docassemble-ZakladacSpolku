@@ -1,3 +1,4 @@
+# V rozvoji. Cílem je vytvořit průvodce konanou schůzí, s určením programu schůze, on-online podpisem listiny přítomných. Tak, aby se zkrátka celá schůze mohla konat on-line.
 metadata:
   title: Ustavující schůze
   tags:
@@ -95,9 +96,9 @@ event: listina
 question: |
   Listina přítomných
 subquestion: |
-  Upravit seznam přítomných: 
+  Upravit seznam přítomných:
   ${ Spolek.schuze.pritomni.table }
-  
+
   ${ Spolek.schuze.pritomni.add_action() }
 section: listina
 continue button field: listinaDone
@@ -183,7 +184,7 @@ subquestion: |
   Zde si sestavte program schůze. Můžete též přidat libovolné další body. Program schůze by měl být schválen na začátku.
 
   ${ Spolek.schuze.program.table }
-  
+
   ${ Spolek.schuze.program.add_action() }
 continue button field: programDone
 section: program
@@ -250,7 +251,7 @@ validation code: |
 ---
 code: |
   Spolek.schuze.program[i].important = False
----  
+---
 section: shrnuto
 mandatory: True
 question: |
@@ -258,26 +259,23 @@ question: |
 subquestion: |
   ##Název spolku
   ${ Spolek.name.text }
-  
+
   ##Počet přítomných:
   ${ Spolek.schuze.pritomni.number_as_word() }
   ${ Spolek.schuze.pritomni[0].podpis }
-  
+
   ##Funkcionáři schůze:
   Předseda: ${ Spolek.schuze.predseda.name.first }
-  
+
   Zapisovatel: ${ Spolek.schuze.zapisovatel.name.first }
-  
+
   Ověřovatel: ${ Spolek.schuze.overovatel.name.first }
-  
+
   ##Program schůze:
   ${ Spolek.schuze.program }
-  
+
   ##Hlasování:
   % for hlasovani in Spolek.schuze.program:
   ${ hlasovani.jednomyslne }
 
   % endfor
- 
-  
-  

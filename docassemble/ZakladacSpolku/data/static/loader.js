@@ -1,1 +1,0 @@
-Loader.load(null, {suggest: true});

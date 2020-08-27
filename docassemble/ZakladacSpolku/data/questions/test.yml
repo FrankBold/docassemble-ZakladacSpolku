@@ -1,7 +1,0 @@
-mandatory: True
-question: |
-  Název bodu programu
-fields:
-  - Název bodu: bod
-  - html: |
-      <div id="daaccordionOne"><div class="card mb-2"><div class="card-header" id="daheadingOne"> <a role="button" data-toggle="collapse" data-parent="#daaccordionOne" href="#dacollapseOne" aria-expanded="true" aria-controls="dacollapseOne" class="">Nápověda</a></div><div id="dacollapseOne" class="collapse show" aria-labelledby="daheadingOne" style=""><div class="card-body"> hypotetický text</div></div></div></div>
