@@ -1,8 +1,10 @@
 import requests
-import keys
+from docassemble.base.util import get_config
+
+ecomailKey = get_config('ecomailKey')
 
 def addEcomail (email):
-  header = {'key': keyEcomail,'Content-Type': 'application/json'}
+  header = {'key': ecomailKey,'Content-Type': 'application/json'}
 
   values = '''
   {
