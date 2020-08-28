@@ -113,6 +113,7 @@ event: odeslatEmail
 code: |
   emailOdeslan = send_email(to=action_argument('email'), template=potvrzeniDok, attachments=Soubory)
   ecomail = addEcomail(action_argument('email'))
+  email = action_argument('email')
   json_response(dict(status=emailOdeslan))
 ---
 # Vytvoření odkazu na checklist s předáním potřebných údajů tak, aby si průvodce v rámci checklistu mohl stáhnout potřebné proměnné z tohoto průvodce.

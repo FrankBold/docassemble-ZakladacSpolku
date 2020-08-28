@@ -20,6 +20,7 @@ event: ulozitMail
 code: |
   if action_argument('wants'):
     emailOdeslan = send_email(to=action_argument('email'), template=t_save)
+    email = action_argument('email')
     show_save_resume_message = False
     json_response(dict(status=emailOdeslan))
 ---
