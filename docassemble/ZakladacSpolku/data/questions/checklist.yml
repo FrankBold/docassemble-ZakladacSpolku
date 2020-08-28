@@ -9,15 +9,19 @@ metadata:
 features:
   labels above fields: True
 ---
+# multi_user kvůli datům
+# Pokud byly předány data z předchozího interview, tak si je vezme.
 mandatory: True
 code: |
-  if not user_logged_in():
-    multi_user = True
+  multi_user = True
   if url_args:
-    spolekJmeno = url_args['name']
-    statutar = url_args['stat']
-    zalozeni = url_args['zal']
+    vychoziData = get_session_variables(url_args['idFile'], url_args['idSesn'])
+    zalozeni
+    statutar
+    organy
+    podnikani
 ---
+id: verze pruvodce
 question: |
   Verze průvodce
 subquestion: |
@@ -27,6 +31,7 @@ buttons:
   - "Stručnou verzi": True
   - "Pokročilou verzi": False
 ---
+id: spolkove info_minimal
 if: |
   minimalVerze
 question: |
@@ -50,6 +55,7 @@ fields:
       - Osobně: osobne
       - Elektronicky: elektro
 ---
+id: spolkove info
 if: |
   not minimalVerze
 question: |
@@ -69,7 +75,7 @@ fields:
       - Výbor: vybor
   - Další orgány spolku: organy
     datatype: checkboxes
-    choices: 
+    choices:
       - Rada: rada
       - Kontrolní komise: kontrol_komise
       - Rozhodčí komise: rozhod_komise
@@ -80,7 +86,8 @@ fields:
     choices:
       - Osobně: osobne
       - Elektronicky: elektro
---- 
+---
+# Jednotlivé položky do checklistu. Jsou dělané před Dictionary, aby byly na jednom místě.
 code: |
   if zalozeni == "stanovy":
     stanovy_t = [
@@ -92,19 +99,19 @@ code: |
     {1: "Stanovy jsou podepsány osobou podávající návrh na zápis, tzn. osobou, která je podepsána na inteligentním formuláři. Podpis nemusí být ověřen."},
     {2: "Všechna pole v hranatých závorkách jsou vyplněn"}
     ]
-  
+
   schuze_t = [
   "Ustavující schůze byla svolána alespoň 30 před jejím konáním.",
   "Všichni přítomní jsou podepsání na Listině přítomných.",
   "Na zápisu jsou podpisy počizovatele a ověřovatela zápisu. (neověřené).",
   "Všechna pole v hranatých závorkách jsou vyplněna."
   ]
-  
+
   prohlaseni_t = [
   "Podpisy zakládajících členů jsou úředně ověřeny",
   "Všechna pole v hranatých závorkách jsou vyplněn"
   ]
-  
+
   souhlas_t = [
   "Kontrola správnosti informací o nemovitosti z katastru nemovitostí.",
   "Souhlas není v době podání návrhu starší než **tři měsíce**.",
@@ -115,12 +122,12 @@ code: |
   zivnost_t = [
   "Před podáním žádosti máte vyřízené živnostenské oprávnění."
   ]
-  
+
   intForm_t = [
   "Všechna pole inteligentního formuláře jsou řádně vyplněna dle [našeho manuálu](https://frankbold.org/poradna/kategorie/zakladani-spolku/rada/jak-vyplnit-inteligentni-formular-pri-zakladani-spolku).",
   "Podpis na vygenerovaném formuláři je úředně ověřen."
   ]
-  
+
   if doruceni == "osobne":
     odeslani_t = [
     "Veškeré výše uvedené dokumenty jsou originály nebo úředně ověřené kopie.",
@@ -188,6 +195,8 @@ fields:
     code: |
       odeslani_t
 ---
+# Pokud je již vše odkliknuto přejdeme na finalní stránku.
+# Pokud ještě není vše hotovo. Nuceně se zeptáme na tutéž otázku.
 mandatory: True
 code: |
   if stanovy.all_true() and prohlaseni.all_true() and souhlas.all_true():

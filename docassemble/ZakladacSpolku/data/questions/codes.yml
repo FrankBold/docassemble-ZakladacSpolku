@@ -1,3 +1,4 @@
+# Označení vlastník/spoluvlastníci podle počtu
 code: |
   if Spolek.sidlo.vlastnik.vice == False:
     Spolek.sidlo.vlastnik.pocet = 1
@@ -5,19 +6,23 @@ code: |
   else:
     vlastnik = "Spoluvlastníci"
 ---
+# Pokud má spolek předsedu, je člen orgánu 1
 code: |
   if Spolek.statutar.druh == 'predseda':
     Spolek.statutar.clen.target_number = 1
 ---
+# Pokud má spolek v easy verzi předsedu nemá smysl se ptát, zda chce pro každého separé dokument, neboť je pouze jeden.
 code: |
   if minimalVerze:
     if Spolek.statutar.druh == 'predseda':
       hromadne = False
 ---
+# Převod vyplněných účelů a činností na jednotlivé položky podle odentrování.
 code: |
   ucelySeznam = string_pole(Spolek.ucel)
   cinnostiSeznam = string_pole(Spolek.cinnosti)
 ---
+# Při easy verzi se doplní standardní pravomoce. U pokročilé se vyplní podle toho, co uživatel uvedl.
 sets: pravomociSeznam
 code: |
   if minimalVerze:
@@ -25,6 +30,9 @@ code: |
   else:
     pravomociSeznam = string_pole(Spolek.nejvyssiOrgan.pravomoc)
 ---
+# Naplnění PartyListu tolika osobami, kolik členů orgánu uživate l uvedl. Spolu se správným pojmenováním.
+# Je potřeba je předvytvořit. DA se pak ptá na jejich údaje, dokud mu nejdojdou položky.
+# Pokud uživatel nevyplňuje osobní údaje, rovnou se vloží Anonymní varianta.
 code: |
   count = 1
   Spolek.statutar.clen.there_are_any = True
@@ -41,6 +49,7 @@ code: |
     count = count + 1
   Spolek.statutar.clen.there_is_another = False
 ---
+# Totéž co výše, jen pro kontrolní komisi
 code: |
   count = 1
   Spolek.kontrolniKomise.there_are_any = True
@@ -54,6 +63,7 @@ code: |
     count = count + 1
   Spolek.kontrolniKomise.there_is_another = False
 ---
+# Totéž co výše, jen pro kontrolní komisi.
 code: |
   count = 1
   Spolek.rozhodciKomise.there_are_any = True
@@ -67,6 +77,7 @@ code: |
     count = count + 1
   Spolek.rozhodciKomise.there_is_another = False
 ---
+# -||- pro Radu spolku
 code: |
   count = 1
   Spolek.rada.there_are_any = True
@@ -80,6 +91,7 @@ code: |
     count = count + 1
   Spolek.rada.there_is_another = False
 ---
+# -||- pro vlasníky/spoluvlastíky sídla
 code: |
   count = 1
   Spolek.sidlo.vlastnik.there_are_any = True
@@ -92,6 +104,7 @@ code: |
     count = count + 1
   Spolek.sidlo.vlastnik.there_is_another = False
 ---
+# -||- pro navrhovatele zápisu. Je buď jeden při Ustavující schůzi nebo dle počtu zakládajících členů.
 code: |
   count = 1
   if Spolek.statutar.clen.there_is_another == False:
@@ -106,16 +119,18 @@ code: |
       else:
         Spolek.zalozeni.navrhovatel.appendObject(Individual)
         Spolek.zalozeni.navrhovatel[-1].label = 'zakládajícího člena'
-      Spolek.zalozeni.navrhovatel[-1].cislo = count  
+      Spolek.zalozeni.navrhovatel[-1].cislo = count
       count = count + 1
     Spolek.zalozeni.navrhovatel.there_is_another = False
 ---
+# Správné označení vlastníka nemovitosti.
 code: |
   if Spolek.sidlo.vlastnik.vice == False:
     Spolek.sidlo.vlastnik[i].label = 'vlastníka nemovitosti'
   else:
     Spolek.sidlo.vlastnik[i].label = 'spoluvlastníka nemovitosti'
 ---
+# Pokud ustavujícíc schůze je počet zakladatelů 1. Jde sice o navrhovatele, ale chová se pak stejně jako zakladatel.
 code: |
   if Spolek.zalozeni.typ == 'schuze':
-    Spolek.zalozeni.pocetZakladatelu = 1    
+    Spolek.zalozeni.pocetZakladatelu = 1
