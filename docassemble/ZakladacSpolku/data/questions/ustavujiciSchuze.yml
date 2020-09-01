@@ -14,6 +14,10 @@ modules:
   - docassemble.base.legal
   - .utility
 ---
+mandatory: true
+code: |
+  multi_user: true
+---
 objects:
   - Spolek: Organization
   - Spolek.schuze: Event
