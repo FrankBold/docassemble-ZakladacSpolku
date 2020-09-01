@@ -7,11 +7,11 @@ metadata:
     Průvodce, který Vám připraví potřebné podklady pro založení spolku.
   tags:
     - Zakladač
+    - v2
   authors:
     - name: Michal Kuk
       organization: Frank Bold Society, z.s.
   revision_date: 2020-01-22
-  documentation: "https://docassemble.org/docs/initial.html#metadata"
   post: |
 #     &nbsp;
 #     ---

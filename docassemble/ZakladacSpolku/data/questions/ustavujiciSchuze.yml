@@ -1,10 +1,28 @@
 metadata:
   title: |
-    Průvodce ústavující schůzí
+    Průvodce ústavující schůzí spolku
   short title: |
-    Ústavující schůze spolku
+    Ústavující schůze
+  description: |
+    Průvodce ustavující schůzi spolku a automatickou tvorbou zápisu a listiny přítomných
   tags:
     - Zakladač
+    - v2
+    - Ustavující schůze
+  authors:
+    - name: Michal Kuk
+      organization: Frank Bold Society, z.s.
+  revision_date: 2020-01-22
+  post: |
+#     &nbsp;
+#     ---
+#     &nbsp;
+#
+#     Vznik nástroje podpořili:
+#
+#     ![Nadace VIA](https://da.frankbold.org/playgroundstatic/ZakladacSpolku/1/logo_via.png)
+  logo: |
+    **Frank Bold**
 ---
 include:
   - t_program.yml

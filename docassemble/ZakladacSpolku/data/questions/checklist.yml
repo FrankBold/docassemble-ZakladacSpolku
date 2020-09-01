@@ -1,10 +1,28 @@
 metadata:
   title: |
-    Kontrolní checklist
+    Kontrola náležitostí při zakládání spolku
   short title: |
-    Checklist
+    Kontrolní checklist
+  description: |
+    Seznam na to nezapomenout, když zakládáte spolek.
   tags:
     - Zakladač
+    - v2
+    - Checklist
+  authors:
+    - name: Michal Kuk
+      organization: Frank Bold Society, z.s.
+  revision_date: 2020-01-22
+  post: |
+#     &nbsp;
+#     ---
+#     &nbsp;
+#
+#     Vznik nástroje podpořili:
+#
+#     ![Nadace VIA](https://da.frankbold.org/playgroundstatic/ZakladacSpolku/1/logo_via.png)
+  logo: |
+    **Frank Bold**
 ---
 features:
   labels above fields: True
