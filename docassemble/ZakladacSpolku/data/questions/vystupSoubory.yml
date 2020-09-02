@@ -65,7 +65,7 @@ need:
  - osobniUdaje
  - souboryDone
 question: |
-  Vaše dokumenty jsou připraveny o odeslání
+  Vaše dokumenty jsou připraveny
 subquestion: |
   Vše potřebné Vám zašleme na e-mail spolu s informacemi k dalšímu postupu.
 
@@ -85,13 +85,43 @@ id: final_screen
 need: vseHotovo
 question: |
   Úspěšně odesláno!
+subquestion: |
+  Děkujeme, že jste využili náš nástroj. Kdyby Vám dokumenty na e-mail nedorazily, napiště na [servis@frankbold.org](mailto:servis@frankbold.org) a napravíme to.
 
-  Podpořte nás. Pozdravte advokáty
+  Tento nástroj je zdarma díky podpoře donorů. Pomozte nám též.
+
+  Pokud chcete, abychom založení spolku vyřídili za Vás, či potřebujete komplexnější pomoc šitou na míru, můžete využít placenýc služeb našich advokátů.
+action buttons:
+  - label: Podpořím darem
+    action: https://frankbold.org/podporte-nas
+    color: dark
+    icon: hand-holding-heart
+    placement: before
+  - label: Navštívit web advokátů
+    action: C2B07C
+    color: light
+    icon: external-link-alt
+    placement: before
+buttons:
+  - Ukončit průvodce: leave
+    url: https://frankbold.org/
+css: |
+  <style>
+  .btn-dark {
+    background-color: #D70B3B;
+    border-color: #D70B3B;
+    }
+  .btn-light {
+    color: white;
+    background-color: #C2B07C;
+    border-color: #C2B07C;
+    }
+  </style>
 ---
 event: neodeslano
 id: Chyba odeslání
 question: |
-  Něco se pokazilo... sorry
+  Něco se pokazilo... Kontaktujte nás na [servis@frankbold.org](mailto:servis@frankbold.org)
 ---
 # Odeslání e-mailu s dokumenty. Zároveň přidání kontaktu k mailing listu v rámci Ecomailu.
 event: odeslatEmail
