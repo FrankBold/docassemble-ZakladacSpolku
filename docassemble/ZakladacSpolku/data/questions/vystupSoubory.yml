@@ -59,15 +59,13 @@ code: |
 ---
 # Cílová stránka celého průvodce.
 id: souboryKeStazeni
-sets: vseHotovo
-mandatory: True
 progress: 100
 need:
  - minimalVerze
  - osobniUdaje
  - souboryDone
 question: |
-  Zde jsou Vaše dokumenty
+  Vaše dokumenty jsou připraveny o odeslání
 subquestion: |
   Vše potřebné Vám zašleme na e-mail spolu s informacemi k dalšímu postupu.
 
@@ -80,41 +78,31 @@ subquestion: |
 fields:
   - Váš e-mail: email
     datatype: email
-  - note: |
-      <button id="run" class="btn btn-primary">Odeslat na e-mail</button>
-
-      <span id="resultsArea"></span>
-# Skript starající se o odeslání e-mailu.
-script: |
-  <script>
-    $("#run").click(function(){
-      $("#resultsArea").html("<div class='spinner-border' role='status'></div> Odesílám...")
-      action_call('odeslatEmail', {email: val('email')}, function(data){
-        if (data.status) {
-          $("#resultsArea").html("E-mail bych úspěšně odeslán.")
-        } else {
-          $("#resultsArea").html("Něco se pokazilo.")
-        }
-      });
-     return false;
-    });
-  </script>
-continue buttton field: vseHotovo
 ---
 # Doplnit poslední stránku s informacemi co dál, FR výzvou, atd.
-# mandatory: True
+mandatory: True
 id: final_screen
 need: vseHotovo
 question: |
   Úspěšně odesláno!
+
+  Podpořte nás. Pozdravte advokáty
+---
+event: neodeslano
+id: Chyba odeslání
+question: |
+  Něco se pokazilo... sorry
 ---
 # Odeslání e-mailu s dokumenty. Zároveň přidání kontaktu k mailing listu v rámci Ecomailu.
 event: odeslatEmail
+sets: vseHotovo
 code: |
-  emailOdeslan = send_email(to=action_argument('email'), template=potvrzeniDok, attachments=Soubory)
-  ecomail = addEcomail(action_argument('email'))
-  email = action_argument('email')
-  json_response(dict(status=emailOdeslan))
+  emailOdeslan = send_email(email, template=potvrzeniDok, attachments=Soubory)
+  ecomail = addEcomail(email)
+  if emailOdeslan:
+    vseHotovo = True
+  else:
+    neodeslano
 ---
 # Vytvoření odkazu na checklist s předáním potřebných údajů tak, aby si průvodce v rámci checklistu mohl stáhnout potřebné proměnné z tohoto průvodce.
 code: |
