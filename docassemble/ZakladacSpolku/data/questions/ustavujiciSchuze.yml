@@ -32,9 +32,9 @@ modules:
   - docassemble.base.legal
   - .utility
 ---
-mandatory: true
+mandatory: True
 code: |
-  multi_user: true
+  multi_user = True
 ---
 objects:
   - Spolek: Organization
@@ -60,8 +60,8 @@ fields:
   - Listinu přítomných...: listina
     input type: radio
     choices:
-      - "... máme podepsanou ze schůze.": false
-      - "... potřebujeme vytvořit online": true
+      - "... máme podepsanou ze schůze.": False
+      - "... potřebujeme vytvořit online": True
     show if:
       variable: verze
       is: po
