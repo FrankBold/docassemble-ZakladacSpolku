@@ -73,8 +73,6 @@ subquestion: |
   % if user_has_privilege('admin'):
   ${ zip_file(Soubory, filename="Podklady_Spolek.zip") }
   % endif
-  % if Spolek.zalozeni.typ == 'schuze':
-  % endif
 fields:
   - Váš e-mail: email
     datatype: email
@@ -127,10 +125,14 @@ question: |
 event: odeslatEmail
 sets: vseHotovo
 code: |
+  import requests
+  import json
+
   emailOdeslan = send_email(email, template=potvrzeniDok, attachments=Soubory)
   ecomail = addEcomail(email)
   if emailOdeslan:
     vseHotovo = True
+    webhook_data = requests.post('https://hook.integromat.com/0cqgtjarfbj9skvkw934ada161vqnt1n', data=json.dumps(all_variables()),headers={'Content-Type': 'application/json'})
   else:
     neodeslano
 ---
