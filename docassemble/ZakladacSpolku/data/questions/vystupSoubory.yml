@@ -85,21 +85,15 @@ question: |
   Úspěšně odesláno!
 subquestion: |
   Děkujeme, že jste využili náš nástroj. Kdyby Vám dokumenty na e-mail nedorazily, napiště na [servis@frankbold.org](mailto:servis@frankbold.org) a napravíme to.
+  <table><tr><td>
+  Tento nástroj je zdarma díky **podpoře donorů**. Pomozte nám též.
 
-  Tento nástroj je zdarma díky podpoře donorů. Pomozte nám též.
+    ${ action_button_html("https://bit.ly/31MGcY3", label="Podpořím darem", color="secondary", icon="hand-holding-heart", block="True") }
+  </td><td>
+    Pokud chcete, abychom založení spolku **vyřídili za Vás, či potřebujete komplexnější pomoc šitou na míru**, můžete využít placených služeb našich advokátů.
 
-  Pokud chcete, abychom založení spolku vyřídili za Vás, či potřebujete komplexnější pomoc šitou na míru, můžete využít placenýc služeb našich advokátů.
-action buttons:
-  - label: Podpořím darem
-    action: https://frankbold.org/podporte-nas
-    color: dark
-    icon: hand-holding-heart
-    placement: before
-  - label: Navštívit web advokátů
-    action: C2B07C
-    color: light
-    icon: external-link-alt
-    placement: before
+    ${ action_button_html("https://bit.ly/2GFmUft", label="Navštívit web advokátů", color="light", icon="external-link-alt", block="True") }
+    </td></tr></table>
 buttons:
   - Ukončit průvodce: leave
     url: https://frankbold.org/
@@ -114,6 +108,12 @@ css: |
     background-color: #C2B07C;
     border-color: #C2B07C;
     }
+  .table.table-striped tr {
+  background:none !important;
+  }
+  .table.table-striped td {
+  width:50%;
+  }
   </style>
 ---
 event: neodeslano
