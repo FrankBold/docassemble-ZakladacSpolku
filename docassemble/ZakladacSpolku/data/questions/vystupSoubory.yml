@@ -1,256 +1,187 @@
-metadata:
-  title: |
-    Kontrola náležitostí při zakládání spolku
-  short title: |
-    Kontrolní checklist
-  description: |
-    Seznam na to nezapomenout, když zakládáte spolek.
-  tags:
-    - Zakladač
-    - v2
-    - Checklist
-  authors:
-    - name: Michal Kuk
-      organization: Frank Bold Society, z.s.
-  revision_date: 2020-01-22
-  post: |
-#     &nbsp;
-#     ---
-#     &nbsp;
-#
-#     Vznik nástroje podpořili:
-#
-#     ![Nadace VIA](https://da.frankbold.org/playgroundstatic/ZakladacSpolku/1/logo_via.png)
-  logo: |
-    **Frank Bold**
+include:
+  - t_maily.yml
 ---
-features:
-  labels above fields: True
+modules:
+  - .integrace
 ---
-# multi_user kvůli datům
-# Pokud byly předány data z předchozího interview, tak si je vezme.
+# Následující části kodu určují jaké šablony se mají přidat k odesílaným přílohám. Jejich pořadí také určuje pořadí, v jakém průvodce doplňuje proměnné.
+# Podle obsahu proměnných se pak do DAFileCollection "Soubory" vkládají jednotlivé přílohy k odeslání.
+# Kombinace need a sets určuje pořadí.
+sets: s_stanovy
+code: |
+  Soubory.append(stanovy)
+  s_stanovy = True
+---
+need: s_stanovy
+sets: s_statutar
+code: |
+  if hromadne:
+    Soubory.append(Spolek.statutar.clen.prohlaseni)
+  else:
+    for clen in Spolek.statutar.clen:
+      Soubory.append(clen.prohlaseni)
+  s_statutar = True
+---
+need: s_statutar
+sets: s_kontrolni
+code: |
+  if not minimalVerze:
+    if Spolek.kontrolniKomise.exist:
+      if hromadne:
+        Soubory.append(Spolek.kontrolniKomise.prohlaseni)
+      else:
+        for clen in Spolek.kontrolniKomise:
+          Soubory.append(clen.prohlaseni)
+  s_kontrolni = True
+---
+need: s_kontrolni
+sets: s_rozhodci
+code: |
+  if not minimalVerze:
+    if Spolek.rozhodciKomise.exist:
+      if hromadne:
+        Soubory.append(Spolek.rozhodciKomise.prohlaseni)
+      else:
+        for clen in Spolek.rozhodciKomise:
+          Soubory.append(clen.prohlaseni)
+  s_rozhodci = True
+---
+need: s_rozhodci
+sets: s_souhlas
+code: |
+  Soubory.append(souhlas)
+  s_souhlas = True
+---
+need: s_souhlas
+sets: souboryDone
+code: |
+  souboryDone = True
+---
+# Cílová stránka celého průvodce.
+id: souboryKeStazeni
+progress: 100
+need:
+ - minimalVerze
+ - osobniUdaje
+ - souboryDone
+question: |
+  Vaše dokumenty jsou připraveny
+subquestion: |
+  Vše potřebné Vám zašleme na e-mail spolu s informacemi k dalšímu postupu.
+
+  V e-mailu bude též odkaz na kontrolní seznam, na co nezapomenout před odesláním žádosti. Zkontrolujete si, že máte všude správné podpisy, aj.
+  % if user_has_privilege('admin'):
+  ${ zip_file(Soubory, filename="Podklady_Spolek.zip") }
+  % endif
+fields:
+  - Váš e-mail: email
+    datatype: email
+---
+# Doplnit poslední stránku s informacemi co dál, FR výzvou, atd.
 mandatory: True
-code: |
-  multi_user = True
-  if url_args:
-    vychoziData = get_session_variables(url_args['idFile'], url_args['idSesn'])
-    minimalVerze = vychoziData["minimalVerze"]
-    zalozeni = vychoziData["Spolek"]["zalozeni"]["typ"]
-    statutar = vychoziData["Spolek"]["statutar"]["druh"]
-    organy = vychoziData["Spolek"]["zalozeni"]["typ"]
-    podnikani = vychoziData["Spolek"]["zivnost"]
----
-id: verze pruvodce
+id: final_screen
+need: vseHotovo
 question: |
-  Verze průvodce
+  Úspěšně odesláno!
 subquestion: |
-  Využili jste stručnou či pokročilejší verzi nástroje?
-field: minimalVerze
+  Děkujeme, že jste využili náš nástroj. Kdyby Vám dokumenty na e-mail nedorazily, napiště na [servis@frankbold.org](mailto:servis@frankbold.org) a napravíme to.
+  <table><tr><td>
+  Tento nástroj je zdarma díky **podpoře donorů**. Pomozte nám též.
+
+    ${ action_button_html("https://bit.ly/31MGcY3", label="Podpořím darem", color="secondary", icon="hand-holding-heart", block="True") }
+  </td><td>
+    Pokud chcete, abychom založení spolku **vyřídili za Vás, či potřebujete komplexnější pomoc šitou na míru**, můžete využít placených služeb našich advokátů.
+
+    ${ action_button_html("https://bit.ly/2GFmUft", label="Navštívit web advokátů", color="light", icon="external-link-alt", block="True") }
+    </td></tr></table>
 buttons:
-  - "Stručnou verzi": True
-  - "Pokročilou verzi": False
----
-id: spolkove info_minimal
-if: |
-  minimalVerze
-question: |
-  Informace o spolku
-subquestion: |
-  Základní informace o spolku pro účely sestavení checklistu
-fields:
-  - Způsob založení: zalozeni
-    input type: radio
-    choices:
-      - Přijetím stanov: stanovy
-      - Ustavujícíc schůzi: schuze
-  - Statutární orgán: statutar
-    input type: radio
-    choices:
-      - Předseda: predseda
-      - Výbor: vybor
-  - Způsob doručení na soud: doruceni
-    input type: radio
-    choices:
-      - Osobně: osobne
-      - Elektronicky: elektro
----
-id: spolkove info
-if: |
-  not minimalVerze
-question: |
-  Informace o spolku
-subquestion: |
-  Základní informace o spolku pro účely sestavení checklistu
-fields:
-  - Způsob založení: zalozeni
-    input type: radio
-    choices:
-      - Přijetím stanov: stanovy
-      - Ustavujícíc schůzi: schuze
-  - Statutární orgán: statutar
-    input type: radio
-    choices:
-      - Předseda: predseda
-      - Výbor: vybor
-  - Další orgány spolku: organy
-    datatype: checkboxes
-    choices:
-      - Rada: rada
-      - Kontrolní komise: kontrol_komise
-      - Rozhodčí komise: rozhod_komise
-  - Výkon vedlejší hospodářské činnosti: podnikani
-    datatype: yesnoradio
-  - Způsob doručení na soud: doruceni
-    input type: radio
-    choices:
-      - Osobně: osobne
-      - Elektronicky: elektro
----
-# Jednotlivé položky do checklistu. Jsou dělané před Dictionary, aby byly na jednom místě.
-code: |
-  if zalozeni == "stanovy":
-    stanovy_t = [
-    {1: "Podpisy zakládajících členů jsou úředně ověřeny"},
-    {2: "Všechna pole v hranatých závorkách jsou vyplněn"}
-    ]
-  else:
-    stanovy_t = [
-    {1: "Stanovy jsou podepsány osobou podávající návrh na zápis, tzn. osobou, která je podepsána na inteligentním formuláři. Podpis nemusí být ověřen."},
-    {2: "Všechna pole v hranatých závorkách jsou vyplněn"}
-    ]
-
-  schuze_t = [
-  "Ustavující schůze byla svolána alespoň 30 před jejím konáním.",
-  "Všichni přítomní jsou podepsání na Listině přítomných.",
-  "Na zápisu jsou podpisy počizovatele a ověřovatela zápisu. (neověřené).",
-  "Všechna pole v hranatých závorkách jsou vyplněna."
-  ]
-
-  prohlaseni_t = [
-  "Podpisy zakládajících členů jsou úředně ověřeny",
-  "Všechna pole v hranatých závorkách jsou vyplněn"
-  ]
-
-  souhlas_t = [
-  "Kontrola správnosti informací o nemovitosti z katastru nemovitostí.",
-  "Souhlas není v době podání návrhu starší než **tři měsíce**.",
-  "Všechna pole v hranatých závorkách jsou vyplněna.",
-  "Podpis majitele nemovitosti na souhlasu je úředně ověřen."
-  ]
-
-  zivnost_t = [
-  "Před podáním žádosti máte vyřízené živnostenské oprávnění."
-  ]
-
-  intForm_t = [
-  "Všechna pole inteligentního formuláře jsou řádně vyplněna dle [našeho manuálu](https://frankbold.org/poradna/kategorie/zakladani-spolku/rada/jak-vyplnit-inteligentni-formular-pri-zakladani-spolku).",
-  "Podpis na vygenerovaném formuláři je úředně ověřen."
-  ]
-
-  if doruceni == "osobne":
-    odeslani_t = [
-    "Veškeré výše uvedené dokumenty jsou originály nebo úředně ověřené kopie.",
-    ]
-  else:
-    odeslani_t = [
-    "Veškeré výše uvedené dokumenty jsou opatřeny zaručeným elektronickým podpisem.",
-    ]
----
-question: |
-  Kontrolní přehled
-subquestion: |
-  Přehled můžete kdykoli znovu otevřít pod ${ action_button_html(interview_url(), label="tímto odkazem", color="primary", size="sm") }
-
-  Můžete jej rovněž ${ action_button_html(url_of(checklistPDF), label="uložit ve formátu pdf", color="primary", size="sm", icon="download") }
-fields:
-  - "##Stanovy": stanovy
-    required: False
-    datatype: checkboxes
-    none of the above: False
-    code: |
-      stanovy_t
-  - "##Zápis z ústavující schůze": schuze
-    show if:
-      code: |
-        zalozeni == "schuze"
-    required: False
-    datatype: checkboxes
-    none of the above: False
-    code: |
-      schuze_t
-  - "##Čestné prohlášení a souhlas členů všech orgánů se zápisem do rejstříku": prohlaseni
-    required: False
-    datatype: checkboxes
-    none of the above: False
-    code: |
-      prohlaseni_t
-  - "##Souhlas majitele nemovitosti s umístěním sídla spolku": souhlas
-    required: False
-    datatype: checkboxes
-    none of the above: False
-    code: |
-      souhlas_t
-  - "##Živnostenské oprávnění": zivnost
-    show if:
-      code: |
-        not minimalVerze and podnikani
-    required: False
-    datatype: checkboxes
-    none of the above: False
-    code: |
-      schuze_t
-  - "##Inteligentní formulář": intForm
-    required: False
-    datatype: checkboxes
-    none of the above: False
-    code: |
-      intForm_t
-  - "##Odeslání na soud": intForm
-    required: False
-    datatype: checkboxes
-    none of the above: False
-    code: |
-      odeslani_t
+  - Ukončit průvodce: leave
+    url: https://frankbold.org/
 css: |
   <style>
-  h2 {
-  font-size: 0.9rem;
-  font-weight: bold;
+  .btn-dark {
+    background-color: #D70B3B;
+    border-color: #D70B3B;
+    }
+  .btn-light {
+    color: white;
+    background-color: #C2B07C;
+    border-color: #C2B07C;
+    }
+  .table.table-striped tr {
+  background:none !important;
+  }
+  .table.table-striped td {
+  width:50%;
   }
   </style>
 ---
-# Pokud je již vše odkliknuto přejdeme na finalní stránku.
-# Pokud ještě není vše hotovo. Nuceně se zeptáme na tutéž otázku.
-mandatory: True
-code: |
-  if stanovy.all_true() and prohlaseni.all_true() and souhlas.all_true():
-    konec
-  else:
-    force_ask('souhlas')
----
+event: neodeslano
+id: Chyba odeslání
 question: |
-  Děkujeme a přejeme mnoho zdaru!
-buttons:
-  - Exit: Ukončit
-event: konec
+  Něco se pokazilo... Kontaktujte nás na [servis@frankbold.org](mailto:servis@frankbold.org)
+---
+# Odeslání e-mailu s dokumenty. Zároveň přidání kontaktu k mailing listu v rámci Ecomailu.
+event: odeslatEmail
+sets: vseHotovo
+code: |
+  import requests
+  import json
+
+  emailOdeslan = send_email(email, template=potvrzeniDok, attachments=Soubory)
+  ecomail = addEcomail(email)
+  if emailOdeslan:
+    vseHotovo = True
+    webhook_data = requests.post('https://hook.integromat.com/0cqgtjarfbj9skvkw934ada161vqnt1n', data=json.dumps(all_variables()),headers={'Content-Type': 'application/json'})
+  else:
+    neodeslano
+---
+# Vytvoření odkazu na checklist s předáním potřebných údajů tak, aby si průvodce v rámci checklistu mohl stáhnout potřebné proměnné z tohoto průvodce.
+code: |
+  idSesn = user_info().session
+  idFile = user_info().filename
+  odkazChecklist = "https://da-test.frankbold.org/interview?i=docassemble.playground1Zakladac:checklist.yml&idSesn=" + idSesn +"&idFile=" + idFile
 ---
 attachment:
-  name: Kontrolní checklist
-  filename: checklist
-  variable name: checklistPDF
-  content: |
-    ${ checklist_t }
+  name: Stanovy spolku
+  filename: Stanovy_spolku
+  variable name: stanovy
+  docx template file: Stanovy.docx
   valid formats:
-    - pdf
+    - docx
 ---
-template: checklist_t
-content: |
-  # Nadpis
-   - [ ] První povinnost
-   - [ ] Druhá povinnost
-   - [ ] Třetí povinnost
-
-  # Nadpis 2
-   - [ ] První povinnost
-   - [ ] Druhá povinnost
-   - [ ] Třetí povinnost
+# Pokud má být společný dokument pro všechny členy orgánu. Je předán celý PartyList
+generic object: PartyList
+attachment:
+  name: Prohlášení osob zapisovaných do rejstříku
+  filename: Prohlášení_${ x.label }
+  variable name: x.prohlaseni
+  docx template file: Prohlaseni.docx
+  valid formats:
+    - docx
+---
+# Pokud má každá člen orgánu mít svůj dokument. Je předáván každý jednotlivý Individual.
+generic object: Individual
+attachment:
+  name: Prohlášení osob zapisovaných do rejstříku
+  filename: Prohlášení_${ x.label }
+  variable name: x.prohlaseni
+  docx template file: Prohlaseni.docx
+  valid formats:
+    - docx
+---
+attachment:
+  name: Souhlas s umístěním sídla spolku
+  filename: Souhlas vlastníka
+  variable name: souhlas
+  docx template file: Souhlas.docx
+  valid formats:
+    - docx
+---
+attachment:
+  name: Zápis ze ustavující schůze
+  filename: Schůze zápis
+  variable name: schuze
+  docx template file: Schuze.docx
+  valid formats:
+    - docx

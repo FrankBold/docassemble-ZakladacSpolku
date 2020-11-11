@@ -24,6 +24,9 @@ metadata:
   logo: |
     **Frank Bold**
 ---
+modules:
+  - .utility
+---
 features:
   labels above fields: True
 ---
@@ -37,8 +40,9 @@ code: |
     minimalVerze = vychoziData["minimalVerze"]
     zalozeni = vychoziData["Spolek"]["zalozeni"]["typ"]
     statutar = vychoziData["Spolek"]["statutar"]["druh"]
-    organy = vychoziData["Spolek"]["zalozeni"]["typ"]
-    podnikani = vychoziData["Spolek"]["zivnost"]
+    kontrol_komise = vychoziData["Spolek"]["kontrolniKomise"]["exist"]
+    rozh_komise = vychoziData["Spolek"]["rozhodciKomise"]["exist"]
+    zivnost = vychoziData["Spolek"]["zivnost"]
 ---
 id: verze pruvodce
 question: |
@@ -50,33 +54,7 @@ buttons:
   - "Stručnou verzi": True
   - "Pokročilou verzi": False
 ---
-id: spolkove info_minimal
-if: |
-  minimalVerze
-question: |
-  Informace o spolku
-subquestion: |
-  Základní informace o spolku pro účely sestavení checklistu
-fields:
-  - Způsob založení: zalozeni
-    input type: radio
-    choices:
-      - Přijetím stanov: stanovy
-      - Ustavujícíc schůzi: schuze
-  - Statutární orgán: statutar
-    input type: radio
-    choices:
-      - Předseda: predseda
-      - Výbor: vybor
-  - Způsob doručení na soud: doruceni
-    input type: radio
-    choices:
-      - Osobně: osobne
-      - Elektronicky: elektro
----
 id: spolkove info
-if: |
-  not minimalVerze
 question: |
   Informace o spolku
 subquestion: |
@@ -95,67 +73,30 @@ fields:
   - Další orgány spolku: organy
     datatype: checkboxes
     choices:
-      - Rada: rada
       - Kontrolní komise: kontrol_komise
       - Rozhodčí komise: rozhod_komise
-  - Výkon vedlejší hospodářské činnosti: podnikani
+    show if:
+      code: |
+        not minimalVerze
+  - Výkon vedlejší hospodářské činnosti: zivnost
     datatype: yesnoradio
-  - Způsob doručení na soud: doruceni
+    show if:
+      code: |
+        not minimalVerze
+---
+question: |
+  Způsob doručení
+fields:
+  - Způsob doručení na soud: odeslani
     input type: radio
     choices:
       - Osobně: osobne
       - Poštou: postou
       - Elektronicky: elektro
 ---
-# Jednotlivé položky do checklistu. Jsou dělané před Dictionary, aby byly na jednom místě.
 code: |
-  if zalozeni == "stanovy":
-    stanovy_t = [
-    {1: "Podpisy zakládajících členů jsou úředně ověřeny"},
-    {2: "Všechna pole v hranatých závorkách jsou vyplněn"}
-    ]
-  else:
-    stanovy_t = [
-    {1: "Stanovy jsou podepsány osobou podávající návrh na zápis, tzn. osobou, která je podepsána na inteligentním formuláři. Podpis nemusí být ověřen."},
-    {2: "Všechna pole v hranatých závorkách jsou vyplněn"}
-    ]
-
-  schuze_t = [
-  "Ustavující schůze byla svolána alespoň 30 před jejím konáním.",
-  "Všichni přítomní jsou podepsání na Listině přítomných.",
-  "Na zápisu jsou podpisy počizovatele a ověřovatela zápisu. (neověřené).",
-  "Všechna pole v hranatých závorkách jsou vyplněna."
-  ]
-
-  prohlaseni_t = [
-  "Podpisy členů orgánů jsou úředně ověřeny",
-  "Všechna pole v hranatých závorkách jsou vyplněn"
-  ]
-
-  souhlas_t = [
-  "Kontrola správnosti informací o nemovitosti z katastru nemovitostí.",
-  "Souhlas není v době podání návrhu starší než **tři měsíce**.",
-  "Všechna pole v hranatých závorkách jsou vyplněna.",
-  "Podpis majitele nemovitosti na souhlasu je úředně ověřen."
-  ]
-
-  zivnost_t = [
-  "Před podáním žádosti máte vyřízené živnostenské oprávnění."
-  ]
-
-  intForm_t = [
-  "Všechna pole inteligentního formuláře jsou řádně vyplněna dle [našeho manuálu](https://frankbold.org/poradna/kategorie/zakladani-spolku/rada/jak-vyplnit-inteligentni-formular-pri-zakladani-spolku).",
-  "Podpis na vygenerovaném formuláři je úředně ověřen."
-  ]
-
-  if doruceni == "osobne":
-    odeslani_t = [
-    "Veškeré výše uvedené dokumenty jsou originály nebo úředně ověřené kopie.",
-    ]
-  else:
-    odeslani_t = [
-    "Veškeré výše uvedené dokumenty jsou opatřeny zaručeným elektronickým podpisem.",
-    ]
+  if minimalVerze:
+    zivnost = False
 ---
 question: |
   Kontrolní přehled
@@ -169,7 +110,7 @@ fields:
     datatype: checkboxes
     none of the above: False
     code: |
-      stanovy_t
+      ziskejPolozky('stanovy')
   - "##Zápis z ústavující schůze": schuze
     show if:
       code: |
@@ -178,40 +119,37 @@ fields:
     datatype: checkboxes
     none of the above: False
     code: |
-      schuze_t
+      ziskejPolozky('schuze')
   - "##Čestné prohlášení a souhlas členů všech orgánů se zápisem do rejstříku": prohlaseni
     required: False
     datatype: checkboxes
     none of the above: False
     code: |
-      prohlaseni_t
+      ziskejPolozky('prohlaseni')
   - "##Souhlas majitele nemovitosti s umístěním sídla spolku": souhlas
     required: False
     datatype: checkboxes
     none of the above: False
     code: |
-      souhlas_t
-  - "##Živnostenské oprávnění": zivnost
-    show if:
-      code: |
-        not minimalVerze and podnikani
+      ziskejPolozky('souhlas')
+  - "##Živnostenské oprávnění": podnikani
     required: False
     datatype: checkboxes
     none of the above: False
     code: |
-      schuze_t
+      ziskejPolozky('zivnost')
   - "##Inteligentní formulář": intForm
     required: False
     datatype: checkboxes
     none of the above: False
     code: |
-      intForm_t
+      ziskejPolozky('intForm')
   - "##Odeslání na soud": intForm
     required: False
     datatype: checkboxes
     none of the above: False
     code: |
-      odeslani_t
+      ziskejPolozky('odeslani')
 css: |
   <style>
   h2 {
@@ -219,6 +157,7 @@ css: |
   font-weight: bold;
   }
   </style>
+continue button label: Uložit
 ---
 # Pokud je již vše odkliknuto přejdeme na finalní stránku.
 # Pokud ještě není vše hotovo. Nuceně se zeptáme na tutéž otázku.
@@ -239,6 +178,15 @@ attachment:
   name: Kontrolní checklist
   filename: checklist
   variable name: checklistPDF
+  metadata:
+    FirstHeaderRight: |
+      ![Logo](https://www.fbadvokati.cz/website/var/tmp/image-thumbnails/0/264/thumb__auto_77f984c5a761dfd0e04641694a0c3d2f/frank_bold_org.png)
+    HeaderRight: |
+      ![Logo](https://www.fbadvokati.cz/website/var/tmp/image-thumbnails/0/264/thumb__auto_77f984c5a761dfd0e04641694a0c3d2f/frank_bold_org.png)
+    FooterCenter: |
+      [PAGENUM] / [TOTALPAGES]
+    FirstFooterCenter: |
+      [PAGENUM] / [TOTALPAGES]
   content: |
     ${ checklist_t }
   valid formats:
@@ -246,12 +194,56 @@ attachment:
 ---
 template: checklist_t
 content: |
-  # Nadpis
-   - [ ] První povinnost
-   - [ ] Druhá povinnost
-   - [ ] Třetí povinnost
+  [BOLDCENTER] Kontrolní checklist — Založení spolku
+  [CENTER] Zkontrolujte své podklady pro založení spolku před odesláním na soud.
 
-  # Nadpis 2
-   - [ ] První povinnost
-   - [ ] Druhá povinnost
-   - [ ] Třetí povinnost
+
+  % if zalozeni == 'schuze':
+  # Stanovy — *Prosté podpisy*:
+  % else:
+  # Stanovy - *Ověřený podpis*:
+  % endif
+  % for polozka in ziskejPolozky('stanovy').values():
+   - [ ]  ${ polozka }
+  % endfor
+
+  % if zalozeni == 'schuze':
+  # Zápis u ustavující schůze — *Prosté podpisy*:
+
+  % for polozka in ziskejPolozky('schuze').values():
+   - [ ]  ${ polozka }
+  % endfor
+  % endif
+
+  # Souhlasy a prohlášení — *Ověřené podpisy*:
+  ## Souhlasy a prohlášení členů orgánů
+  % for polozka in ziskejPolozky('prohlaseni').values():
+   - [ ]  ${ polozka }
+  % endfor
+
+  ## Souhlas majitele nemovitosti s umístěním sídla spolku
+
+  % for polozka in ziskejPolozky('souhlas').values():
+   - [ ]  ${ polozka }
+  % endfor
+
+  # Inteligentní formulář Ministerstva Spravedlnosti — *Ověřený podpis*
+
+  % for polozka in ziskejPolozky('intForm').values():
+   - [ ]  ${ polozka }
+  % endfor
+  % for polozka in ziskejPolozky('zivnost').values():
+   - [ ]  ${ polozka }
+  % endfor
+
+  # Odeslání
+
+  % for polozka in ziskejPolozky('odeslani').values():
+   - [ ]  ${ polozka }
+  % endfor
+
+
+
+  [NOINDENT] Soud do pěti pracovních dnů od doručení návrhu rozhodne o zápisu spolku. Může navrhovatele vyzvat k doplnění či opravě návrhu. V případě zásadních problému návrh rovnou zamítne.
+
+  [NOINDENT] Jak proti výzvě k opravám, tak proti zamítnutí nývrhu se lze odvolat v uvedené lhůtě. Pokud máte otázky, neváhejte se obrátit přímo na příslušného vyššího soudního úředníka, který má Váš případ na starosti.

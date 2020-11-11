@@ -9,16 +9,16 @@
       },
       {
          "id":2,
-         "text":"Všechna pole v hranatých závorkách jsou vyplněna.",
-         "hodnota":null,
-         "podminka":null,
+         "text":"Stanovy jsou podepsány osobou podávající návrh na zápis, tzn. osobou, která je podepsána na inteligentním formuláři. Podpis nemusí být ověřen.",
+         "hodnota":"schuze",
+         "podminka":"zalozeni",
          "kategorie":"stanovy"
       },
       {
          "id":3,
-         "text":"Stanovy jsou podepsány osobou podávající návrh na zápis, tzn. osobou, která je podepsána na inteligentním formuláři. Podpis nemusí být ověřen.",
-         "hodnota":"schuze",
-         "podminka":"zalozeni",
+         "text":"Všechna pole v hranatých závorkách jsou vyplněna.",
+         "hodnota":null,
+         "podminka":null,
          "kategorie":"stanovy"
       },
       {
@@ -51,83 +51,104 @@
       },
       {
          "id":8,
-         "text":"Podpisy členů orgánů jsou úředně ověřeny.",
-         "hodnota":null,
-         "podminka":null,
+         "text":"Podpisy členů výboru jsou úředně ověřeny.",
+         "hodnota":"vybor",
+         "podminka":"statutar",
          "kategorie":"prohlaseni"
       },
       {
          "id":9,
+         "text":"Pospis předsedy spolku je úředně ověřen.",
+         "hodnota":"predseda",
+         "podminka":"statutar",
+         "kategorie":"prohlaseni"
+      },
+      {
+         "id":10,
+         "text":"Podpisy členů kontrolní komise jsou úředně ověřeny.",
+         "hodnota":true,
+         "podminka":"kontrol_komise",
+         "kategorie":"prohlaseni"
+      },
+      {
+         "id":11,
+         "text":"Podpisy členů rozhodčí komise josu úředně ověřeny.",
+         "hodnota":true,
+         "podminka":"rozh_komise",
+         "kategorie":"prohlaseni"
+      },
+      {
+         "id":12,
          "text":"Všechna pole v hranatých závorkách jsou vyplněn",
          "hodnota":null,
          "podminka":null,
          "kategorie":"prohlaseni"
       },
       {
-         "id":10,
+         "id":13,
          "text":"Kontrola správnosti informací o nemovitosti z katastru nemovitostí.",
          "hodnota":null,
          "podminka":null,
          "kategorie":"souhlas"
       },
       {
-         "id":11,
+         "id":14,
          "text":"Souhlas není v době podání návrhu starší než **tři měsíce**.",
          "hodnota":null,
          "podminka":null,
          "kategorie":"souhlas"
       },
       {
-         "id":12,
+         "id":15,
          "text":"Podpis majitele nemovitosti na souhlasu je úředně ověřen.",
          "hodnota":null,
          "podminka":null,
          "kategorie":"souhlas"
       },
       {
-         "id":13,
+         "id":16,
          "text":"Všechna pole v hranatých závorkách jsou vyplněna.",
          "hodnota":null,
          "podminka":null,
          "kategorie":"souhlas"
       },
       {
-         "id":14,
+         "id":17,
          "text":"Před podáním žádosti máte vyřízené živnostenské oprávnění.",
-         "hodnota":"true",
+         "hodnota":true,
          "podminka":"zivnost",
          "kategorie":"zivnost"
       },
       {
-         "id":15,
+         "id":18,
          "text":"Všechna pole inteligentního formuláře jsou řádně vyplněna dle [našeho manuálu](https://frankbold.org/poradna/kategorie/zakladani-spolku/rada/jak-vyplnit-inteligentni-formular-pri-zakladani-spolku).",
          "hodnota":null,
          "podminka":null,
          "kategorie":"intForm"
       },
       {
-         "id":16,
+         "id":19,
          "text":"Podpis na vygenerovaném formuláři je úředně ověřen.",
          "hodnota":null,
          "podminka":null,
          "kategorie":"intForm"
       },
       {
-         "id":17,
+         "id":20,
          "text":"Veškeré výše uvedené dokumenty jsou originály nebo úředně ověřené kopie.",
          "hodnota":"postou",
          "podminka":"odeslani",
          "kategorie":"odeslani"
       },
       {
-         "id":18,
+         "id":21,
          "text":"Veškeré výše uvedené dokumenty jsou originály nebo úředně ověřené kopie.",
          "hodnota":"osobne",
          "podminka":"odeslani",
          "kategorie":"odeslani"
       },
       {
-         "id":19,
+         "id":22,
          "text":"Veškeré výše uvedené dokumenty jsou opatřeny zaručeným elektronickým podpisem.",
          "hodnota":"elektro",
          "podminka":"odeslani",
