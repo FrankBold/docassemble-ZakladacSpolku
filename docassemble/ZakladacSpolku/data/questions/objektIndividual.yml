@@ -1,12 +1,12 @@
 generic object: Individual
 question: |
-  % if defined('x.cislo'):
+  % if defined('x.cislo') and x.cislo != 1:
   Indentifikační člena orgánu údaje:
-  
+  <br>
   **${ x.cislo }. ${ x.label }**
   % else:
   Indetifikační údaje:
-  
+  <br>
   **${ x.label }**
   % endif
 fields:
@@ -20,7 +20,7 @@ question: |
   Identifikační údaje vlastníka nemovitosti.
   % else:
   Indentifikační údaje:
-  
+
   **${ Spolek.sidlo.vlastnik[i].cislo }. ${ Spolek.sidlo.vlastnik[i].label }**
   % endif
 fields:
@@ -44,7 +44,7 @@ question: |
   Identifikační údaje osoby pověřené zápisem spolku.
   % else:
   Indentifikační údaje:
-  
+
   **${ Spolek.zalozeni.navrhovatel[i].cislo }. ${ Spolek.zalozeni.navrhovatel[i].label }**
   % endif
 fields:

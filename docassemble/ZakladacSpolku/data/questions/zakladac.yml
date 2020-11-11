@@ -5,6 +5,15 @@ include:
   - objektIndividual.yml
   - t_napovedy.yml
 ---
+# Přidání odkazu pro uložení naspod každé stránky.
+default screen parts:
+  under: |
+    % if show_save_resume_message:
+    <i class="fas fa-save"></i> [Uložit a pokračovat později](${ url_action('ulozit') })
+    % endif
+
+#    <i class="far fa-lightbulb"></i> Máte komentář, podnět či zpětnou vazbu? [Dejte nám prosím vědět]("").
+---
 # Upravit texting
 id: uvodniObrazovka
 reconsider:
@@ -36,26 +45,123 @@ fields:
       - Údaje vyplním po stažení: False
       - Vyplním zde v rozhraní: True
 ---
-id: zpusobZalozeni
+id: identifikaceSpolku
 question: |
-  Způsob založení spolku
+  Identifikační údaje spolku
 subquestion: |
-  Nápověda k tomu, jakou variantu vybrat.
+  Základní údaje o spolku.
 fields:
-  - Způsob založení spolku: Spolek.zalozeni.typ
+# Doplnit check se spolkovým rejstříkem.
+  - Název spolku: Spolek.name.text
+    hint: Musí obsahova z.s., spolek nebo zapsaný spolek.
+    validate: contains_spolek
+  - Sídlo spolku: Spolek.address
+    hint: stačí obec
+help: |
+  ${ h_nazev }
+  ${ h_sidlo }
+action buttons:
+  - label: Vyplním později v dokumentu
+    action: obsah_pozdeji
+    arguments:
+      que: identifikaceSpolku
+    color: danger
+    icon: forward
+---
+id: cinnostSpolku
+question: |
+  Činnost spolku
+subquestion: |
+  Popište jaké aktivity bude Váš spolek vyvíjet.
+fields:
+  - Účel spolku: Spolek.ucel
+    datatype: area
+    hint: jednotlivé položky oddělte novým řádkem
+    note: |
+        ${ action_button_html("#", label="Vyplním později", color="danger", size="sm", icon="forward", id_tag="ucel") }
+  - Formy činnosti spolku: Spolek.cinnosti
+    datatype: area
+    hint: jednotlivé položky oddělte novým řádkem
+    note: |
+        ${ action_button_html("#", label="Vyplním později", color="danger", size="sm", icon="forward", id_tag="cinnosti") }
+  - Popis spolku: Spolek.popis
+    datatype: area
+    show if:
+      code: |
+        minimalVerze == False
+    note: |
+        ${ action_button_html("#", label="Vyplním později", color="danger", size="sm", icon="forward", id_tag="popis") }
+  - Bude spolek vykonávat vedlejší hospodářskou činnost?: hospCinnost
+    datatype: yesnoradio
+    show if:
+      code: |
+        minimalVerze == False
+  - Vedlejší hospodářská činnost: Spolek.zivnost
+    datatype: area
+    hint: jednotlivé položky oddělte novým řádkem
+    show if:
+      variable: hospCinnost
+      is: True
+    note: |
+        ${ action_button_html("#", label="Vyplním později", color="danger", size="sm", icon="forward", id_tag="zivnost") }
+help: |
+  ${ h_ucel }
+  ${ h_formy }
+action buttons:
+  - label: Vyplním vše později
+    action: obsah_pozdeji
+    arguments:
+      que: cinnostSpolku
+    color: danger
+    icon: forward
+script: |
+  <script type="application/javascript" charset="utf-8">
+    $("#ucel").click(function(){
+      setField("Spolek.ucel", "[Účel spolku]");
+      return false;
+    });
+    $("#cinnosti").click(function(){
+      setField("Spolek.cinnosti", "[Činnost spolku]");
+      return false;
+    });
+    $("#popis").click(function(){
+      setField("Spolek.popis", "[Popis spolku]");
+      return false;
+    });
+    $("#zivnost").click(function(){
+      setField("Spolek.zivnost", "[Vedlejší hospodářská činnost]");
+      return false;
+    });
+  </script>
+---
+id: nejvyssiOrgan
+if: |
+  minimalVerze == False
+question: |
+  Nejvyšší orgán spolku
+fields:
+  - Četnost členské schůze: Spolek.nejvyssiOrgan.cetnost
     input type: radio
     choices:
-      - Ústavující schůzí: schuze
-      - Přijetím stanov: stanovy
-help: |
-  ${ h_zalozeni }
-#  - Chcete rovnou předvyplnit zápis z ústavujícíc schůze?: schuzeVyplnit
-#    datatype: yesnoradio
-#    show if:
-#      variable: Spolek.zalozeni.typ
-#      is: schuze
-#    help: |
-#      Pokud už víte, kdy se bude schůze konat, jaký bude program, atd. můžete si jej zde rovnou předvyplnit. Pokud ještě dá dáme Vám ke stažení prázdnou šablonu. Vyplnit zápis online můžete pak kdykoli pod tímto <a href="${ url_of('root', _external=True)}interview?i=docassemble.ZakladacSpolku:ustavujiciSchuze.yml">odkazem</a>
+      - Jednou ročně: rocne
+      - Dle potřeby: neurcite
+  - Pravomoci členské schůze: Spolek.nejvyssiOrgan.pravomoc
+    datatype: area
+    default: |
+      přijímá členy
+      rozhoduje o výši a splatnosti členského příspěvku
+      volí a odvolává statutární orgán
+      rozhoduje o změnách stanov
+    note: |
+      Další pravomoce doplňte na nové řádky.
+  - Hlasování per-rollam: Spolek.nejvyssiOrgan.perrollam
+    show if:
+      code: |
+        minimalVerze == False
+    input type: radio
+    choices:
+      - Bude umožněno: True
+      - Nebude možné: False
 ---
 id: statutar_minimal
 if: |
@@ -118,74 +224,44 @@ fields:
 help: |
   ${ h_statutar }
 ---
-id: identifikaceSpolku
-question: |
-  Identifikační údaje spolku
-subquestion: |
-  Základní údaje o spolku.
-fields:
-# Doplnit check se spolkovým rejstříkem.
-  - Název spolku: Spolek.name.text
-    hint: Musí obsahova z.s., spolek nebo zapsaný spolek.
-    validate: contains_spolek
-  - Sídlo spolku: Spolek.address
-    hint: stačí obec
-help: |
-  ${ h_nazev }
-  ${ h_sidlo }
----
-id: nejvyssiOrgan
+id: clenstvi
 if: |
   minimalVerze == False
 question: |
-  Nejvyšší orgán spolku
-fields:
-  - Četnost členské schůze: Spolek.nejvyssiOrgan.cetnost
-    input type: radio
-    choices:
-      - Jednou ročně: rocne
-      - Dle potřeby: neurcite
-  - Pravomoci členské schůze: Spolek.nejvyssiOrgan.pravomoc
-    datatype: area
-    default: |
-      přijímá členy
-      rozhoduje o výši a splatnosti členského příspěvku
-      volí a odvolává statutární orgán
-      rozhoduje o změnách stanov
-  - Hlasování per-rollam: Spolek.nejvyssiOrgan.perrollam
-    show if:
-      code: |
-        minimalVerze == False
-    input type: radio
-    choices:
-      - Bude umožněno: True
-      - Nebude možné: False
----
-id: cinnostSpolku
-question: |
-  Činnost spolku
+  Členství ve spolku
 subquestion: |
-  Popište jaké aktivity bude Váš spolek vyvíjet.
+  Můžete přidat čestné členství, kdy čestný člen má pouze poradní hlas.
 fields:
-  - Účel spolku: Spolek.ucel
-    datatype: area
-    hint: jednotlivé položky oddělte novým řádkem
-  - Formy činnosti spolku: Spolek.cinnosti
-    datatype: area
-    hint: jednotlivé položky oddělte novým řádkem
-  - Popis spolku: Spolek.popis
-    datatype: area
+  - Budou řádní členové platit členské příspěky?: Spolek.clenstvi.poplatky
+    datatype: yesnoradio
+  - Čestné členství: Spolek.clenstvi.cestne
+    datatype: yesnoradio
+  - Název členství: Spolek.clenstvi.cestneNazev
+    default: Čestné
     show if:
-      code: |
-        minimalVerze == False
-  - Vedlejší hospodářská činnost: Spolek.zivnost
-    datatype: area
-    show if:
-      code: |
-        minimalVerze == False
+      variable: Spolek.clenstvi.cestne
+      is: True
+---
+id: zpusobZalozeni
+question: |
+  Způsob založení spolku
+subquestion: |
+  Zvolte jakým způsobem chcete spolek zakládat.
+fields:
+  - Způsob založení spolku: Spolek.zalozeni.typ
+    input type: radio
+    choices:
+      - Ústavující schůzí: schuze
+      - Přijetím stanov: stanovy
 help: |
-  ${ h_ucel }
-  ${ h_formy }
+  ${ h_zalozeni }
+#  - Chcete rovnou předvyplnit zápis z ústavujícíc schůze?: schuzeVyplnit
+#    datatype: yesnoradio
+#    show if:
+#      variable: Spolek.zalozeni.typ
+#      is: schuze
+#    help: |
+#      Pokud už víte, kdy se bude schůze konat, jaký bude program, atd. můžete si jej zde rovnou předvyplnit. Pokud ještě dá dáme Vám ke stažení prázdnou šablonu. Vyplnit zápis online můžete pak kdykoli pod tímto <a href="${ url_of('root', _external=True)}interview?i=docassemble.ZakladacSpolku:ustavujiciSchuze.yml">odkazem</a>
 ---
 id: dalsiOrgany
 if: |
@@ -232,24 +308,6 @@ fields:
       - Neurčito: neurcito
     show if: Spolek.rada.exist
 ---
-id: clenstvi
-if: |
-  minimalVerze == False
-question: |
-  Členství ve spolku
-subquestion: |
-  Můžete přidat čestné členství, kdy čestný člen má pouze poradní hlas.
-fields:
-  - Budou řádní členové platit členské příspěky?: Spolek.clenstvi.poplatky
-    datatype: yesnoradio
-  - Čestné členství: Spolek.clenstvi.cestne
-    datatype: yesnoradio
-  - Název členství: Spolek.clenstvi.cestneNazev
-    default: Čestné
-    show if:
-      variable: Spolek.clenstvi.cestne
-      is: True
----
 # Zde se určuje, zda budou dokumenty k podpisům rozděleny, aby měl každý svůj, či se podpisy nahromadí na jednom.
 question: |
   Chcete pro každého člena orgánu samostatný dokument s prohlášením?
@@ -274,6 +332,13 @@ fields:
   - Kolik spoluvlastníků: Spolek.sidlo.vlastnik.pocet
     show if: Spolek.sidlo.vlastnik.vice
     datatype: integer
+action buttons:
+  - label: Určím později
+    action: obsah_pozdeji
+    arguments:
+      que: sidlo
+    color: danger
+    icon: forward
 ---
 id: pocetZakladatelu
 if: |

@@ -1,13 +1,6 @@
 include:
   - t_maily.yml
 ---
-# Přidání odkazu pro uložení naspod každé stránky.
-default screen parts:
-  under: |
-    % if show_save_resume_message:
-    <i class="fas fa-save"></i> [Uložit a pokračovat později](${ url_action('ulozit') })
-    % endif
----
 # Aby se nepřihlášený uživatel mohl dostat zpět, je nutné nastavit interview pro multi_user.
 mandatory: True
 code: |

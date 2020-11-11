@@ -21,6 +21,7 @@ code: |
 code: |
   ucelySeznam = string_pole(Spolek.ucel)
   cinnostiSeznam = string_pole(Spolek.cinnosti)
+  zivnostSeznam = string_pole(Spolek.zivnost)
 ---
 # Při easy verzi se doplní standardní pravomoce. U pokročilé se vyplní podle toho, co uživatel uvedl.
 sets: pravomociSeznam
@@ -134,3 +135,24 @@ code: |
 code: |
   if Spolek.zalozeni.typ == 'schuze':
     Spolek.zalozeni.pocetZakladatelu = 1
+---
+scan for variables: False
+event: obsah_pozdeji
+code: |
+  q = action_argument('que')
+  if q == "identifikaceSpolku":
+    Spolek.name.text = "[Název spolku]"
+    Spolek.address = "[Sídlo spolku]"
+  elif q == "cinnostSpolku":
+    Spolek.ucel = "[Účel spolku]"
+    Spolek.cinnosti = "[Činnost spolku]"
+    Spolek.popis = "[Popis spolku]"
+    Spolek.zivnost = "[Vedlejší hospodářská činnost]"
+  elif q == "sidlo":
+    Spolek.sidlo.typ = "domu"
+    Spolek.sidlo.vlastnik.vice = False
+    Spolek.sidlo.vlastnik.appendObject(Individual)
+    Spolek.sidlo.vlastnik[0].name.first = "[Jméno a příjmení]"
+    Spolek.sidlo.vlastnik[0].address = "[Bydliště]"
+    Spolek.sidlo.vlastnik[0].birthday = "[##.##.####]"
+    Spolek.sidlo.vlastnik.there_is_another = False

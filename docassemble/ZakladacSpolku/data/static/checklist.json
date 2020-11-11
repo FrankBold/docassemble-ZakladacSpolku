@@ -1,0 +1,137 @@
+{
+   "checklist":[
+      {
+         "id":1,
+         "text":"Podpisy zakládajících členů jsou úředně ověřeny.",
+         "hodnota":"stanovy",
+         "podminka":"zalozeni",
+         "kategorie":"stanovy"
+      },
+      {
+         "id":2,
+         "text":"Všechna pole v hranatých závorkách jsou vyplněna.",
+         "hodnota":null,
+         "podminka":null,
+         "kategorie":"stanovy"
+      },
+      {
+         "id":3,
+         "text":"Stanovy jsou podepsány osobou podávající návrh na zápis, tzn. osobou, která je podepsána na inteligentním formuláři. Podpis nemusí být ověřen.",
+         "hodnota":"schuze",
+         "podminka":"zalozeni",
+         "kategorie":"stanovy"
+      },
+      {
+         "id":4,
+         "text":"Ustavující schůze byla svolána alespoň 30 před jejím konáním.",
+         "hodnota":"schuze",
+         "podminka":"zalozeni",
+         "kategorie":"schuze"
+      },
+      {
+         "id":5,
+         "text":"Všichni přítomní jsou podepsání na Listině přítomných.",
+         "hodnota":"schuze",
+         "podminka":"zalozeni",
+         "kategorie":"schuze"
+      },
+      {
+         "id":6,
+         "text":"Na zápisu jsou podpisy počizovatele a ověřovatela zápisu. (neověřené).",
+         "hodnota":"schuze",
+         "podminka":"zalozeni",
+         "kategorie":"schuze"
+      },
+      {
+         "id":7,
+         "text":"Všechna pole v hranatých závorkách jsou vyplněna.",
+         "hodnota":"schuze",
+         "podminka":"zalozeni",
+         "kategorie":"schuze"
+      },
+      {
+         "id":8,
+         "text":"Podpisy členů orgánů jsou úředně ověřeny.",
+         "hodnota":null,
+         "podminka":null,
+         "kategorie":"prohlaseni"
+      },
+      {
+         "id":9,
+         "text":"Všechna pole v hranatých závorkách jsou vyplněn",
+         "hodnota":null,
+         "podminka":null,
+         "kategorie":"prohlaseni"
+      },
+      {
+         "id":10,
+         "text":"Kontrola správnosti informací o nemovitosti z katastru nemovitostí.",
+         "hodnota":null,
+         "podminka":null,
+         "kategorie":"souhlas"
+      },
+      {
+         "id":11,
+         "text":"Souhlas není v době podání návrhu starší než **tři měsíce**.",
+         "hodnota":null,
+         "podminka":null,
+         "kategorie":"souhlas"
+      },
+      {
+         "id":12,
+         "text":"Podpis majitele nemovitosti na souhlasu je úředně ověřen.",
+         "hodnota":null,
+         "podminka":null,
+         "kategorie":"souhlas"
+      },
+      {
+         "id":13,
+         "text":"Všechna pole v hranatých závorkách jsou vyplněna.",
+         "hodnota":null,
+         "podminka":null,
+         "kategorie":"souhlas"
+      },
+      {
+         "id":14,
+         "text":"Před podáním žádosti máte vyřízené živnostenské oprávnění.",
+         "hodnota":"true",
+         "podminka":"zivnost",
+         "kategorie":"zivnost"
+      },
+      {
+         "id":15,
+         "text":"Všechna pole inteligentního formuláře jsou řádně vyplněna dle [našeho manuálu](https://frankbold.org/poradna/kategorie/zakladani-spolku/rada/jak-vyplnit-inteligentni-formular-pri-zakladani-spolku).",
+         "hodnota":null,
+         "podminka":null,
+         "kategorie":"intForm"
+      },
+      {
+         "id":16,
+         "text":"Podpis na vygenerovaném formuláři je úředně ověřen.",
+         "hodnota":null,
+         "podminka":null,
+         "kategorie":"intForm"
+      },
+      {
+         "id":17,
+         "text":"Veškeré výše uvedené dokumenty jsou originály nebo úředně ověřené kopie.",
+         "hodnota":"postou",
+         "podminka":"odeslani",
+         "kategorie":"odeslani"
+      },
+      {
+         "id":18,
+         "text":"Veškeré výše uvedené dokumenty jsou originály nebo úředně ověřené kopie.",
+         "hodnota":"osobne",
+         "podminka":"odeslani",
+         "kategorie":"odeslani"
+      },
+      {
+         "id":19,
+         "text":"Veškeré výše uvedené dokumenty jsou opatřeny zaručeným elektronickým podpisem.",
+         "hodnota":"elektro",
+         "podminka":"odeslani",
+         "kategorie":"odeslani"
+      }
+   ]
+}

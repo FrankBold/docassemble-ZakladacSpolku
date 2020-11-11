@@ -34,10 +34,11 @@ code: |
   multi_user = True
   if url_args:
     vychoziData = get_session_variables(url_args['idFile'], url_args['idSesn'])
-    zalozeni
-    statutar
-    organy
-    podnikani
+    minimalVerze = vychoziData["minimalVerze"]
+    zalozeni = vychoziData["Spolek"]["zalozeni"]["typ"]
+    statutar = vychoziData["Spolek"]["statutar"]["druh"]
+    organy = vychoziData["Spolek"]["zalozeni"]["typ"]
+    podnikani = vychoziData["Spolek"]["zivnost"]
 ---
 id: verze pruvodce
 question: |
@@ -103,6 +104,7 @@ fields:
     input type: radio
     choices:
       - Osobně: osobne
+      - Poštou: postou
       - Elektronicky: elektro
 ---
 # Jednotlivé položky do checklistu. Jsou dělané před Dictionary, aby byly na jednom místě.
@@ -126,7 +128,7 @@ code: |
   ]
 
   prohlaseni_t = [
-  "Podpisy zakládajících členů jsou úředně ověřeny",
+  "Podpisy členů orgánů jsou úředně ověřeny",
   "Všechna pole v hranatých závorkách jsou vyplněn"
   ]
 
@@ -158,11 +160,9 @@ code: |
 question: |
   Kontrolní přehled
 subquestion: |
-  % if True:
-  Přehled můžete kdykoli znovu otevřít pod ${ action_button_html(interview_url(), label="tímto odkazem", color="primary", size="md") }
-  % else:
-  Abyste mohli přehled uložit na později a kdykoli se k němu mohli vrátit je potřeba se **[zaregistrovat](${ url_of('register') })**.
-  % endif
+  Přehled můžete kdykoli znovu otevřít pod ${ action_button_html(interview_url(), label="tímto odkazem", color="primary", size="sm") }
+
+  Můžete jej rovněž ${ action_button_html(url_of(checklistPDF), label="uložit ve formátu pdf", color="primary", size="sm", icon="download") }
 fields:
   - "##Stanovy": stanovy
     required: False
@@ -212,6 +212,13 @@ fields:
     none of the above: False
     code: |
       odeslani_t
+css: |
+  <style>
+  h2 {
+  font-size: 0.9rem;
+  font-weight: bold;
+  }
+  </style>
 ---
 # Pokud je již vše odkliknuto přejdeme na finalní stránku.
 # Pokud ještě není vše hotovo. Nuceně se zeptáme na tutéž otázku.
@@ -228,3 +235,23 @@ buttons:
   - Exit: Ukončit
 event: konec
 ---
+attachment:
+  name: Kontrolní checklist
+  filename: checklist
+  variable name: checklistPDF
+  content: |
+    ${ checklist_t }
+  valid formats:
+    - pdf
+---
+template: checklist_t
+content: |
+  # Nadpis
+   - [ ] První povinnost
+   - [ ] Druhá povinnost
+   - [ ] Třetí povinnost
+
+  # Nadpis 2
+   - [ ] První povinnost
+   - [ ] Druhá povinnost
+   - [ ] Třetí povinnost
