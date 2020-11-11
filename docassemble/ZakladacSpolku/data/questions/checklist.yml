@@ -208,7 +208,7 @@ content: |
   % endfor
 
   % if zalozeni == 'schuze':
-  # Zápis u ustavující schůze — *Prosté podpisy*:
+  # Zápis z ustavující schůze — *Prosté podpisy*:
 
   % for polozka in ziskejPolozky('schuze').values():
    - [ ]  ${ polozka }

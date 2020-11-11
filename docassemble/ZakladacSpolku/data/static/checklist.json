@@ -37,7 +37,7 @@
       },
       {
          "id":6,
-         "text":"Na zápisu jsou podpisy počizovatele a ověřovatela zápisu. (neověřené).",
+         "text":"Na zápisu jsou podpisy pořizovatele a ověřovatela zápisu. (neověřené).",
          "hodnota":"schuze",
          "podminka":"zalozeni",
          "kategorie":"schuze"
@@ -72,14 +72,14 @@
       },
       {
          "id":11,
-         "text":"Podpisy členů rozhodčí komise josu úředně ověřeny.",
+         "text":"Podpisy členů rozhodčí komise jsou úředně ověřeny.",
          "hodnota":true,
          "podminka":"rozh_komise",
          "kategorie":"prohlaseni"
       },
       {
          "id":12,
-         "text":"Všechna pole v hranatých závorkách jsou vyplněn",
+         "text":"Všechna pole v hranatých závorkách jsou vyplněna.",
          "hodnota":null,
          "podminka":null,
          "kategorie":"prohlaseni"

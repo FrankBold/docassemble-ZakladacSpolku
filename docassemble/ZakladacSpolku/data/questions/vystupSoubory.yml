@@ -140,7 +140,7 @@ code: |
 code: |
   idSesn = user_info().session
   idFile = user_info().filename
-  odkazChecklist = "https://da-test.frankbold.org/interview?i=docassemble.playground1Zakladac:checklist.yml&idSesn=" + idSesn +"&idFile=" + idFile
+  odkazChecklist = "https://da.frankbold.org/interview?i=docassemble.ZakladacSpolku:checklist.yml&idSesn=" + idSesn +"&idFile=" + idFile
 ---
 attachment:
   name: Stanovy spolku
