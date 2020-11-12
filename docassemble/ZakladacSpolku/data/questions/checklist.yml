@@ -43,6 +43,13 @@ code: |
     kontrol_komise = vychoziData["Spolek"]["kontrolniKomise"]["exist"]
     rozh_komise = vychoziData["Spolek"]["rozhodciKomise"]["exist"]
     zivnost = vychoziData["Spolek"]["zivnost"]
+  elif url_args and not minimalVerze:
+    kontrol_komise = organy['kontrol_komise']
+    rozh_komise = organy['rozh_komise']
+  elif minimalVerze:
+    kontrol_komise = False
+    rozh_komise = False
+    zivnost = False
 ---
 id: verze pruvodce
 question: |
@@ -74,7 +81,7 @@ fields:
     datatype: checkboxes
     choices:
       - Kontrolní komise: kontrol_komise
-      - Rozhodčí komise: rozhod_komise
+      - Rozhodčí komise: rozh_komise
     show if:
       code: |
         not minimalVerze
@@ -232,9 +239,13 @@ content: |
   % for polozka in ziskejPolozky('intForm').values():
    - [ ]  ${ polozka }
   % endfor
+
+  % if zivnost:
+  # Živnostenské oprávnění:
   % for polozka in ziskejPolozky('zivnost').values():
    - [ ]  ${ polozka }
   % endfor
+  % endif
 
   # Odeslání
 
