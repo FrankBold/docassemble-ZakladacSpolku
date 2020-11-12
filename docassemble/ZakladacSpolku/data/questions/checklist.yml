@@ -43,10 +43,10 @@ code: |
     kontrol_komise = vychoziData["Spolek"]["kontrolniKomise"]["exist"]
     rozh_komise = vychoziData["Spolek"]["rozhodciKomise"]["exist"]
     zivnost = vychoziData["Spolek"]["zivnost"]
-  elif url_args and not minimalVerze:
+  elif not url_args and not minimalVerze:
     kontrol_komise = organy['kontrol_komise']
     rozh_komise = organy['rozh_komise']
-  elif minimalVerze:
+  elif not url_args and minimalVerze:
     kontrol_komise = False
     rozh_komise = False
     zivnost = False
