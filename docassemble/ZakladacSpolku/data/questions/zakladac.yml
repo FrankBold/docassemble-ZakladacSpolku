@@ -53,8 +53,19 @@ subquestion: |
 fields:
 # Doplnit check se spolkovým rejstříkem.
   - Název spolku: Spolek.name.text
-    hint: Musí obsahova z.s., spolek nebo zapsaný spolek.
+    hint: Musí obsahova z. s., spolek nebo zapsaný spolek.
     validate: contains_spolek
+    note: |
+      <button id="overit" class="btn btn-primary">Ověřit jedinečnost</button>
+  - html: |
+      <div id="unikatni" class="alert alert-success d-none" role="alert">
+        Nezalezli jsme žádnou přílišnou shodu.
+      </div>
+      <div id="duplicita" class="alert alert-warning d-none" role="alert">
+        Nalezli jsme spolky s podobným názvem. Zhodnoťte, zda názvy nejsou zaměnitelné, připadně vyberte jiný název spolku.<br><br>
+       <a href="${ url_of('help') }"><i class="fas fa-question-circle"></i> Jak poznat jedinečnost názvu?</a>
+      </div>
+      <span id="resultsArea"></span>
   - Sídlo spolku: Spolek.address
     hint: stačí obec
 help: |
@@ -67,6 +78,37 @@ action buttons:
       que: identifikaceSpolku
     color: danger
     icon: forward
+script: |
+  <script type="application/javascript" charset="utf-8">
+    $("#overit").click(function(){
+      $("#resultsArea").html('<div class="spinner-border" role="status"><span class="sr-only">Loading...</span></div>')
+      $("#unikatni").removeClass("d-block");
+      $("#unikatni").addClass("d-none");
+      $("#duplicita").removeClass("d-block");
+      $("#duplicita").addClass("d-none");
+      action_call('overit', {firma: val('Spolek.name.text')}, function(data){
+        $("#resultsArea").html("")
+        if(data.spolek == "False") {
+        $("#unikatni").removeClass("d-none");
+        $("#unikatni").addClass("d-block");
+        } else {
+        $("#duplicita").removeClass("d-none");
+        $("#duplicita").addClass("d-block");
+        $("#resultsArea").append("<ul>")
+        var i;
+        for (i=0; i < data.spolek.length; i++) {
+          $("#resultsArea").append("<li>"+ data.spolek[i] +"</li>")
+        }
+        $("#resultsArea").append("</ul>")}
+      });
+      return false;
+    });
+  </script>
+---
+event: overit
+code: |
+  vystup = overitXml(action_argument('firma'))
+  json_response(dict(spolek=vystup))
 ---
 id: cinnostSpolku
 question: |
