@@ -18,7 +18,10 @@ content: |
      - Frank Bold Society, z. s.
      - Spolek kovářů na Bruntálsku
 
-  Zkontrolujte si též v rejstříku spolků (https://or.justice.cz/ias/ui/rejstrik), že neexistuje spolek se stejným či příliš podobným názvem. V takovém případě by rejstříkový soud odmítl spolek zapsat.
+  <h3>Nezaměnitelný název</h3>
+  Název spolku nesmí být zaměnitelný s jiným již existujícím. Například názvy "Život **ve** městě, z. s." a "Život **na** městě, z. s." jsou zaměnitelné a soud by odmítl spolek zapsat. Rovněž nestačí odlišení v označení spolku ve stylu "Život na městě, **z. s.** a "Život na městě, **spolek**" Hranice zaměnitelnosti není přesně definována, pokud chcete mít jistotu bezproblémového zápisu spolku doporučujeme spíše opravdu jedinečné názvy.
+
+  Existující spolky můžete prohledat v <a href="https://or.justice.cz/ias/ui/rejstrik" target="_blank">on-line v rejstříku</a>.
 ---
 template: h_statutar
 content: |
