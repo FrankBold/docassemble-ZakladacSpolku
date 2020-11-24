@@ -59,7 +59,8 @@ fields:
       <button id="overit" class="btn btn-primary">Ověřit jedinečnost</button>
   - html: |
       <div id="unikatni" class="alert alert-success d-none" role="alert">
-        Nezalezli jsme žádnou přílišnou shodu.
+        Nezalezli jsme žádnou přílišnou shodu. Název tak je pravděpodobně k dispozici.<br><br>
+        Doporučujeme však ujistit se i <a href="https://or.justice.cz/ias/ui/rejstrik">přímo v rejstříku</a>.
       </div>
       <div id="duplicita" class="alert alert-warning d-none" role="alert">
         Nalezli jsme spolky s podobným názvem. Zhodnoťte, zda názvy nejsou zaměnitelné, připadně vyberte jiný název spolku.<br><br>
