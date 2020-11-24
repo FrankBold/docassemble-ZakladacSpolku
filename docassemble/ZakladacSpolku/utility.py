@@ -44,7 +44,7 @@ def overitXml(firma):
   info = []
 
   if int(number_of_results) == 0:
-    return false
+    return "False"
   elif int(number_of_results) == 1:
     company_record = response_root['are:Zaznam']
     info.append(company_record.get('are:Obchodni_firma'))
