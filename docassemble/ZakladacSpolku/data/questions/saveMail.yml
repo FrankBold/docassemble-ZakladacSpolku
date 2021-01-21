@@ -28,6 +28,9 @@ question: |
   Uložení průvodce na později.
 subquestion: |
   Pokud chcete aktuálně vyplněné údaje uložit na později, můžeme Vám na e-mail poslat odkaz, pod kterým se můžete kdykoli vrátit.
+  % if user_has_privilege('admin'):
+  ${ interview_url() }
+  % endif
 fields:
   - no label: wants_email
     input type: radio
