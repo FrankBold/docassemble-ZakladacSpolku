@@ -134,7 +134,7 @@ fields:
         minimalVerze == False
     note: |
         ${ action_button_html("#", label="Vyplním později", color="danger", size="sm", icon="forward", id_tag="popis") }
-  - Bude spolek vykonávat vedlejší hospodářskou činnost?: hospCinnost
+  - "Bude spolek vykonávat vedlejší hospodářskou činnost?": hospCinnost
     datatype: yesnoradio
     show if:
       code: |

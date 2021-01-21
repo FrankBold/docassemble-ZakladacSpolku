@@ -42,15 +42,17 @@ def overitXml(firma):
   number_of_results = response_root['are:Pocet_zaznamu']
 
   info = []
-
-  if int(number_of_results) == 0:
+  try:
+    if int(number_of_results) == 0:
+      return "False"
+    elif int(number_of_results) == 1:
+      company_record = response_root['are:Zaznam']
+      info.append(company_record.get('are:Obchodni_firma'))
+    else:
+      info = []
+      company_record = response_root['are:Zaznam']
+      for zaznam in company_record:
+        info.append(zaznam.get('are:Obchodni_firma'))
+    return info
+  except:
     return "False"
-  elif int(number_of_results) == 1:
-    company_record = response_root['are:Zaznam']
-    info.append(company_record.get('are:Obchodni_firma'))
-  else:
-    info = []
-    company_record = response_root['are:Zaznam']
-    for zaznam in company_record:
-      info.append(zaznam.get('are:Obchodni_firma'))
-  return info

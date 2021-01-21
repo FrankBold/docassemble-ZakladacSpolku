@@ -147,7 +147,7 @@ code: |
     Spolek.ucel = "[Účel spolku]"
     Spolek.cinnosti = "[Činnost spolku]"
     Spolek.popis = "[Popis spolku]"
-    Spolek.zivnost = "[Vedlejší hospodářská činnost]"
+    hospCinnost = False
   elif q == "sidlo":
     Spolek.sidlo.typ = "domu"
     Spolek.sidlo.vlastnik.vice = False
