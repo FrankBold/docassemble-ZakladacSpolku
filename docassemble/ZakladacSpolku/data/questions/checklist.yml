@@ -42,7 +42,7 @@ code: |
     statutar = vychoziData["Spolek"]["statutar"]["druh"]
     kontrol_komise = vychoziData["Spolek"]["kontrolniKomise"]["exist"]
     rozh_komise = vychoziData["Spolek"]["rozhodciKomise"]["exist"]
-    zivnost = vychoziData["Spolek"]["zivnost"]
+    zivnost = vychoziData["hospCinnost"]
   elif not url_args and not minimalVerze:
     kontrol_komise = organy['kontrol_komise']
     rozh_komise = organy['rozh_komise']
