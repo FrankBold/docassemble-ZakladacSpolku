@@ -16,6 +16,7 @@ code: |
   if minimalVerze:
     if Spolek.statutar.druh == 'predseda':
       hromadne = False
+    hospCinnost = False
 ---
 # Převod vyplněných účelů a činností na jednotlivé položky podle odentrování.
 code: |
