@@ -21,8 +21,9 @@ code: |
 code: |
   ucelySeznam = string_pole(Spolek.ucel)
   cinnostiSeznam = string_pole(Spolek.cinnosti)
-  if hospCinnost:
-    zivnostSeznam = string_pole(Spolek.zivnost)
+  if minimalVerze == False:
+    if hospCinnost:
+      zivnostSeznam = string_pole(Spolek.zivnost)
 ---
 # Při easy verzi se doplní standardní pravomoce. U pokročilé se vyplní podle toho, co uživatel uvedl.
 sets: pravomociSeznam
