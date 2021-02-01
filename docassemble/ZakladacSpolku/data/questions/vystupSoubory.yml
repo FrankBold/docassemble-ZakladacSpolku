@@ -157,6 +157,7 @@ attachment:
   filename: Prohlášení_${ x.label }
   variable name: x.prohlaseni
   docx template file: Prohlaseni.docx
+  update references: True
   valid formats:
     - docx
 ---
@@ -167,6 +168,7 @@ attachment:
   filename: Prohlášení_${ x.label }
   variable name: x.prohlaseni
   docx template file: Prohlaseni.docx
+  update references: True
   valid formats:
     - docx
 ---
@@ -175,6 +177,7 @@ attachment:
   filename: Souhlas vlastníka
   variable name: souhlas
   docx template file: Souhlas.docx
+  update references: True
   valid formats:
     - docx
 ---
@@ -183,5 +186,6 @@ attachment:
   filename: Schůze zápis
   variable name: schuze
   docx template file: Schuze.docx
+  update references: True
   valid formats:
     - docx
