@@ -88,7 +88,7 @@ subquestion: |
   <table><tr><td>
   Tento nástroj je zdarma díky **podpoře donorů**. Pomozte nám též.
 
-    ${ action_button_html("https://frankbold.org/podporte-nas?utm_source=Servis&utm_medium=appka&utm_campaign=fundraising&utm_content=zakladac", label="Podpořím darem", color="secondary", icon="hand-holding-heart", block="True") }
+    ${ action_button_html("https://frankbold.org/podporte-nas?pAuto&utm_source=Servis&utm_medium=appka&utm_campaign=fundraising&utm_content=zakladac", label="Podpořím darem", color="secondary", icon="hand-holding-heart", block="True") }
   </td><td>
     Pokud chcete, abychom založení spolku **vyřídili za Vás, či potřebujete komplexnější pomoc šitou na míru**, můžete využít placených služeb našich advokátů.
 
