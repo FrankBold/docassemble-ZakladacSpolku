@@ -12,24 +12,8 @@ metadata:
     - name: Michal Kuk
       organization: Frank Bold Society, z.s.
   revision_date: 2020-01-22
-  post: |
-#     &nbsp;
-#     ---
-#     &nbsp;
-#
-#     Vznik nástroje podpořili:
-#
-#     ![Nadace VIA](https://da.frankbold.org/playgroundstatic/ZakladacSpolku/1/logo_via.png)
   logo: |
     **Frank Bold**
----
-mandatory: True
-code: |
-  set_live_help_status(availability='available', mode='help', partner_roles="Administrator")
----
-images:
-  via: logo_via.png
-  nfro: logo_nfro.png
 ---
 modules:
   - docassemble.base.legal
