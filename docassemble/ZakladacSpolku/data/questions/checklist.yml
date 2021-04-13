@@ -187,9 +187,9 @@ attachment:
   variable name: checklistPDF
   metadata:
     FirstHeaderRight: |
-      ![Logo](https://www.fbadvokati.cz/website/var/tmp/image-thumbnails/0/264/thumb__auto_77f984c5a761dfd0e04641694a0c3d2f/frank_bold_org.png)
+      ![Logo](https://frankbold.org/sites/all/themes/jpc/img/logo/FB_logo_small.png)
     HeaderRight: |
-      ![Logo](https://www.fbadvokati.cz/website/var/tmp/image-thumbnails/0/264/thumb__auto_77f984c5a761dfd0e04641694a0c3d2f/frank_bold_org.png)
+      ![Logo](https://frankbold.org/sites/all/themes/jpc/img/logo/FB_logo_small.png)
     FooterCenter: |
       [PAGENUM] / [TOTALPAGES]
     FirstFooterCenter: |

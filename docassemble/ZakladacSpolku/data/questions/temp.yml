@@ -1,1 +1,35 @@
-testing
+# Doplnit poslední stránku s informacemi co dál, FR výzvou, atd.
+mandatory: True
+id: final_screen
+question: |
+  Úspěšně odesláno!
+subquestion: |
+  Děkujeme, že jste využili náš nástroj. Kdyby Vám dokumenty na e-mail nedorazily, napiště na [servis@frankbold.org](mailto:servis@frankbold.org) a napravíme to.
+
+  Tento nástroj je **zdarma díky podpoře donorů**. Pomozte nám též.
+
+  ${ action_button_html("https://frankbold.org/podporte-nas?pAuto&utm_source=Servis&utm_medium=appka&utm_campaign=fundraising&utm_content=zakladac", label="Podpořím darem", color="secondary", icon="hand-holding-heart", size="md") }
+  
+  [QR SPD*1.0*ACC:CZ4520100000002401874285*AM:150*CC:CZK*MSG:QR - vzor*X-KS:0125*RN:Frank Bold Society z.s., 200px]
+  
+buttons:
+  - Ukončit průvodce: leave
+    url: https://frankbold.org/
+css: |
+  <style>
+  .btn-dark {
+    background-color: #D70B3B;
+    border-color: #D70B3B;
+    }
+  .btn-light {
+    color: white;
+    background-color: #C2B07C;
+    border-color: #C2B07C;
+    }
+  .table.table-striped tr {
+  background:none !important;
+  }
+  .table.table-striped td {
+  width:50%;
+  }
+  </style>
