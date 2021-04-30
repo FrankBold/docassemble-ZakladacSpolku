@@ -76,6 +76,8 @@ subquestion: |
 fields:
   - Váš e-mail: email
     datatype: email
+  - Přihlásit k odběru novinek: novinky
+    datatype: yesno
 ---
 # Doplnit poslední stránku s informacemi co dál, FR výzvou, atd.
 mandatory: True
@@ -129,7 +131,8 @@ code: |
   import json
 
   emailOdeslan = send_email(email, template=potvrzeniDok, attachments=Soubory)
-  ecomail = addEcomail(email)
+  if novinky:
+    ecomail = addEcomail(email)
   if emailOdeslan:
     vseHotovo = True
     webhook_data = requests.post('https://hook.integromat.com/0cqgtjarfbj9skvkw934ada161vqnt1n', data=json.dumps(all_variables()),headers={'Content-Type': 'application/json'})
