@@ -23,6 +23,8 @@ modules:
 features:
   progress bar: True
   question help button: True
+  question back button: True
+  navigation back button: False
 ---
 objects:
   - Spolek: Organization

@@ -86,6 +86,8 @@ need: vseHotovo
 question: |
   Úspěšně odesláno!
 subquestion: |
+  Dokumenty jsme odeslali na e-mail: **${ email }** Pokud je v e-mailu chyba, klikněte níže na *zpět* a zadejte adresu znovu.
+
   Děkujeme, že jste využili náš nástroj. Kdyby Vám dokumenty na e-mail nedorazily, napiště na [servis@frankbold.org](mailto:servis@frankbold.org) a napravíme to.
   <table><tr><td>
   Tento nástroj je zdarma díky **podpoře donorů**. Pomozte nám též.
@@ -129,7 +131,6 @@ sets: vseHotovo
 code: |
   import requests
   import json
-
   emailOdeslan = send_email(email, template=potvrzeniDok, attachments=Soubory)
   if novinky:
     ecomail = addEcomail(email)
