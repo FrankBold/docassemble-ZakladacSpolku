@@ -11,7 +11,6 @@ default screen parts:
     % if show_save_resume_message:
     <i class="fas fa-save"></i> [Uložit a pokračovat později](${ url_action('ulozit') })
     % endif
-
 #    <i class="far fa-lightbulb"></i> Máte komentář, podnět či zpětnou vazbu? [Dejte nám prosím vědět]("").
 ---
 # Upravit texting
@@ -19,14 +18,12 @@ id: uvodniObrazovka
 reconsider:
   - zakladniPole
 question: |
-  Jakou verzi nástroje využijete
+  Výběr verze nástroje
 subquestion: |
-  % if user_logged_in():
-  Vítejte. Jelikož jste přihlášeni můžete si vybrat zda využijete pouze stručné, či pokročilejší verze zakladače.
-  % else:
-    Vítejte. Tento průvodce Vám vygeneruje veškeré potřebné dokumenty k založení spolku.
+  Vítejte. Nejprve zvolte, zda Vám postačí zjednodušená, či chcete využít pokročilejší verze nástoje. V **pokročilé verzi jsou navíc** k dispozici volba kontrolních orgánů, úprava více druhů členství, délky volbeních období, aj. Zjednodušená verze je okleštěna jen na to nejnutnější.
 
-  Pokud byste chtěli využít pokročilejší funkce nástroje včetně možnosti uložit rozpracované dokumenty a kdykoli se k nim později vrátit, **[zaregistrujte se](${ url_of('register') })**
+  % if not user_logged_in():
+  Pokud se chcete k rozpracovanému průvodci a využít další navazující funkce **[zaregistrujte se](${ url_of('register') })**.
   % endif
 fields:
   - no label: minimalVerze
@@ -34,9 +31,7 @@ fields:
     code: |
       zakladniPole
   - note: |
-      Osobní údaje, které v aplikaci vyplníte nikam trvale neukládáme a po vytvoření dokumentů jsou odstraněny.
-
-      Přesto si můžete zvolit, zda osobní údaje raději vyplníte v dokumentech sami po stažení. Musíte pak však vyplňovat tytéž údaje v několika dokumentech.
+      V rozhraní můžete též vyplnit identifikační údaje zakládajících členů, či členů orgánu. Pokud údaje zatím nemáte, či je vyplnit nechcete, můžete tak učinit až o stažení dokumentů.
 
       Kompletní informace o tom, jak pracujeme o osobními údaji naleznete zde: [Zásady ochrany osobních údajů](https://frankbold.org/zasady-ochrany-osobnich-udaju-frank-bold).
   - no label: osobniUdaje

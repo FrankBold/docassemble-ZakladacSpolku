@@ -24,8 +24,16 @@ question: |
   **${ Spolek.sidlo.vlastnik[i].cislo }. ${ Spolek.sidlo.vlastnik[i].label }**
   % endif
 fields:
+  - Typ osoby: Spolek.sidlo.vlastnik[i].typ
+    input type: radio
+    choices:
+      - Právnická osoba: PO
+      - Fyzická osoba: FO
   - Někdo z členů: Spolek.sidlo.vlastnik[i]
     datatype: object_radio
+    show if:
+      variable: Spolek.sidlo.vlastnik[i].typ
+      is: FO
     disable others: True
     choices:
       - Spolek.zalozeni.navrhovatel
@@ -33,9 +41,50 @@ fields:
     exclude: |
       Spolek.sidlo.vlastnik
   - Jméno a příjmení: Spolek.sidlo.vlastnik[i].name.first
+    show if:
+      variable: Spolek.sidlo.vlastnik[i].typ
+      is: FO
   - Bydliště: Spolek.sidlo.vlastnik[i].address
+    show if:
+      variable: Spolek.sidlo.vlastnik[i].typ
+      is: FO
   - Datum narození: Spolek.sidlo.vlastnik[i].birthday
     datatype: date
+    show if:
+      variable: Spolek.sidlo.vlastnik[i].typ
+      is: FO
+  - Název organizace: Spolek.sidlo.vlastnik[i].name.first
+    show if:
+      variable: Spolek.sidlo.vlastnik[i].typ
+      is: PO
+  - Sídlo: Spolek.sidlo.vlastnik[i].address
+    hint: Sídlo
+    show if:
+      variable: Spolek.sidlo.vlastnik[i].typ
+      is: PO
+  - IČO: Spolek.sidlo.vlastnik[i].ic
+    datatype: integer
+    minlength: 8
+    maxlength: 8
+    show if:
+      variable: Spolek.sidlo.vlastnik[i].typ
+      is: PO
+    hint: 12345678
+  - note: |
+      **Zástupce společnosti**
+    show if:
+      variable: x.forma
+      is: PO
+  - Jméno a příjmení: Spolek.sidlo.vlastnik[i].zastupceName
+    required: False
+    show if:
+      variable: Spolek.sidlo.vlastnik[i].typ
+      is: PO
+  - Vaše funkce v organizaci: Spolek.sidlo.vlastnik[i].zastupceFunkce
+    required: False
+    show if:
+      variable: Spolek.sidlo.vlastnik[i].typ
+      is: PO
 ---
 need:
   - Spolek.zalozeni.pocetZakladatelu
