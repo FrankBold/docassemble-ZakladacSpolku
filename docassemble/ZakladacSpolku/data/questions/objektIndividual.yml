@@ -62,7 +62,7 @@ fields:
     show if:
       variable: Spolek.sidlo.vlastnik[i].typ
       is: PO
-  - IČO: Spolek.sidlo.vlastnik[i].ic
+  - IČO: Spolek.sidlo.vlastnik[i].ico
     datatype: integer
     minlength: 8
     maxlength: 8
@@ -76,12 +76,10 @@ fields:
       variable: x.forma
       is: PO
   - Jméno a příjmení: Spolek.sidlo.vlastnik[i].zastupceName
-    required: False
     show if:
       variable: Spolek.sidlo.vlastnik[i].typ
       is: PO
   - Vaše funkce v organizaci: Spolek.sidlo.vlastnik[i].zastupceFunkce
-    required: False
     show if:
       variable: Spolek.sidlo.vlastnik[i].typ
       is: PO
