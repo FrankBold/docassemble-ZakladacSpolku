@@ -29,17 +29,6 @@ fields:
     choices:
       - Právnická osoba: PO
       - Fyzická osoba: FO
-  - Někdo z členů: Spolek.sidlo.vlastnik[i]
-    datatype: object_radio
-    show if:
-      variable: Spolek.sidlo.vlastnik[i].typ
-      is: FO
-    disable others: True
-    choices:
-      - Spolek.zalozeni.navrhovatel
-      - Spolek.statutar.clen
-    exclude: |
-      Spolek.sidlo.vlastnik
   - Jméno a příjmení: Spolek.sidlo.vlastnik[i].name.first
     show if:
       variable: Spolek.sidlo.vlastnik[i].typ
