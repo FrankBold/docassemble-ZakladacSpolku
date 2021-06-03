@@ -89,36 +89,19 @@ subquestion: |
   Dokumenty jsme odeslali na e-mail: **${ email }** Pokud je v e-mailu chyba, klikněte níže na *zpět* a zadejte adresu znovu.
 
   Děkujeme, že jste využili náš nástroj. Kdyby Vám dokumenty na e-mail nedorazily, napiště na [servis@frankbold.org](mailto:servis@frankbold.org) a napravíme to.
-  <table><tr><td>
-  Tento nástroj je zdarma díky **podpoře donorů**. Pomozte nám též.
 
-    ${ action_button_html("https://frankbold.org/podporte-nas?pAuto&utm_source=Servis&utm_medium=appka&utm_campaign=fundraising&utm_content=zakladac", label="Podpořím darem", color="secondary", icon="hand-holding-heart", block="True") }
-  </td><td>
-    Pokud chcete, abychom založení spolku **vyřídili za Vás, či potřebujete komplexnější pomoc šitou na míru**, můžete využít placených služeb našich advokátů.
+  ---
 
-    ${ action_button_html("https://fbadvokati.cz/kontakt?utm_source=Servis&utm_medium=appka&utm_campaign=fundraising&utm_content=zakladac", label="Navštívit web advokátů", color="light", icon="external-link-alt", block="True") }
-    </td></tr></table>
-buttons:
-  - Ukončit průvodce: leave
-    url: https://frankbold.org/
-css: |
-  <style>
-  .btn-dark {
-    background-color: #D70B3B;
-    border-color: #D70B3B;
-    }
-  .btn-light {
-    color: white;
-    background-color: #C2B07C;
-    border-color: #C2B07C;
-    }
-  .table.table-striped tr {
-  background:none !important;
-  }
-  .table.table-striped td {
-  width:50%;
-  }
-  </style>
+  Tento nástroj je zdarma díky <strong>podpoře [dárců](https://frankbold.org/o-nas/darci)</strong>. Pomozte jej takový udržet.
+
+action buttons:
+  - label: Podpořím darem
+    action: https://frankbold.org/podporte-nas?pAuto&utm_source=Servis&utm_medium=appka&utm_campaign=fundraising&utm_content=zakladac }
+    color: secondary
+    icon: hand-holding-heart
+  - label: Ukončit průvodce
+    action: https://frankbold.org
+    color: light
 ---
 event: neodeslano
 id: Chyba odeslání
