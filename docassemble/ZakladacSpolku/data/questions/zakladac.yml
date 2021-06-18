@@ -52,6 +52,8 @@ fields:
     validate: contains_spolek
     note: |
       <button id="overit" class="btn btn-primary">Ověřit jedinečnost</button>
+  - note: |
+      Pokud má název spolku obsahovat jméno nějaké osoby, je potřeba zajistit její souhlas. Pokud nejde zároveň o někoho z navrhovatelů založení spolku.
   - html: |
       <div id="unikatni" class="alert alert-success d-none" role="alert">
         Nezalezli jsme žádnou přílišnou shodu. Název tak je pravděpodobně k dispozici.<br><br>
