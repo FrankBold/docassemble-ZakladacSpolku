@@ -11,6 +11,7 @@ def addEcomail (email):
   "subscriber_data": {
     "email": "'''+ email +'''",
     "tags": [
+      "OBČAN 2.0",
       "Zakladac"
     ]
   },
@@ -19,6 +20,6 @@ def addEcomail (email):
   "resubscribe": true
   }
   '''
-  r = requests.post('http://api2.ecomailapp.cz/lists/75/subscribe', headers=header, data=values)
+  r = requests.post('http://api2.ecomailapp.cz/lists/96/subscribe', headers=header, data=values)
 
   return

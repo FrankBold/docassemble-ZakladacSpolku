@@ -14,7 +14,7 @@ metadata:
 ---
 mandatory: True
 code: |
-  menu_items = [ {'url': url_of('root', _external=True) +'interview?i=docassemble.ZakladacSpolku:zakladac.yml', 'label': 'Průvodce založením'} ]
+  menu_items = [ {'url': url_of('root', _external=True) +'interview?i=docassemble.ZakladacSpolku:zakladac.yml', 'label': 'Průvodce založením'}, {'url': url_of('restart'), 'label': 'Spustit znovu'} ]
 ---
 mandatory: True
 question: |
@@ -25,9 +25,9 @@ subquestion: |
   % else:
   Pro uložení vyplněných informací a možnost kdykoli se k nim vrátit se [zaregistrujte](url_of('register')). Účet si můžete vytvořit též kdykoli v průběhu interview přes odkaz vpravo nahoře.
   % endif
-  
+
   [Průvodce založením spolku](${ url_of('root', _external=True)}interview?i=docassemble.ZakladacSpolku:zakladac.yml)
-  
+
   [Průvodce ustavujícíc schůzi](${ url_of('root', _external=True)}interview?i=docassemble.ZakladacSpolku:ustavujiciSchuze.yml)
-  
+
   [Kontrolní checklist](${ url_of('root', _external=True)}interview?i=docassemble.ZakladacSpolku:checklist.yml)
