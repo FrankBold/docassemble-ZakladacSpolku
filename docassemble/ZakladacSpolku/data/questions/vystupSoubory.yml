@@ -76,7 +76,7 @@ subquestion: |
 fields:
   - Váš e-mail: email
     datatype: email
-  - Přihlásit k odběru novinek: novinky
+  - Zajímají mě novinky z poradny: novinky
     datatype: yesno
 ---
 # Doplnit poslední stránku s informacemi co dál, FR výzvou, atd.
