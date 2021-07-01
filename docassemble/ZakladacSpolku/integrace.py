@@ -20,6 +20,6 @@ def addEcomail (email):
   "resubscribe": true
   }
   '''
-  r = requests.post('http://api2.ecomailapp.cz/lists/96/subscribe', headers=header, data=values)
+  r = requests.post('http://api2.ecomailapp.cz/lists/96/subscribe', headers=header, data=values.encode('utf-8'))
 
   return
