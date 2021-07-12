@@ -38,7 +38,8 @@ code: |
   if url_args:
     vychoziData = get_session_variables(url_args['idFile'], url_args['idSesn'])
     minimalVerze = vychoziData["minimalVerze"]
-    zalozeni = vychoziData["Spolek"]["zalozeni"]["typ"]
+    if vychoziData["Spolek"]["zalozeni"]["typ"]:
+      zalozeni = vychoziData["Spolek"]["zalozeni"]["typ"]
     statutar = vychoziData["Spolek"]["statutar"]["druh"]
     kontrol_komise = vychoziData["Spolek"]["kontrolniKomise"]["exist"]
     rozh_komise = vychoziData["Spolek"]["rozhodciKomise"]["exist"]
