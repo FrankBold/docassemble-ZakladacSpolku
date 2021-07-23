@@ -132,8 +132,11 @@ sets: Spolek.schuze.program[i].zapis
 code: |
   cal = 0
   povinnyProgramZapis = [[t_uvod.content, t_uvod.subject, False], [t_listina.content, t_listina.subject, False], [t_stanovy.content, t_stanovy.subject, False], [t_statutar.content, t_statutar.subject, True], [t_povereni.content, t_povereni.subject, False]]
-  Spolek.schuze.program[i].zapis = povinnyProgramZapis[i][0]
-  Spolek.schuze.program[i].volba = povinnyProgramZapis[i][2]
+  try:
+    Spolek.schuze.program[i].zapis = povinnyProgramZapis[i][0]
+    Spolek.schuze.program[i].volba = povinnyProgramZapis[i][2]
+  except:
+    Spolek.schuze.program[i].zapis = Spolek.schuze.program[i].obsah
 ---
 sets: Spolek.schuze.program[i].target_number
 code: |
@@ -232,6 +235,10 @@ fields:
     datatype: yesnoradio
   - Volí se osoby?: Spolek.schuze.program[i].volba
     datatype: yesnoradio
+  - Obsah bodu: Spolek.schuze.program[i].obsah
+    input type: area
+    hint: |
+      Popis do zápisu. Např.: Schválení výše členského příspěvku ve výši 100 Kč.
 ---
 code: |
   Spolek.schuze.program[i].important = False
