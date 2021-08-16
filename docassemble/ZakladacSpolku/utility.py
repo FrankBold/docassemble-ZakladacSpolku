@@ -21,7 +21,9 @@ def string_pole(x):
 
 def ziskejPolozky(kat):
   (filename, mimetype) = path_and_mimetype('data/static/checklist.json')
-  y = json.loads(filename)
+  soubor = open(filename, "r", encoding="utf-8")
+  y = json.load(soubor)
+  soubor.close()
   list_duvody = {}
 
   for x in y['checklist']:
