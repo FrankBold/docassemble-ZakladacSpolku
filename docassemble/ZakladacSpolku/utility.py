@@ -1,4 +1,4 @@
-from docassemble.base.util import validation_error, value
+from docassemble.base.util import validation_error, value, path_and_mimetype
 import json
 import requests
 import xmltodict
@@ -20,8 +20,8 @@ def string_pole(x):
   return x
 
 def ziskejPolozky(kat):
-  page = requests.get("https://da-test.frankbold.org/playgroundstatic/Zakladac/1/checklist.json")
-  y = json.loads(page.content)
+  (filename, mimetype) = path_and_mimetype('data/static/checklist.json')
+  y = json.loads(filename)
   list_duvody = {}
 
   for x in y['checklist']:

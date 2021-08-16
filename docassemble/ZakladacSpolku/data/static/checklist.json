@@ -23,7 +23,7 @@
       },
       {
          "id":4,
-         "text":"Ustavující schůze byla svolána alespoň 30 před jejím konáním.",
+         "text":"Ustavující schůze byla svolána alespoň 30 dní před jejím konáním.",
          "hodnota":"schuze",
          "podminka":"zalozeni",
          "kategorie":"schuze"
