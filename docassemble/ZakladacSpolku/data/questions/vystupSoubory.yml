@@ -79,29 +79,91 @@ fields:
   - Zajímají mě novinky z poradny: novinky
     datatype: yesno
 ---
-# Doplnit poslední stránku s informacemi co dál, FR výzvou, atd.
+modules:
+  - .progressivedisclosure
+---
+features:
+  css: progressivedisclosure.css
+---
 mandatory: True
+code: |
+  import random
+  vseHotovo
+  if random.random() < 0.5:
+    final1
+  else:
+    final2
+---
+# Doplnit poslední stránku s informacemi co dál, FR výzvou, atd.
+event: final1
 id: final_screen
-need: vseHotovo
 question: |
   Úspěšně odesláno!
 subquestion: |
-  Dokumenty jsme odeslali na e-mail: **${ email }** Pokud je v e-mailu chyba, klikněte níže na *zpět* a zadejte adresu znovu.
+  Dokumenty jsme odeslali na e-mail: ** email ** Pokud je v e-mailu chyba, klikněte níže na *zpět* a zadejte adresu znovu.
 
   Děkujeme, že jste využili náš nástroj. Kdyby Vám dokumenty na e-mail nedorazily, napiště na [servis@frankbold.org](mailto:servis@frankbold.org) a napravíme to.
 
   ---
+  Tento nástroj je stále bezplatný a to jen díky podpoře od našich <strong>podpoře [dárců](https://frankbold.org/o-nas/darci)</strong>. Přidejte se k nám a pomozte nám v provozu.
 
-  Tento nástroj je zdarma díky <strong>podpoře [dárců](https://frankbold.org/o-nas/darci)</strong>. Pomozte jej takový udržet.
+    ${ prog_disclose(qr_dar) }
 
 action buttons:
   - label: Podpořím darem
-    action: https://frankbold.org/podporte-nas?pAuto&utm_source=Servis&utm_medium=appka&utm_campaign=fundraising&utm_content=zakladac }
+    action: https://frankbold.org/podporte-nas?pAuto&utm_source=Servis&utm_medium=appka&utm_campaign=fundraising&utm_content=zakladac1 }
+    color: primary
+    icon: hand-holding-heart
+  - label: Připomeňte se mi mailem za týden
+    action: reminder
     color: secondary
+    icon: bell
+  - label: Ukončit průvodce
+    action: https://frankbold.org
+    color: light
+---
+# Doplnit poslední stránku s informacemi co dál, FR výzvou, atd.
+event: final2
+id: final_screen
+question: |
+  Úspěšně odesláno!
+subquestion: |
+  Dokumenty jsme odeslali na e-mail: ** email ** Pokud je v e-mailu chyba, klikněte níže na *zpět* a zadejte adresu znovu.
+
+  Děkujeme, že jste využili náš nástroj. Kdyby Vám dokumenty na e-mail nedorazily, napiště na [servis@frankbold.org](mailto:servis@frankbold.org) a napravíme to.
+
+  ---
+  Tento nástroj je stále bezplatný a to jen díky podpoře od našich <strong>podpoře [dárců](https://frankbold.org/o-nas/darci)</strong>. Přidejte se k nám a pomozte nám v provozu.
+
+action buttons:
+  - label: Podpořím darem
+    action: https://frankbold.org/podporte-nas?pAuto&utm_source=Servis&utm_medium=appka&utm_campaign=fundraising&utm_content=zakladac2 }
+    color: primary
     icon: hand-holding-heart
   - label: Ukončit průvodce
     action: https://frankbold.org
     color: light
+---
+event: reminder
+code: |
+  import requests
+  r = requests.post('https://hook.integromat.com/xx0cuvnb1d3mxmczskj4uhx7wi3328z0?email='+email)
+  dekujeme
+---
+event: dekujeme
+question: |
+  Děkujeme.
+subquestion: |
+  Za týden Vám pošleme e-mail s informacemi a možnostech podpory.
+---
+template: qr_dar
+subject: |
+  QR platba – 100 Kč
+content: |
+  ##### Pošlete dar jednoduše přes QR kód
+
+  [QR SPD*1.0*ACC:CZ4520100000002401874285*AM:$100*CC:CZK*MSG:Pozdrav z generátoru*X-KS:0125*RN:Frank Bold Society z.s., 200px]
+
 ---
 event: neodeslano
 id: Chyba odeslání
