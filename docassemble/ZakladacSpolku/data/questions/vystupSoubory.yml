@@ -105,7 +105,7 @@ subquestion: |
   Děkujeme, že jste využili náš nástroj. Kdyby Vám dokumenty na e-mail nedorazily, napiště na [servis@frankbold.org](mailto:servis@frankbold.org) a napravíme to.
 
   ---
-  Tento nástroj je stále bezplatný a to jen díky podpoře od našich <strong>podpoře [dárců](https://frankbold.org/o-nas/darci)</strong>. Přidejte se k nám a pomozte nám v provozu.
+  Tento nástroj je stále bezplatný a to jen díky podpoře od našich <strong>[dárců](https://frankbold.org/o-nas/darci)</strong>. Přidejte se k nám a pomozte nám v provozu.
 
     ${ prog_disclose(qr_dar) }
 
