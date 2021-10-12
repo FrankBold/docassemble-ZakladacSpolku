@@ -18,6 +18,7 @@ def addEcomail (email, id):
   else:
     tagy = []
 
+  tagy.append("OBČAN 2.0")
   tagy.append("Zakladac")
 
   values = {}
