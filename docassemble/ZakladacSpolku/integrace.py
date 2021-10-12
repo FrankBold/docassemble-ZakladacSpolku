@@ -9,7 +9,7 @@ def detailEcomail (email):
     r = requests.get('https://api2.ecomailapp.cz/subscribers/'+email, headers=header)
     return r.json()
 
-def addEcomail (email, id, vzor):
+def addEcomail (email, id):
   header = {'key': ecomailKey,'Content-Type': 'application/json'}
 
   contact = detailEcomail(email)
@@ -18,9 +18,7 @@ def addEcomail (email, id, vzor):
   else:
     tagy = []
 
-  tagy.append("OBČAN 2.0")
-  tagy.append(str(vzor))
-  tagy.append("Vzor")
+  tagy.append("Zakladac")
 
   values = {}
   values["subscriber_data"] = {}

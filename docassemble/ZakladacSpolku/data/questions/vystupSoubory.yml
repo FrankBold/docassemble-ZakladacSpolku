@@ -178,7 +178,7 @@ code: |
   import json
   emailOdeslan = send_email(email, template=potvrzeniDok, attachments=Soubory)
   if novinky:
-    ecomail = addEcomail(email)
+    ecomail = addEcomail(email, "96")
   if emailOdeslan:
     vseHotovo = True
     webhook_data = requests.post('https://hook.integromat.com/0cqgtjarfbj9skvkw934ada161vqnt1n', data=json.dumps(all_variables()),headers={'Content-Type': 'application/json'})
