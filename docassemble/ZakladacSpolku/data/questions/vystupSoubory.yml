@@ -128,7 +128,7 @@ id: final_screen
 question: |
   Úspěšně odesláno!
 subquestion: |
-  Dokumenty jsme odeslali na e-mail: ** email ** Pokud je v e-mailu chyba, klikněte níže na *zpět* a zadejte adresu znovu.
+  Dokumenty jsme odeslali na e-mail: ** ${ email } ** Pokud je v e-mailu chyba, klikněte níže na *zpět* a zadejte adresu znovu.
 
   Děkujeme, že jste využili náš nástroj. Kdyby Vám dokumenty na e-mail nedorazily, napiště na [servis@frankbold.org](mailto:servis@frankbold.org) a napravíme to.
 
