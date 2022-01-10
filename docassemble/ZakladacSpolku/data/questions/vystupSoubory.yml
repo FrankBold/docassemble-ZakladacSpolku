@@ -1,240 +1,105 @@
-include:
-  - t_maily.yml
+metadata:
+  title: |
+    Zpětná vazba k Zakladači
+  temporary session: True
 ---
-modules:
-  - .integrace
----
-# Následující části kodu určují jaké šablony se mají přidat k odesílaným přílohám. Jejich pořadí také určuje pořadí, v jakém průvodce doplňuje proměnné.
-# Podle obsahu proměnných se pak do DAFileCollection "Soubory" vkládají jednotlivé přílohy k odeslání.
-# Kombinace need a sets určuje pořadí.
-sets: s_stanovy
+initial: True
 code: |
-  Soubory.append(stanovy)
-  s_stanovy = True
+  if 'zalozeno' in url_args:
+    zalozeno = url_args["zalozeno"]
+  idSesn = user_info().session
 ---
-need: s_stanovy
-sets: s_statutar
+initial: True
 code: |
-  if hromadne:
-    Soubory.append(Spolek.statutar.clen.prohlaseni)
-  else:
-    for clen in Spolek.statutar.clen:
-      Soubory.append(clen.prohlaseni)
-  s_statutar = True
----
-need: s_statutar
-sets: s_kontrolni
-code: |
-  if not minimalVerze:
-    if Spolek.kontrolniKomise.exist:
-      if hromadne:
-        Soubory.append(Spolek.kontrolniKomise.prohlaseni)
-      else:
-        for clen in Spolek.kontrolniKomise:
-          Soubory.append(clen.prohlaseni)
-  s_kontrolni = True
----
-need: s_kontrolni
-sets: s_rozhodci
-code: |
-  if not minimalVerze:
-    if Spolek.rozhodciKomise.exist:
-      if hromadne:
-        Soubory.append(Spolek.rozhodciKomise.prohlaseni)
-      else:
-        for clen in Spolek.rozhodciKomise:
-          Soubory.append(clen.prohlaseni)
-  s_rozhodci = True
----
-need: s_rozhodci
-sets: s_souhlas
-code: |
-  Soubory.append(souhlas)
-  s_souhlas = True
----
-need: s_souhlas
-sets: souboryDone
-code: |
-  souboryDone = True
----
-# Cílová stránka celého průvodce.
-id: souboryKeStazeni
-progress: 100
-need:
- - minimalVerze
- - osobniUdaje
- - souboryDone
-question: |
-  Vaše dokumenty jsou připraveny
-subquestion: |
-  Vše potřebné Vám zašleme na e-mail spolu s informacemi k dalšímu postupu.
-
-  V e-mailu bude též odkaz na kontrolní seznam, na co nezapomenout před odesláním žádosti. Zkontrolujete si, že máte všude správné podpisy, aj.
-  % if user_has_privilege('admin'):
-  ${ zip_file(Soubory, filename="Podklady_Spolek.zip") }
-  % endif
-fields:
-  - Váš e-mail: email
-    datatype: email
-  - Zajímají mě novinky z poradny: novinky
-    datatype: yesno
----
-modules:
-  - .progressivedisclosure
----
-features:
-  css: progressivedisclosure.css
+  import requests
+  requests.post('https://hook.integromat.com/njdv6s5y3xf39fzpu5hr5q6b0s37qxke', data=all_variables())
 ---
 mandatory: True
 code: |
-  import random
-  vseHotovo
-  if random.random() < 0.5:
-    final1
-  else:
-    final2
----
-# Doplnit poslední stránku s informacemi co dál, FR výzvou, atd.
-event: final1
-id: final_screen
-question: |
-  Úspěšně odesláno!
-subquestion: |
-  Dokumenty jsme odeslali na e-mail: ** email ** Pokud je v e-mailu chyba, klikněte níže na *zpět* a zadejte adresu znovu.
-
-  Děkujeme, že jste využili náš nástroj. Kdyby Vám dokumenty na e-mail nedorazily, napiště na [servis@frankbold.org](mailto:servis@frankbold.org) a napravíme to.
-
-  ---
-  Tento nástroj je stále bezplatný a to jen díky podpoře od našich <strong>[dárců](https://frankbold.org/o-nas/darci)</strong>. Přidejte se k nám a pomozte nám v provozu.
-
-    ${ prog_disclose(qr_dar) }
-
-action buttons:
-  - label: Podpořím darem
-    action: https://frankbold.org/podporte-nas?pAuto&utm_source=Servis&utm_medium=appka&utm_campaign=fundraising&utm_content=zakladac1 }
-    color: primary
-    icon: hand-holding-heart
-  - label: Připomeňte se mi mailem za týden
-    action: reminder
-    color: secondary
-    icon: bell
-  - label: Ukončit průvodce
-    action: https://frankbold.org
-    color: light
----
-# Doplnit poslední stránku s informacemi co dál, FR výzvou, atd.
-event: final2
-id: final_screen
-question: |
-  Úspěšně odesláno!
-subquestion: |
-  Dokumenty jsme odeslali na e-mail: ** ${ email } ** Pokud je v e-mailu chyba, klikněte níže na *zpět* a zadejte adresu znovu.
-
-  Děkujeme, že jste využili náš nástroj. Kdyby Vám dokumenty na e-mail nedorazily, napiště na [servis@frankbold.org](mailto:servis@frankbold.org) a napravíme to.
-
-  ---
-  Tento nástroj je stále bezplatný a to jen díky podpoře od našich <strong>podpoře [dárců](https://frankbold.org/o-nas/darci)</strong>. Přidejte se k nám a pomozte nám v provozu.
-
-action buttons:
-  - label: Podpořím darem
-    action: https://frankbold.org/podporte-nas?pAuto&utm_source=Servis&utm_medium=appka&utm_campaign=fundraising&utm_content=zakladac2 }
-    color: primary
-    icon: hand-holding-heart
-  - label: Ukončit průvodce
-    action: https://frankbold.org
-    color: light
----
-event: reminder
-code: |
-  import requests
-  r = requests.post('https://hook.integromat.com/xx0cuvnb1d3mxmczskj4uhx7wi3328z0?email='+email)
+  zalozeno
+  if zalozeno == "True":
+    vsecajk
+  elif zalozeno == "False":
+    procNe
+  elif zalozeno == "progress":
+    procCeka
+  obecne
+  komplet = True
   dekujeme
+---
+question: |
+  Založili jste už spolek?
+field: zalozeno
+buttons:
+  - Ano: True
+  - Ne a nebudeme: False
+  - Pracujeme na tom: progress
+---
+question: |
+  Proběhlo vše bez problémů?
+fields:
+  - no label: vsecajk
+    input type: radio
+    choices:
+      - Ano: True
+      - Ne: False
+  - V čem byl problém?: vsecajk_problem
+    input type: area
+    required: false
+    show if:
+      variable: vsecajk
+      is: False
+---
+question: |
+  Proč ne?
+fields:
+  - no label: procNe
+    input type: radio
+    choices:
+      - Odpadl zájem: nezajem
+      - Je to moc složité: slozite
+      - Jdeme jinou cestou: jinaCesta
+      - Jiné: jine
+  - Z jakého důvodu?: procNe_jine
+    input type: area
+    required: false
+    show if:
+      variable: procNe
+      is: jine
+---
+question: |
+  Na co se čeká?
+fields:
+  - no label: procCeka
+    input type: radio
+    choices:
+      - Ladíme dokumenty: ladime
+      - Sháníme podpisy: podpisy
+      - Čekáme na rozhodnutí soudu: soud
+      - Soud žádost vrátil: vraceno
+      - jine: jine
+  - Z jakého důvodu?: procCeka_vraceno
+    input type: area
+    required: false
+    show if:
+      variable: procCeka
+      is: vraceno
+  - Na co se čeká?: procCeka_jine
+    input type: area
+    required: false
+    show if:
+      variable: procCeka
+      is: jine
+---
+question: |
+  Máte nějaký podnět?
+subquestion: |
+  Pokud nám chcete k nástroji cokoli sdělit, budeme rádi. Ať už jde o podnět, chybu, kritiku či nápad.
+fields:
+  - no label: obecne
+    input type: area
+    required: false
 ---
 event: dekujeme
 question: |
-  Děkujeme.
-subquestion: |
-  Za týden Vám pošleme e-mail s informacemi a možnostech podpory.
----
-template: qr_dar
-subject: |
-  QR platba – 100 Kč
-content: |
-  ##### Pošlete dar jednoduše přes QR kód
-
-  [QR SPD*1.0*ACC:CZ4520100000002401874285*AM:$100*CC:CZK*MSG:Pozdrav z generátoru*X-KS:0125*RN:Frank Bold Society z.s., 200px]
-
----
-event: neodeslano
-id: Chyba odeslání
-question: |
-  Něco se pokazilo... Kontaktujte nás na [servis@frankbold.org](mailto:servis@frankbold.org)
----
-# Odeslání e-mailu s dokumenty. Zároveň přidání kontaktu k mailing listu v rámci Ecomailu.
-event: odeslatEmail
-sets: vseHotovo
-code: |
-  import requests
-  import json
-  emailOdeslan = send_email(email, template=potvrzeniDok, attachments=Soubory)
-  if novinky:
-    ecomail = addEcomail(email, "96")
-  if emailOdeslan:
-    vseHotovo = True
-    webhook_data = requests.post('https://hook.integromat.com/0cqgtjarfbj9skvkw934ada161vqnt1n', data=json.dumps(all_variables()),headers={'Content-Type': 'application/json'})
-  else:
-    neodeslano
----
-# Vytvoření odkazu na checklist s předáním potřebných údajů tak, aby si průvodce v rámci checklistu mohl stáhnout potřebné proměnné z tohoto průvodce.
-code: |
-  idSesn = user_info().session
-  idFile = user_info().filename
-  odkazChecklist = "https://da.frankbold.org/interview?i=docassemble.ZakladacSpolku:checklist.yml&idSesn=" + idSesn +"&idFile=" + idFile
----
-attachment:
-  name: Stanovy spolku
-  filename: Stanovy_spolku
-  variable name: stanovy
-  docx template file: Stanovy.docx
-  valid formats:
-    - docx
----
-# Pokud má být společný dokument pro všechny členy orgánu. Je předán celý PartyList
-generic object: PartyList
-attachment:
-  name: Prohlášení osob zapisovaných do rejstříku
-  filename: Prohlášení_${ x.label }
-  variable name: x.prohlaseni
-  docx template file: Prohlaseni.docx
-  update references: True
-  valid formats:
-    - docx
----
-# Pokud má každá člen orgánu mít svůj dokument. Je předáván každý jednotlivý Individual.
-generic object: Individual
-attachment:
-  name: Prohlášení osob zapisovaných do rejstříku
-  filename: Prohlášení_${ x.label }
-  variable name: x.prohlaseni
-  docx template file: Prohlaseni.docx
-  update references: True
-  valid formats:
-    - docx
----
-attachment:
-  name: Souhlas s umístěním sídla spolku
-  filename: Souhlas vlastníka
-  variable name: souhlas
-  docx template file: Souhlas.docx
-  update references: True
-  valid formats:
-    - docx
----
-attachment:
-  name: Zápis ze ustavující schůze
-  filename: Schůze zápis
-  variable name: schuze
-  docx template file: Schuze.docx
-  update references: True
-  valid formats:
-    - docx
+  Děkujeme
