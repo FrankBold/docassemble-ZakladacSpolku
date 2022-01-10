@@ -1,12 +1,18 @@
+metadata:
+  title: |
+    Zpětná vazba k Zakladači
+  temporary session: True
+---
+initial: True
+code: |
+  if 'zalozeno' in url_args:
+    zalozeno = url_args["zalozeno"]
+  idSesn = user_info().session
+---
 initial: True
 code: |
   import requests
   requests.post('https://hook.integromat.com/njdv6s5y3xf39fzpu5hr5q6b0s37qxke', data=all_variables())
----
-mandatory: True
-code: |
-  if 'zalozeno' in url_args:
-    zalozeno = url_args["zalozeno"]
 ---
 mandatory: True
 code: |
