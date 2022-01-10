@@ -1,0 +1,99 @@
+initial: True
+code: |
+  import requests
+  requests.post('https://hook.integromat.com/njdv6s5y3xf39fzpu5hr5q6b0s37qxke', data=all_variables())
+---
+mandatory: True
+code: |
+  if 'zalozeno' in url_args:
+    zalozeno = url_args["zalozeno"]
+---
+mandatory: True
+code: |
+  zalozeno
+  if zalozeno == "True":
+    vsecajk
+  elif zalozeno == "False":
+    procNe
+  elif zalozeno == "progress":
+    procCeka
+  obecne
+  komplet = True
+  dekujeme
+---
+question: |
+  Založili jste už spolek?
+field: zalozeno
+buttons:
+  - Ano: True
+  - Ne a nebudeme: False
+  - Pracujeme na tom: progress
+---
+question: |
+  Proběhlo vše bez problémů?
+fields:
+  - no label: vsecajk
+    input type: radio
+    choices:
+      - Ano: True
+      - Ne: False
+  - V čem byl problém?: vsecajk_problem
+    input type: area
+    required: false
+    show if:
+      variable: vsecajk
+      is: False
+---
+question: |
+  Proč ne?
+fields:
+  - no label: procNe
+    input type: radio
+    choices:
+      - Odpadl zájem: nezajem
+      - Je to moc složité: slozite
+      - Jdeme jinou cestou: jinaCesta
+      - Jiné: jine
+  - Z jakého důvodu?: procNe_jine
+    input type: area
+    required: false
+    show if:
+      variable: procNe
+      is: jine
+---
+question: |
+  Na co se čeká?
+fields:
+  - no label: procCeka
+    input type: radio
+    choices:
+      - Ladíme dokumenty: ladime
+      - Sháníme podpisy: podpisy
+      - Čekáme na rozhodnutí soudu: soud
+      - Soud žádost vrátil: vraceno
+      - jine: jine
+  - Z jakého důvodu?: procCeka_vraceno
+    input type: area
+    required: false
+    show if:
+      variable: procCeka
+      is: vraceno
+  - Na co se čeká?: procCeka_jine
+    input type: area
+    required: false
+    show if:
+      variable: procCeka
+      is: jine
+---
+question: |
+  Máte nějaký podnět?
+subquestion: |
+  Pokud nám chcete k nástroji cokoli sdělit, budeme rádi. Ať už jde o podnět, chybu, kritiku či nápad.
+fields:
+  - no label: obecne
+    input type: area
+    required: false
+---
+event: dekujeme
+question: |
+  Děkujeme
