@@ -31,7 +31,7 @@ fields:
     code: |
       zakladniPole
   - note: |
-      V rozhraní můžete též vyplnit identifikační údaje zakládajících členů, či členů orgánu. Pokud údaje zatím nemáte, či je vyplnit nechcete, můžete tak učinit až o stažení dokumentů.
+      V rozhraní můžete též vyplnit identifikační údaje zakládajících členů, či členů orgánu. Pokud údaje zatím nemáte, či je vyplnit nechcete, můžete tak učinit až po stažení dokumentů.
 
       Kompletní informace o tom, jak pracujeme o osobními údaji naleznete zde: [Zásady ochrany osobních údajů](https://frankbold.org/zasady-ochrany-osobnich-udaju-frank-bold).
   - no label: osobniUdaje
