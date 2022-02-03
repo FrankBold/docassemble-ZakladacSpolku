@@ -149,7 +149,10 @@ code: |
   elif q == "cinnostSpolku":
     Spolek.ucel = "[Účel spolku]"
     Spolek.cinnosti = "[Činnost spolku]"
-    Spolek.popis = "[Popis spolku]"
+    if minimalVerze:
+      Spolek.popis = "[Popis spolku]"
+    else:
+      Spolek.popis = False
     hospCinnost = False
   elif q == "sidlo":
     Spolek.sidlo.typ = "domu"
