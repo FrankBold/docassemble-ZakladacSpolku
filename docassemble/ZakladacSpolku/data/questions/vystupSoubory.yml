@@ -111,7 +111,7 @@ subquestion: |
 
 action buttons:
   - label: Podpořím darem
-    action: https://frankbold.org/podporte-nas?pAuto&utm_source=Servis&utm_medium=appka&utm_campaign=fundraising&utm_content=zakladac1 }
+    action: https://frankbold.org/podporte-nas?pAuto&utm_source=Servis&utm_medium=appka&utm_campaign=fundraising&utm_content=zakladac1
     color: primary
     icon: hand-holding-heart
   - label: Připomeňte se mi mailem za týden
@@ -137,7 +137,33 @@ subquestion: |
 
 action buttons:
   - label: Podpořím darem
-    action: https://frankbold.org/podporte-nas?pAuto&utm_source=Servis&utm_medium=appka&utm_campaign=fundraising&utm_content=zakladac2 }
+    action: https://frankbold.org/podporte-nas?pAuto&utm_source=Servis&utm_medium=appka&utm_campaign=fundraising&utm_content=zakladac2
+    color: primary
+    icon: hand-holding-heart
+  - label: Ukončit průvodce
+    action: https://frankbold.org
+    color: light
+---
+# Doplnit poslední stránku s informacemi co dál, FR výzvou, atd.
+event: final3
+id: final_screen
+question: |
+  Úspěšně odesláno!
+subquestion: |
+  Dokumenty jsme odeslali na e-mail: ** ${ email } ** Pokud je v e-mailu chyba, klikněte níže na *zpět* a zadejte adresu znovu.
+
+  Děkujeme, že jste využili náš nástroj. Kdyby Vám dokumenty na e-mail nedorazily, napiště na [servis@frankbold.org](mailto:servis@frankbold.org) a napravíme to.
+
+  ---
+  <div class="alert alert-dismissible alert-info">
+  Tento nástroj je stále bezplatný a to jen díky podpoře <strong>dobrovolných dárců</strong>. Přidejte se k nám a pomozte nám jej takový udržet.
+  </div>
+
+  * 300 Kč pomůže se založení dalším 5 spolkům
+  * 600 Kč pak dalším 10
+action buttons:
+  - label: Předplatit nástroj dalším
+    action: https://frankbold.org/podporte-nas?pAuto&utm_source=Servis&utm_medium=appka&utm_campaign=fundraising&utm_content=zakladac3
     color: primary
     icon: hand-holding-heart
   - label: Ukončit průvodce
@@ -162,7 +188,7 @@ subject: |
 content: |
   ##### Pošlete dar jednoduše přes QR kód
 
-  [QR SPD*1.0*ACC:CZ4520100000002401874285*AM:$100*CC:CZK*MSG:Pozdrav z generátoru*X-KS:0125*RN:Frank Bold Society z.s., 200px]
+  [QR SPD*1.0*ACC:CZ4520100000002401874285*AM:100*CC:CZK*MSG:Pozdrav z generátoru*X-KS:0125*RN:Frank Bold Society z.s., 200px]
 
 ---
 event: neodeslano
