@@ -90,7 +90,7 @@ code: |
   import random
   vseHotovo
   if random.random() < 0.5:
-    final1
+    final3
   else:
     final2
 ---
