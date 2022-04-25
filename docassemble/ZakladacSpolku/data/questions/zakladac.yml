@@ -48,7 +48,7 @@ subquestion: |
 fields:
 # Doplnit check se spolkovým rejstříkem.
   - Název spolku: Spolek.name.text
-    hint: Musí obsahova z. s. **(s mezerou)**, spolek nebo zapsaný spolek.
+    hint: Musí obsahova z. s. (s mezerou), spolek nebo zapsaný spolek.
     validate: contains_spolek
     note: |
       <button id="overit" class="btn btn-primary">Ověřit jedinečnost</button>
