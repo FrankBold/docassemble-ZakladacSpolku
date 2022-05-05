@@ -25,6 +25,7 @@ features:
   question help button: True
   question back button: True
   navigation back button: False
+  go full screen: True
 ---
 objects:
   - Spolek: Organization
