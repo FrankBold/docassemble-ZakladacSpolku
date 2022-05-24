@@ -42,6 +42,7 @@ modules:
 mandatory: True
 code: |
   multi_user = True
+  nazev_vzoru = "Zápis z ústavujícíc schůze"
 ---
 objects:
   - Spolek: Organization
@@ -339,6 +340,7 @@ edit:
 sets: hotovo
 code: |
   if programDone and pritomniDone:
+    webhook_data = requests.post('https://hook.eu1.make.com/ynnfeyvv4508yducw3vjjf4s6kf14bg5', data=json.dumps(all_variables(make_copy=True)),headers={'Content-Type': 'application/json'})
     hotovo = True
 ---
 sets: pritomniDone
