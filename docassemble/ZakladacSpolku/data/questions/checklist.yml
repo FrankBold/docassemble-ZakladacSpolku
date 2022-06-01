@@ -4,7 +4,7 @@ metadata:
   short title: |
     Kontrolní checklist
   description: |
-    Seznam na to nezapomenout, když zakládáte spolek.
+    Seznam na co nezapomenout, když zakládáte spolek.
   tags:
     - Zakladač
     - v2
@@ -66,13 +66,13 @@ id: spolkove info
 question: |
   Informace o spolku
 subquestion: |
-  Základní informace o spolku pro účely sestavení checklistu
+  Vyplňte základní informace o spolku pro účely sestavení checklistu.
 fields:
   - Způsob založení: zalozeni
     input type: radio
     choices:
       - Přijetím stanov: stanovy
-      - Ustavujícíc schůzi: schuze
+      - Ustavující schůzí: schuze
   - Statutární orgán: statutar
     input type: radio
     choices:
@@ -109,9 +109,9 @@ code: |
 question: |
   Kontrolní přehled
 subquestion: |
-  Přehled můžete kdykoli znovu otevřít pod ${ action_button_html(interview_url(), label="tímto odkazem", color="primary", size="sm") }
+  Přehled můžete kdykoli znovu otevřít pod ${ action_button_html(interview_url(), label="tímto odkazem", color="primary", size="sm") }.
 
-  Můžete jej rovněž ${ action_button_html(url_of(checklistPDF), label="uložit ve formátu pdf", color="primary", size="sm", icon="download") }
+  Můžete ho také ${ action_button_html(url_of(checklistPDF), label="uložit ve formátu pdf", color="primary", size="sm", icon="download") }.
 fields:
   - "##Stanovy": stanovy
     required: False
@@ -258,4 +258,4 @@ content: |
 
   [NOINDENT] Soud do pěti pracovních dnů od doručení návrhu rozhodne o zápisu spolku. Může navrhovatele vyzvat k doplnění či opravě návrhu. V případě zásadních problému návrh rovnou zamítne.
 
-  [NOINDENT] Jak proti výzvě k opravám, tak proti zamítnutí nývrhu se lze odvolat v uvedené lhůtě. Pokud máte otázky, neváhejte se obrátit přímo na příslušného vyššího soudního úředníka, který má Váš případ na starosti.
+  [NOINDENT] Jak proti výzvě k opravám, tak proti zamítnutí nývrhu se můžete odvolat v uvedené lhůtě. Pokud máte otázky, neváhejte se obrátit přímo na příslušného vyššího soudního úředníka, který má Váš případ na starosti.
