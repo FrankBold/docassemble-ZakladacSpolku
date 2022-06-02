@@ -20,10 +20,10 @@ reconsider:
 question: |
   Výběr verze nástroje
 subquestion: |
-  Vítejte. Nejprve zvolte, zda Vám postačí zjednodušená, či chcete využít pokročilejší verze nástoje. V **pokročilé verzi jsou navíc** k dispozici volba kontrolních orgánů, úprava více druhů členství, délky volbeních období, aj. Zjednodušená verze je okleštěna jen na to nejnutnější.
+  Vítejte. Nejprve zvolte, zda Vám postačí zjednodušená verze nástroje či chcete využít verzi pokročilejší. V **pokročilé verzi si můžete navíc** upravit mj. volbu kontrolních orgánů, více druhů členství, délku volebních období. Zjednodušená verze je okleštěna jen na to nejnutnější.
 
   % if not user_logged_in():
-  Pokud se chcete k rozpracovanému průvodci a využít další navazující funkce **[zaregistrujte se](${ url_of('register') })**.
+  Pokud se chcete k rozpracovanému průvodci vrátit a využít další navazující funkce, **[zaregistrujte se](${ url_of('register') })**.
   % endif
 fields:
   - no label: minimalVerze
@@ -31,7 +31,7 @@ fields:
     code: |
       zakladniPole
   - note: |
-      V rozhraní můžete též vyplnit identifikační údaje zakládajících členů, či členů orgánu. Pokud údaje zatím nemáte, či je vyplnit nechcete, můžete tak učinit až po stažení dokumentů.
+      V rozhraní můžete také vyplnit identifikační údaje zakládajících členů či členů orgánu. Pokud údaje zatím nemáte nebo je vyplnit nechcete, můžete je doplnit ručně až po stažení dokumentů.
 
       Kompletní informace o tom, jak pracujeme o osobními údaji naleznete zde: [Zásady ochrany osobních údajů](https://frankbold.org/zasady-ochrany-osobnich-udaju-frank-bold).
   - no label: osobniUdaje
@@ -44,19 +44,19 @@ id: identifikaceSpolku
 question: |
   Identifikační údaje spolku
 subquestion: |
-  Základní údaje o spolku.
+  Základní údaje o spolku:
 fields:
 # Doplnit check se spolkovým rejstříkem.
   - Název spolku: Spolek.name.text
-    hint: Musí obsahova z. s. (s mezerou), spolek nebo zapsaný spolek.
+    hint: Musí obsahovat z. s. (s mezerou), spolek nebo zapsaný spolek.
     validate: contains_spolek
     note: |
       <button id="overit" class="btn btn-primary">Ověřit jedinečnost</button>
   - note: |
-      Pokud má název spolku obsahovat jméno nějaké osoby, je potřeba zajistit její souhlas. Pokud nejde zároveň o někoho, kdo je zároveň zakládajícím členem spolku.
+      Pokud má název spolku obsahovat jméno nějaké osoby, je potřeba zajistit její souhlas. Souhlas zajišťovat nemusíte, pokud má název spolku obsahovat jméno některého ze zakládajících členů spolku.
   - html: |
       <div id="unikatni" class="alert alert-success d-none" role="alert">
-        Nezalezli jsme žádnou přílišnou shodu. Název tak je pravděpodobně k dispozici.<br><br>
+        Nezalezli jsme žádnou významnou shodu. Název tak je pravděpodobně k dispozici.<br><br>
         Doporučujeme však ujistit se i <a href="https://or.justice.cz/ias/ui/rejstrik">přímo v rejstříku</a>.
       </div>
       <div id="duplicita" class="alert alert-warning d-none" role="alert">
@@ -65,7 +65,7 @@ fields:
       </div>
       <span id="resultsArea"></span>
   - Sídlo spolku: Spolek.address
-    hint: stačí obec
+    hint: Stačí obec.
 help: |
   ${ h_nazev }
   ${ h_sidlo }
@@ -112,16 +112,16 @@ id: cinnostSpolku
 question: |
   Činnost spolku
 subquestion: |
-  Popište jaké aktivity bude Váš spolek vyvíjet.
+  Popište, jaké aktivity bude Váš spolek vyvíjet.
 fields:
   - Účel spolku: Spolek.ucel
     datatype: area
-    hint: jednotlivé položky oddělte novým řádkem
+    hint: Jednotlivé položky oddělte novým řádkem.
     note: |
         ${ action_button_html("#", label="Vyplním později", color="danger", size="sm", icon="forward", id_tag="ucel") }
   - Formy činnosti spolku: Spolek.cinnosti
     datatype: area
-    hint: jednotlivé položky oddělte novým řádkem
+    hint: Jednotlivé položky oddělte novým řádkem.
     note: |
         ${ action_button_html("#", label="Vyplním později", color="danger", size="sm", icon="forward", id_tag="cinnosti") }
   - Popis spolku: Spolek.popis
@@ -138,7 +138,7 @@ fields:
         minimalVerze == False
   - Vedlejší hospodářská činnost: Spolek.zivnost
     datatype: area
-    hint: jednotlivé položky oddělte novým řádkem
+    hint: Jednotlivé položky oddělte novým řádkem.
     show if:
       variable: hospCinnost
       is: True
@@ -270,7 +270,7 @@ if: |
 question: |
   Členství ve spolku
 subquestion: |
-  Můžete přidat čestné členství, kdy čestný člen má pouze poradní hlas.
+  Můžete přidat čestné členství. Čestný člen má pouze poradní hlas.
 fields:
   - Budou řádní členové platit členské příspěky?: Spolek.clenstvi.poplatky
     datatype: yesnoradio
@@ -286,7 +286,7 @@ id: zpusobZalozeni
 question: |
   Způsob založení spolku
 subquestion: |
-  Zvolte jakým způsobem chcete spolek zakládat.
+  Zvolte, jakým způsobem chcete spolek založit.
 fields:
   - Způsob založení spolku: Spolek.zalozeni.typ
     input type: radio
@@ -301,7 +301,7 @@ help: |
 #      variable: Spolek.zalozeni.typ
 #      is: schuze
 #    help: |
-#      Pokud už víte, kdy se bude schůze konat, jaký bude program, atd. můžete si jej zde rovnou předvyplnit. Pokud ještě dá dáme Vám ke stažení prázdnou šablonu. Vyplnit zápis online můžete pak kdykoli pod tímto <a href="${ url_of('root', _external=True)}interview?i=docassemble.ZakladacSpolku:ustavujiciSchuze.yml">odkazem</a>
+#      Pokud už víte, kdy se bude schůze konat, jaký bude program, atd. můžete si to zde rovnou předvyplnit. Pokud ještě nevíte nebo chcete údaje vyplnit ručně, pošleme Vám ke stažení prázdnou šablonu. Vyplnit zápis online můžete kdykoli pod tímto <a href="${ url_of('root', _external=True)}interview?i=docassemble.ZakladacSpolku:ustavujiciSchuze.yml">odkazem</a>
 ---
 id: dalsiOrgany
 if: |
@@ -309,7 +309,7 @@ if: |
 question: |
   Dodatečné orgány spolku
 subquestion: |
-  Můžete vybrat některé běžné orgány, spolku. V dokumentu si můžete kdykoli doplnit vlastní na míru.
+  Můžete vybrat některé běžné orgány spolku. V dokumentu si můžete kdykoli doplnit vlastní orgány na míru.
 fields:
   - Kontrolní komise: Spolek.kontrolniKomise.exist
     datatype: yesnoradio
@@ -352,7 +352,7 @@ fields:
 question: |
   Chcete pro každého člena orgánu samostatný dokument s prohlášením?
 subquestion: |
-  Na prohlášením musí být ověřené podpisy. Pokud by tedy bylo komplikované se k ověření podpisů sejít hromadně, či si předat jeden dokument, je lepší aby měl každý člen vlastní.
+  Na prohlášení musí být ověřené podpisy. Pokud by tedy bylo komplikované se k ověření podpisů sejít hromadně či si předat jeden dokument, je lepší aby měl každý člen prohlášení vlastní.
 noyes: hromadne
 ---
 id: sidlo
@@ -386,7 +386,7 @@ if: |
 question: |
   Kolik bude zakladatelů spolku?
 subquestion: |
-  Spolek musí zakládat **minimálně 3 osoby**. Když zakládáte spolek přijetím stanov, musí být každý zakládající člen podepsán pod stanovami ověřeným podpisem. Pokud k tomu však máte důvod, můžete zvolit i vyšší počet zakládajících členů.
+  Spolek musí zakládat **minimálně 3 osoby**. Když zakládáte spolek přijetím stanov, musí být každý zakládající člen podepsán pod stanovami. Pokud k tomu však máte důvod, můžete zvolit i vyšší počet zakládajících členů.
 fields:
   - Počet zakládajících členů: Spolek.zalozeni.pocetZakladatelu
     datatype: integer
