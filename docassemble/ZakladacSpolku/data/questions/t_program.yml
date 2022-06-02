@@ -3,13 +3,13 @@ template: t_uvod
 subject: |
   Úvodní slovo
 content: |
-  V úvodu ustavující schůze seznámil svolavatel přítomné s důvody vzniku a základními cíli činnosti spolku a s jednáními, která v zájmu spolku již učinil. Dále svolavatel navrhl ustavující schůzi pravidla pro její jednání a volbu předsedajícího ustavující schůze. Jako předsedajícího schůze přítomní pověřili ${ Spolek.schuze.predseda.name.first  }, ${ Spolek.schuze.predseda.address  }
+  V úvodu ustavující schůze seznámil svolavatel přítomné s důvody vzniku spolku, základními cíli činnosti spolku a s jednáními, která v zájmu spolku již učinil. Dále svolavatel navrhl ustavující schůzi pravidla pro její jednání a volbu předsedajícího ustavující schůze. Jako předsedajícího schůze přítomní pověřili ${ Spolek.schuze.predseda.name.first  }, ${ Spolek.schuze.predseda.address  }
 ---
 template: t_listina
 subject: |
   Soupis listiny přítomných
 content: |
-  Přítomní poté vyjádřili svůj souhlas s hlavními cíli spolku, uvedenými v návrhu stanov a projevili vůli stát se členy spolku. Jako doklad o této skutečnosti byla vyhotovena listina přítomných, která tvoří součást tohoto zápisu.
+  Přítomní poté vyjádřili svůj souhlas s hlavními cíli spolku uvedenými v návrhu stanov a projevili vůli stát se členy spolku. Jako doklad o této skutečnosti byla vyhotovena listina přítomných, která tvoří součást tohoto zápisu.
 ---
 template: t_stanovy
 subject: |
@@ -24,11 +24,11 @@ content: |
   % if Spolek.statutar.druh == 'predseda':
   Dle stanov byl předsedou spolku zvolen:
   % else:
-  Dle stanov byly členy kolektivního statutárního orgánu zvoleni:
+  Dle stanov byli členy kolektivního statutárního orgánu zvoleni:
   % endif
 ---
 template: t_povereni
 subject: |
   Pověření osoby k podání návrhu na zápis spolku
 content: |
-  Ustavující schůze pověřuje k podání návrhu na zápis do spolkového rejstříku: ${ Spolek.navrhovatel.name.first }, ${ Spolek.navrhovatel.address }, ${ format_date(Spolek.navrhovatel.birthday, format='dd.MM.yyyy')}
+  Ustavující schůze pověřuje k podání návrhu na zápis do spolkového rejstříku: ${ Spolek.navrhovatel.name.first }, ${ Spolek.navrhovatel.address }, ${ format_date(Spolek.navrhovatel.birthday, format='dd.MM.yyyy')}.
