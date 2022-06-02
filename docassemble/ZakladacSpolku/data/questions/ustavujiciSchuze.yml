@@ -302,7 +302,7 @@ fields:
 ---
 generic object: Individual
 question: |
-  Podepiště se
+  Podepište se
 signature: x.podpis
 required: False
 under: |
