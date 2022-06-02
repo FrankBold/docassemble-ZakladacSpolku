@@ -69,7 +69,7 @@ question: |
 subquestion: |
   Vše potřebné Vám zašleme na e-mail spolu s informacemi k dalšímu postupu.
 
-  V e-mailu bude též odkaz na kontrolní seznam, na co nezapomenout před odesláním žádosti. Zkontrolujete si, že máte všude správné podpisy, aj.
+  V e-mailu bude též odkaz na kontrolní seznam, na co nezapomenout před odesláním žádosti. Zkontrolujete si, že máte všude správné podpisy a všechny další praktikálie.
   % if user_has_privilege('admin'):
   ${ zip_file(Soubory, filename="Podklady_Spolek.zip") }
   % endif
@@ -102,10 +102,10 @@ question: |
 subquestion: |
   Dokumenty jsme odeslali na e-mail: ** email ** Pokud je v e-mailu chyba, klikněte níže na *zpět* a zadejte adresu znovu.
 
-  Děkujeme, že jste využili náš nástroj. Kdyby Vám dokumenty na e-mail nedorazily, napiště na [servis@frankbold.org](mailto:servis@frankbold.org) a napravíme to.
+  Děkujeme, že jste využili náš nástroj. Kdyby Vám dokumenty na e-mail nedorazily, napište na [servis@frankbold.org](mailto:servis@frankbold.org) a napravíme to.
 
   ---
-  Tento nástroj je stále bezplatný a to jen díky podpoře od našich <strong>[dárců](https://frankbold.org/o-nas/darci)</strong>. Přidejte se k nám a pomozte nám v provozu.
+  Tento nástroj je stále bezplatný a to jen díky podpoře od našich <strong>[dárců](https://frankbold.org/o-nas/darci)</strong>. Přidejte se k nám a pomozte nám s údržbou nástroje.
 
     ${ prog_disclose(qr_dar) }
 
@@ -130,7 +130,7 @@ question: |
 subquestion: |
   Dokumenty jsme odeslali na e-mail: ** ${ email } ** Pokud je v e-mailu chyba, klikněte níže na *zpět* a zadejte adresu znovu.
 
-  Děkujeme, že jste využili náš nástroj. Kdyby Vám dokumenty na e-mail nedorazily, napiště na [servis@frankbold.org](mailto:servis@frankbold.org) a napravíme to.
+  Děkujeme, že jste využili náš nástroj. Kdyby Vám dokumenty na e-mail nedorazily, napište na [servis@frankbold.org](mailto:servis@frankbold.org) a napravíme to.
 
   ---
   Tento nástroj je stále bezplatný a to jen díky podpoře od našich <strong>podpoře [dárců](https://frankbold.org/o-nas/darci)</strong>. Přidejte se k nám a pomozte nám v provozu.
@@ -151,14 +151,14 @@ question: |
 subquestion: |
   Dokumenty jsme odeslali na e-mail: ** ${ email } ** Pokud je v e-mailu chyba, klikněte níže na *zpět* a zadejte adresu znovu.
 
-  Děkujeme, že jste využili náš nástroj. Kdyby Vám dokumenty na e-mail nedorazily, napiště na [servis@frankbold.org](mailto:servis@frankbold.org) a napravíme to.
+  Děkujeme, že jste využili náš nástroj. Kdyby Vám dokumenty na e-mail nedorazily, napište na [servis@frankbold.org](mailto:servis@frankbold.org) a napravíme to.
 
   ---
   <div class="alert alert-dismissible alert-info">
-  Tento nástroj je stále bezplatný a to jen díky podpoře <strong>dobrovolných dárců</strong>. Přidejte se k nám a pomozte nám jej takový udržet.
+  Tento nástroj je stále bezplatný a to jen díky podpoře <strong>dobrovolných dárců</strong>. Přidejte se k nám a pomozte nám ho takový udržet.
   </div>
 
-  * 300 Kč pomůže se založení dalším 5 spolkům
+  * 300 Kč pomůže se založením dalším 5 spolkům
   * 600 Kč pak dalším 10
 action buttons:
   - label: Předplatit nástroj dalším
