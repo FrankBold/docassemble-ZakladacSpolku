@@ -4,7 +4,7 @@ metadata:
   short title: |
     Rozcestník mezi průvodci
   description: |
-    Průvodce vytvoří na míru připravené podklady pro založení spolku.
+    Průvodce vytvoří na míru podklady pro založení spolku.
   authors:
     - name: Michal Kuk
       organization: Frank Bold Society, z.s.
@@ -21,9 +21,9 @@ question: |
   Vítejte v průvodci
 subquestion: |
   % if user_logged_in():
-  Vítejte. Uložené průvodce najdete pod menu vpravo nahoře nebo pod [tímto odkazem](${ url_of('interviews')}). Kliknutím na odkaz níže zahájíte průvodce s čistým štítem (o dříve vyplněné nepříjdete).
+  Vítejte. Uložené průvodce najdete pod menu vpravo nahoře nebo pod [tímto odkazem](${ url_of('interviews')}). Kliknutím na odkaz níže zahájíte průvodce s čistým štítem (o dříve vyplněné nepřijdete).
   % else:
-  Pro uložení vyplněných informací a možnost kdykoli se k nim vrátit se [zaregistrujte](url_of('register')). Účet si můžete vytvořit též kdykoli v průběhu interview přes odkaz vpravo nahoře.
+  Pro uložení vyplněných informací a možnost kdykoli se k nim vrátit se [zaregistrujte](url_of('register')). Účet si můžete vytvořit také kdykoli v průběhu interview přes odkaz vpravo nahoře.
   % endif
 
   [Průvodce založením spolku](${ url_of('root', _external=True)}interview?i=docassemble.ZakladacSpolku:zakladac.yml)
