@@ -77,7 +77,7 @@ fields:
       - Sháníme podpisy: podpisy
       - Čekáme na rozhodnutí soudu: soud
       - Soud žádost vrátil: vraceno
-      - jine: jine
+      - jiné: jine
   - Z jakého důvodu?: procCeka_vraceno
     input type: area
     required: false
@@ -94,7 +94,7 @@ fields:
 question: |
   Máte nějaký podnět?
 subquestion: |
-  Pokud nám chcete k nástroji cokoli sdělit, budeme rádi. Ať už jde o podnět, chybu, kritiku či nápad.
+  Pokud nám chcete k nástroji cokoli sdělit, budeme rádi. Ať už jde o podnět, upozornění na chybu, kritiku či nápad.
 fields:
   - no label: obecne
     input type: area
