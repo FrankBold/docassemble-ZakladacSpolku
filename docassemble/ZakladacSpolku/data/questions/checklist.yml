@@ -35,7 +35,7 @@ features:
 mandatory: True
 code: |
   multi_user = True
-  if url_args:
+  if "idFile" in url_args:
     vychoziData = get_session_variables(url_args['idFile'], url_args['idSesn'])
     minimalVerze = vychoziData["minimalVerze"]
     if vychoziData["Spolek"]["zalozeni"]["typ"]:
