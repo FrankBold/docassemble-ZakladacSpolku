@@ -7,12 +7,13 @@ initial: True
 code: |
   if 'zalozeno' in url_args:
     zalozeno = url_args["zalozeno"]
+    email = url_args["email"]
   idSesn = user_info().session
 ---
 initial: True
 code: |
   import requests
-  requests.post('https://hook.integromat.com/njdv6s5y3xf39fzpu5hr5q6b0s37qxke', data=all_variables())
+  requests.post('https://hook.integromat.com/njdv6s5y3xf39fzpu5hr5q6b0s37qxke', data=all_variables(make_copy=True))
 ---
 mandatory: True
 code: |
@@ -77,7 +78,7 @@ fields:
       - Sháníme podpisy: podpisy
       - Čekáme na rozhodnutí soudu: soud
       - Soud žádost vrátil: vraceno
-      - jiné: jine
+      - Jiné: jine
   - Z jakého důvodu?: procCeka_vraceno
     input type: area
     required: false
@@ -99,6 +100,8 @@ fields:
   - no label: obecne
     input type: area
     required: false
+  - Odeslat anonymně?: anonym
+    datatype: yesnoradio
 ---
 event: dekujeme
 question: |
