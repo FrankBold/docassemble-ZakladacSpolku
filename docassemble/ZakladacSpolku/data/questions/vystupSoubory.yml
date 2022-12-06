@@ -172,7 +172,7 @@ action buttons:
 event: reminder
 code: |
   import requests
-  r = requests.post('https://hook.integromat.com/xx0cuvnb1d3mxmczskj4uhx7wi3328z0?email='+email)
+  r = requests.post('https://hook.eu1.make.com/i6yt79ew9vk9i29r3jwiiuh2os95uj2e?email='+email)
   dekujeme
 ---
 event: dekujeme
@@ -206,7 +206,7 @@ code: |
     ecomail = addEcomail(email, "96")
   if emailOdeslan:
     vseHotovo = True
-    webhook_data = requests.post('https://hook.integromat.com/0cqgtjarfbj9skvkw934ada161vqnt1n', data=json.dumps(all_variables()),headers={'Content-Type': 'application/json'})
+    webhook_data = requests.post('https://hook.eu1.make.com/jyw7yei921k9bqcjfsc1w6k8v5cbvpj8', data=json.dumps(all_variables()),headers={'Content-Type': 'application/json'})
   else:
     neodeslano
 ---
