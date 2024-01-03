@@ -91,7 +91,8 @@ def overitJson(ico = None, firma = None):
           return "False"
       
       elif data["pocetCelkem"] == 1:
-          return info.append(data["ekonomickeSubjekty"][0]["obchodniJmeno"])
+          info.append(data["ekonomickeSubjekty"][0]["obchodniJmeno"])
+          return info
       
       else:
           for firma in data["ekonomickeSubjekty"]:
