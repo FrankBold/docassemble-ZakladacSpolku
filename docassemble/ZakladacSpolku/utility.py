@@ -58,3 +58,46 @@ def overitXml(firma):
     return info
   except:
     return "False"
+
+def overitJson(ico = None, firma = None):
+    # Use the same URL as in the 'overit' function
+    URL = 'https://ares.gov.cz/ekonomicke-subjekty-v-be/rest/ekonomicke-subjekty/vyhledat'
+    
+    # Parameters are now sent as JSON in the body of the request
+    call = {
+        'start': 0, 
+        'pocet': 10, 
+    }
+
+    if ico:
+        call['ico'] = [ico]
+
+    if firma:
+        call['obchodniJmeno'] = firma
+
+    payload = json.dumps(call)
+
+    # Specify the content type as JSON
+    headers = {'Content-Type': 'application/json'}
+
+    # Make a POST request
+    response = requests.post(URL, data=payload, headers=headers)
+    data = response.json()
+
+    info = []
+
+    try:
+      if data["pocetCelkem"] == 0:
+          return "False"
+      
+      elif data["pocetCelkem"] == 1:
+          return info.append(data["ekonomickeSubjekty"][0]["obchodniJmeno"])
+      
+      else:
+          for firma in data["ekonomickeSubjekty"]:
+              info.append(firma["obchodniJmeno"])
+        
+      return info
+
+    except:
+       return "False"

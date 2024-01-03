@@ -105,7 +105,7 @@ script: |
 ---
 event: overit
 code: |
-  vystup = overitXml(action_argument('firma'))
+  vystup = overitJson(action_argument('firma'))
   json_response(dict(spolek=vystup))
 ---
 id: cinnostSpolku
