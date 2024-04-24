@@ -65,6 +65,8 @@ code: |
     Spolek.clenstvi.poplatky = True
     Spolek.rada.exist = False
     Spolek.rozhodciKomise.exist = False
+    hospCinnost = False
+    Spolek.zivnost = False
 ---
 code: |
   pocetOsob = 1
